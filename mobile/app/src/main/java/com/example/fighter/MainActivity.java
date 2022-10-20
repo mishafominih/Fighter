@@ -2,48 +2,43 @@ package com.example.fighter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    String server_name = "http://l29340eb.bget.ru";
+    String adress = "http://127.0.0.1:5000/time";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.i("chat", "+ MainActivity - запуск приложения");
+        Toast.makeText(MainActivity.this, "start", Toast.LENGTH_LONG).show();
 
         findViewById(R.id.button_ping_server).setOnClickListener(view -> {
-            HttpURLConnection conn = null;
-            try {
-                URL url = new URL(server_name + "/chat.php?action=delete");
-                conn = (HttpURLConnection) url.openConnection();
-                conn.setConnectTimeout(10000); // ждем 10сек
-                conn.setRequestMethod("POST");
-                conn.setRequestProperty("User-Agent", "Mozilla/5.0");
-                conn.connect();
-                int res = conn.getResponseCode();
-                Log.i("chat", "+ MainActivity - ответ сервера (200 = ОК): "
-                        + Integer.toString(res));
-
-            } catch (Exception e) {
-                Log.i("chat",
-                        "+ MainActivity - ответ сервера ОШИБКА: "
-                                + e.getMessage());
-            } finally {
-                conn.disconnect();
-            }
-
+            new MyRequest().Call("time", (res) -> {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, res, Toast.LENGTH_LONG).show();
+                    }
+                });
+            }, (fail) ->{
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, fail.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+            });
         });
     }
 }
