@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import org.json.JSONException;
+
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -21,14 +23,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toast.makeText(MainActivity.this, "start", Toast.LENGTH_LONG).show();
-
         findViewById(R.id.button_ping_server).setOnClickListener(view -> {
             new MyRequest().Call("time", (res) -> {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(MainActivity.this, res, Toast.LENGTH_LONG).show();
+                        try {
+                            Toast.makeText(MainActivity.this, res.getString("result"), Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
             }, (fail) ->{
