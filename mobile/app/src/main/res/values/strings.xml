@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Fighter</string>
     <string name="sign_in"><u>Войти</u></string>
+    <string name="sign_up"><u>Зарегистрироваться</u></string>
 </resources>
