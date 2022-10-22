@@ -1,18 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
-    android:gravity="center"
+    android:background="#FFA979"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/button_ping_server"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#008000"
-        android:text="Пингануть сервер)"
-        tools:layout_editor_absoluteX="107dp"
-        tools:layout_editor_absoluteY="341dp" />
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="15dp"
+            app:srcCompat="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Регистрация" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:background="#FFFFFF"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="20dp"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/edit_text_registration_surname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Фамилия" />
+
+            <EditText
+                android:id="@+id/edit_text_registration_firstname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Имя" />
+
+            <EditText
+                android:id="@+id/edit_text_registration_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:hint="Email" />
+
+            <EditText
+                android:id="@+id/edit_text_registration_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:hint="Придумайте пароль" />
+
+            <EditText
+                android:id="@+id/edit_text_registration_password_repeat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:hint="Повторите пароль" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button_registration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#DC143C"
+            android:text="Зарегистрироваться"
+            tools:layout_editor_absoluteX="107dp"
+            tools:layout_editor_absoluteY="341dp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="260dp"
+            android:layout_height="40dp"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Уже зарегистрировались?" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:textSize="20dp"
+            android:textColor="#DC143C"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/sign_in" />
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -10,33 +10,59 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class MyRequest {
 
+    public void Call(String path, JSONObject params, Responsble<JSONObject> resp, Failurable<IOException> fail){
+        call(path, params, resp, fail);
+    }
+
+    public void Call(String path, JSONObject params, Responsble<JSONObject> resp){
+        call(path, params, resp, this::baseFail);
+    }
+
     public void Call(String path, Responsble<JSONObject> resp, Failurable<IOException> fail){
-        call(path, resp, fail);
+        call(path, new JSONObject(), resp, fail);
     }
 
     public void Call(String path, Responsble<JSONObject> resp){
-        call(path, resp, this::baseFail);
+        call(path, new JSONObject(), resp, this::baseFail);
     }
 
     private void baseFail(IOException ex){
         Log.i("connect_fail", ex.getMessage());
     }
 
-    private void call(String path, Responsble<JSONObject> resp, Failurable<IOException> fail){
+    private RequestBody build_params(JSONObject params){
+        FormBody.Builder formbody = new FormBody.Builder();
+        for (Iterator<String> it = params.keys(); it.hasNext(); ) {
+            String key = it.next();
+            try {
+                formbody.add(key, (String) params.get(key));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return formbody.build();
+    }
+
+    private void call(String path, JSONObject params, Responsble<JSONObject> resp, Failurable<IOException> fail){
         String url = "http://10.0.2.2:5000/";
+
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request
                 .Builder()
                 .url(url + path)
+                .post(build_params(params))
                 .build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
