@@ -1,0 +1,4 @@
+CREATE TABLE "Users" (
+	"_id" INT GENERATED ALWAYS AS IDENTITY,
+	"Login" VARCHAR,
+	"Password" VARCHAR)
