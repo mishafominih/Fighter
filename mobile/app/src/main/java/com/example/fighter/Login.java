@@ -32,18 +32,14 @@ public class Login extends AppCompatActivity {
         });
 
         findViewById(R.id.button_login).setOnClickListener(view -> {
-            JSONObject params = new JSONObject();
-            try {
-                // Набираем данные для запроса
-                for (String key: sources.keySet()) {
-                    EditText edit =  (EditText) findViewById(sources.get(key));
-                    params.put(key, edit.getText().toString());
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
+            MyRequest request = new MyRequest();
+            // Набираем данные для запроса
+            for (String key: sources.keySet()) {
+                EditText edit =  (EditText) findViewById(sources.get(key));
+                request.put(key, edit.getText().toString());
             }
             // Сам запрос
-            new MyRequest().Call("login", params, (res) -> {
+            request.Call("login", (res) -> {
                 runOnUiThread(() -> {
                     try {
                         Toast.makeText(Login.this, res.getString("result"), Toast.LENGTH_LONG).show();

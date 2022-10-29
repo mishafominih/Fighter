@@ -10,11 +10,6 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.security.Key;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +18,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent login = new Intent(this, Registration.class);
-        startActivity(login);
+        findViewById(R.id.button_main_login).setOnClickListener(view -> {
+            Intent login = new Intent(this, Login.class);
+            startActivity(login);
+        });
+
+        findViewById(R.id.image_join_to_tournament).setOnClickListener(view -> {
+            MyRequest request = new MyRequest();
+            EditText edit =  (EditText) findViewById(R.id.edit_text_main_code_to_join);
+            request.put("key", edit.getText().toString());
+            request.Call("tournament_list", (res) -> {
+                runOnUiThread(() -> {
+                    try {
+                        Toast.makeText(this, res.getString("result"), Toast.LENGTH_LONG).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }, (fail) ->{
+                runOnUiThread(() -> Toast.makeText(this, fail.getMessage(), Toast.LENGTH_LONG).show());
+            });
+        });
     }
 }

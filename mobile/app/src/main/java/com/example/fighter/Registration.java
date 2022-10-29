@@ -34,21 +34,17 @@ public class Registration extends AppCompatActivity {
         });
 
         findViewById(R.id.button_registration).setOnClickListener(view -> {
-            JSONObject params = new JSONObject();
-            try {
-                // Набираем данные для запроса
-                for (String key: sources.keySet()) {
-                    EditText edit =  (EditText) findViewById(sources.get(key));
-                    params.put(key, edit.getText().toString());
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
+            MyRequest request = new MyRequest();
+            // Набираем данные для запроса
+            for (String key: sources.keySet()) {
+                EditText edit =  (EditText) findViewById(sources.get(key));
+                request.put(key, edit.getText().toString());
             }
             // Сам запрос
-            new MyRequest().Call("registration", params, (res) -> {
+            request.Call("registration", (res) -> {
                 runOnUiThread(() -> {
                     try {
-                        Toast.makeText(Registration.this, res.getString("result"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, res.getString("result"), Toast.LENGTH_LONG).show();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
