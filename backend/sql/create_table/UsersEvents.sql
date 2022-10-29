@@ -1,0 +1,4 @@
+CREATE TABLE "UsersEvent" (
+	"_id" INT GENERATED ALWAYS AS IDENTITY,
+	"User" INT,
+	"Event" INT)
