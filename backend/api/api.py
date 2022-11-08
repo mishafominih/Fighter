@@ -19,3 +19,5 @@ def reg(params):
     if result:
         return {'result': False, 'message': result}
     return {'result': not result}
+
+app.run()
