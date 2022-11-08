@@ -1,8 +1,2 @@
-function httpGet() {
-  var xmlHttp = new XMLHttpRequest();
-  xmlHttp.open("GET", '/api/login', false); // false for synchronous request
-  xmlHttp.send(null);
-  return xmlHttp.responseText;
-}
-
-console.log(xmlHttp.responseText);
+fetch('http://84.252.142.58/login')
+.then(console.log('dd'))
