@@ -6,12 +6,6 @@ from flask import request
 logins = {'my@my': '1234'}
 keys = ['1234']
 tournaments = [
-<<<<<<< HEAD
-    {'time': '12:30', 'place': 'Зал 1', 'fighter_one': 'Фоминых М.И', 'fighter_two': 'Андреев А.А.', 'score': '3:4'},
-    {'time': '13:30', 'place': 'Зал 2', 'fighter_one': 'Фоминых М.И', 'fighter_two': 'Путров Е.В.',
-     'score': 'Сейчас идет'},
-    {'time': '14:30', 'place': 'Зал 3', 'fighter_one': 'Фоминых М.И', 'fighter_two': 'Андреев А.А.', 'score': None}
-=======
     {'time': '12:30', 'place': 'Зал 1', 'fighter_one': 'Фоминых М.И.', 'fighter_two': 'Андреев А.А.', 'score': '3:4'},
     {'time': '12:30', 'place': 'Зал 2', 'fighter_one': 'Иванов Ю.И.', 'fighter_two': 'Салимов А.Д.', 'score': '3:2'},
     {'time': '13:00', 'place': 'Зал 1', 'fighter_one': 'Ибрагимов А.В.', 'fighter_two': 'Юнусов А.А.', 'score': '3:1'},
@@ -28,8 +22,6 @@ tournaments = [
      'score': ''},
     {'time': '15:00', 'place': 'Зал 2', 'fighter_one': 'Ласточкин А.А.', 'fighter_two': 'Макшанцев М.И.',
      'score': ''}
-
->>>>>>> c3e33cac05ea98b9212f9fe8d56fb94d2dfe1ec6
 ]
 
 app = Flask(__name__)
