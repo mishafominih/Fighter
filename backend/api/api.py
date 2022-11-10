@@ -6,10 +6,30 @@ from flask import request
 logins = {'my@my': '1234'}
 keys = ['1234']
 tournaments = [
+<<<<<<< HEAD
     {'time': '12:30', 'place': 'Зал 1', 'fighter_one': 'Фоминых М.И', 'fighter_two': 'Андреев А.А.', 'score': '3:4'},
     {'time': '13:30', 'place': 'Зал 2', 'fighter_one': 'Фоминых М.И', 'fighter_two': 'Путров Е.В.',
      'score': 'Сейчас идет'},
     {'time': '14:30', 'place': 'Зал 3', 'fighter_one': 'Фоминых М.И', 'fighter_two': 'Андреев А.А.', 'score': None}
+=======
+    {'time': '12:30', 'place': 'Зал 1', 'fighter_one': 'Фоминых М.И.', 'fighter_two': 'Андреев А.А.', 'score': '3:4'},
+    {'time': '12:30', 'place': 'Зал 2', 'fighter_one': 'Иванов Ю.И.', 'fighter_two': 'Салимов А.Д.', 'score': '3:2'},
+    {'time': '13:00', 'place': 'Зал 1', 'fighter_one': 'Ибрагимов А.В.', 'fighter_two': 'Юнусов А.А.', 'score': '3:1'},
+    {'time': '13:00', 'place': 'Зал 2', 'fighter_one': 'Петров И.И.', 'fighter_two': 'Сидоров А.М.', 'score': '4:5'},
+    {'time': '13:30', 'place': 'Зал 1', 'fighter_one': 'Лебедев А.Л.', 'fighter_two': 'Ларинов Ю.А.', 'score': '1:2'},
+    {'time': '13:30', 'place': 'Зал 2', 'fighter_one': 'Соломатин М.А.', 'fighter_two': 'Кузьминых А.И.', 'score': '2:4'},
+    {'time': '14:00', 'place': 'Зал 1', 'fighter_one': 'Новиков А.В.', 'fighter_two': 'Ласточкин А.А.', 'score': '4:5'},
+    {'time': '14:00', 'place': 'Зал 2', 'fighter_one': 'Макшанцев М.И.', 'fighter_two': 'Альмухометов А.И.', 'score': '4:1'},
+    {'time': '14:30', 'place': 'Зал 1', 'fighter_one': 'Андреев А.А.', 'fighter_two': 'Иванов Ю.И.',
+     'score': 'Сейчас идет'},
+    {'time': '14:30', 'place': 'Зал 2', 'fighter_one': 'Ибрагимов А.В.', 'fighter_two': 'Сидоров А.М.',
+     'score': 'Сейчас идет'},
+    {'time': '15:00', 'place': 'Зал 1', 'fighter_one': 'Ларинов Ю.А.', 'fighter_two': 'Кузьминых А.И.',
+     'score': ''},
+    {'time': '15:00', 'place': 'Зал 2', 'fighter_one': 'Ласточкин А.А.', 'fighter_two': 'Макшанцев М.И.',
+     'score': ''}
+
+>>>>>>> c3e33cac05ea98b9212f9fe8d56fb94d2dfe1ec6
 ]
 
 app = Flask(__name__)
