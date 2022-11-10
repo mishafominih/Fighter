@@ -1,0 +1,474 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+:root {
+  --color--main: #ffa979;
+  --color-select: #f88d40;
+  --color-extra: #ffd952;
+  --color-main-pink: #ff7979;
+}
+
+.formJoin > input::-webkit-input-placeholder {
+  color: white;
+  opacity: 0.7;
+}
+.formJoin > input:-moz-placeholder {
+  color: white;
+  opacity: 0.7;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #000000;
+  background-color: #fff;
+  margin: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+.navInner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  margin: auto auto;
+  height: 10vh;
+}
+
+.navInner ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  width: 40vw;
+  height: 5vh;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+}
+
+.login {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+  cursor: pointer;
+}
+
+.login:hover {
+  transform: scale(1.1);
+}
+
+.navInner ul li:hover {
+  color: var(--color-select);
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.navLogo img {
+  width: 61px;
+}
+
+.join {
+  width: 100%;
+  height: 628px;
+  background-image: url("images/JoinBg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+h1 {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-size: 64px;
+  line-height: 87px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.joinInner {
+  padding: 156px 0 58px 0;
+}
+
+.joinText {
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 54px;
+  color: #ffffff;
+}
+
+.joinForm {
+  margin-top: 74px;
+  width: 984px;
+  height: 109px;
+  border: 2px solid var(--color--main);
+  border-radius: 5px;
+}
+
+.form {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.formJoin {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+}
+
+
+
+.formJoin > input {
+  background: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 5px;
+  color: white;
+  font-weight: 400;
+  font-size: 36px;
+  text-align: center;
+  width: 528px;
+  height: 70px;
+  padding: 0;
+}
+
+.formJoin > button {
+  font-size: 36px;
+  text-align: center;
+  color: #000000;
+  width: 358px;
+  background: rgba(248, 141, 64, 0.8);
+  border-radius: 5px;
+  height: 72.5px;
+  width: 358px;
+}
+
+
+.about {
+  min-height: 440px;
+  background-image: url("images/Картинка\ для\ блока\ информации.png");
+  background-repeat: no-repeat;
+  background-position: bottom 30vh left 40vw;
+  padding-top: 200px;
+  padding-bottom: 200px;
+}
+
+.aboutBtn {
+  background: var(--color--main);
+  width: 491px;
+  height: 70px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
+
+.aboutBtn:hover {
+  background: var(--color-select);
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.aboutItem {
+  background-color: #f8f7f7;
+  width: 600px;
+  height: 440px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.aboutItemInner {
+  padding: 36px 0 0 54px;
+}
+
+.aboutText {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  width: 450px;
+  margin-bottom: 50px;
+}
+
+.aboutItem h2 {
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 59px;
+  margin: 0;
+  margin-bottom: 50px;
+}
+
+.steps {
+  width: 100%;
+  background-color: var(--color--main);
+  padding-top: 50px;
+}
+
+.steps h2{
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 48px;
+  text-align: center;
+}
+
+.stepsInner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 600px;
+}
+
+.stepsItem {
+  text-align: center;
+  height: 315px;
+}
+
+.stepHead {
+  margin-top: 20px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-size: 36px;
+}
+
+.stepsItem img {
+  height: 157px;
+}
+.stepHead {
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 44px;
+}
+.stepText {
+  font-family: 'Montserrat';
+font-style: normal;
+  text-align: center;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  margin-top: 50px;
+}
+
+.advantages {
+  font-family: 'Montserrat', sans-serif;
+  width: 100%;
+  min-height: 629px;
+  background-color: #eeecec;
+  text-align: center;
+  padding-top: 46px;
+}
+
+.advantagesText {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  color: #b6b5b5;
+}
+
+.advantagesInner > h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 0px;
+}
+
+.advantagesItems {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.advantagesItem {
+  width: 507px;
+  height: 157px;
+  background-color: #fff;
+  margin-top: 20px;
+}
+
+.advantagesItem h3{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  text-align: left;
+  padding-left: 18px;
+}
+
+.advantagesItem p{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  color: #494848;
+  text-align: left;
+  padding-left: 18px;
+}
+
+
+
+.login-page {
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+  position: absolute;
+}
+
+.form {
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  border-radius: 30px;
+}
+
+.form input {
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+.form button {
+  text-transform: uppercase;
+  outline: 0;
+  background: var(--color--main);
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-top: 34px;
+}
+
+.form button:hover,
+.form button:active,
+.form button:focus {
+  background: var(--color-select);
+}
+
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+
+.form .message a {
+  color: var(--color--main);
+  text-decoration: none;
+}
+
+.form .message a:hover {
+  color: var(--color-select);
+  text-decoration: none;
+}
+
+.form .register-form {
+  display: none;
+}
+
+.form {
+  position: relative;
+  z-index: 1;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.form:before,
+.form:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.form .info {
+  margin: 50px auto;
+  text-align: center;
+}
+
+.form .info h1 {
+  margin: 0 0 15px;
+  padding: 0;
+  font-size: 36px;
+  font-weight: 300;
+  color: #1a1a1a;
+}
+
+.form .info span {
+  color: #4d4d4d;
+  font-size: 12px;
+}
+
+.form .info span a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.formName {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 26px;
+  text-align: center;
+}
+
+.formHead {
+  margin-bottom: 23px;
+}
+
+.popup-fade {
+  display: none;
+}
+.popup-fade:before {
+  content: "";
+  background: #000;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+  z-index: 9999;
+}
+.popup {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  width: 360px;
+  margin-left: -200px;
+  border-radius: 4px;
+  z-index: 99999;
+  opacity: 1;
+}
+.popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
