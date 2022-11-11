@@ -13,7 +13,7 @@ tournaments = [
     {'time': '13:30', 'place': 'Зал 1', 'fighter_one': 'Лебедев А.Л.', 'fighter_two': 'Ларинов Ю.А.', 'score': '1:2'},
     {'time': '13:30', 'place': 'Зал 2', 'fighter_one': 'Соломатин М.А.', 'fighter_two': 'Кузьминых А.И.', 'score': '2:4'},
     {'time': '14:00', 'place': 'Зал 1', 'fighter_one': 'Новиков А.В.', 'fighter_two': 'Ласточкин А.А.', 'score': '4:5'},
-    {'time': '14:00', 'place': 'Зал 2', 'fighter_one': 'Макшанцев М.И.', 'fighter_two': 'Альмухометов А.И.', 'score': '4:1'},
+    {'time': '14:00', 'place': 'Зал 2', 'fighter_one': 'Макшанцев М.И.', 'fighter_two': 'Альмухаметов А.И.', 'score': '4:1'},
     {'time': '14:30', 'place': 'Зал 1', 'fighter_one': 'Андреев А.А.', 'fighter_two': 'Иванов Ю.И.',
      'score': 'Сейчас идет'},
     {'time': '14:30', 'place': 'Зал 2', 'fighter_one': 'Ибрагимов А.В.', 'fighter_two': 'Сидоров А.М.',
@@ -25,7 +25,6 @@ tournaments = [
 ]
 
 app = Flask(__name__)
-
 
 @app.route('/api/login', methods=['GET', 'POST'])
 def check_login():

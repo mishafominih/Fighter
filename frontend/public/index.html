@@ -21,7 +21,7 @@
               <li>Соревнования</li>
               <li>Мой профиль</li>
             </ul> -->
-            <a class="popup-open" href="#"
+            <a class="popup-open" href="schedule.html"
               ><div class="login">
                 <p>Войти</p>
                 <img src="images/Иконка выхода.svg" alt="Войти" /></div
@@ -31,7 +31,7 @@
               <div class="popup">
                 <div class="login-page">
                   <div class="form">
-                    <form class="register-form formToggle">
+                    <form class="register-form formToggle" method="post" action="/api/registration">
                       <div class="formHead">
                         <div class="formLogo">
                           <img src="images/Form Logo.png" />
@@ -54,10 +54,10 @@
                       />
                       <button>Зарегистрироваться</button>
                       <p class="message">
-                        Уже зарегистрировались? <a href="#">Войти</a>
+                        Уже зарегистрировались? <a href="schedule.html">Войти</a>
                       </p>
                     </form>
-                    <form class="login-form formToggle">
+                    <form class="login-form formToggle" method="post" action="/api/login">
                       <div class="formHead">
                         <div class="formLogo">
                           <img src="images/Form Logo.png" />
@@ -67,7 +67,7 @@
                       </div>
                       <input type="text" placeholder="Логин" />
                       <input type="password" placeholder="Пароль" />
-                      <button>Войти</button>
+                      <button><a href="schedule.html">Войти</a></button>
                       <p class="message">
                         Не зарегистрированы? <a href="#">Создать аккаунт</a>
                       </p>
@@ -89,13 +89,12 @@
               Провести соревнование с нами быстро и легко!
             </div>
             <div class="joinForm">
-              <form action="" class="formJoin">
+              <form action="/api/join_to_tournament" class="formJoin" method="post">
                 <input
                   type="text"
                   placeholder="Введите код присоединения"
                   class="joinFormText"
                 />
-
                 <button type="submit" class="joinFormBtn">
                   Присоединиться
                 </button>
