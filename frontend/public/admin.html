@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin</title>
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body>
+    <head>
+      <nav>
+        <div class="container">
+          <div class="navInner">
+            <div class="navLogo">
+              <img src="images/Form Logo.png" alt="Лого" />
+            </div>
+            <ul>
+              <li><a href="index.html">Главная</a></li>
+              <li><a href="listCompetition.html">Соревнования</a></li>
+              <li>Мой профиль</li>
+            </ul>
+            <a class="popup-open" href="#"
+              ><div class="login">
+                <p>Выйти</p>
+                <img src="images/Иконка выхода.svg" alt="Войти" /></div
+            ></a>
+          </div>
+        </div>
+      </nav>
+    </head>
+    <main>
+      <div class="mainInner">
+        <div class="info">
+          <div class="adminItem">
+            <div class="adminImage">
+              <img src="./images/admin.svg" />
+            </div>
+            <div class="adminRef">
+              <a href="">
+                <div class="adminName">Оксимирон</div>
+                <div class="adminArrow">
+                  <img src="./images/arrow.svg" alt="admin" />
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="createCompetitionHref">
+            <a class="createItem" href="">
+              <img src="./images/add.svg" alt="add" />
+              <div class="infoItem">Создать соревнование</div>
+            </a>
+          </div>
+          <div class="listCompetition">
+            <a class="createItem" href="">
+              <img src="./images/list.svg" alt="item" />
+              <div class="infoItem">Список соревнований</div>
+            </a>
+          </div>
+        </div>
+        <div class="createCompetition">
+          <h1>Создание соревнования</h1>
+          <form class="competitionForm" action="" method="post">
+            <div class="competitionItem">
+              <label for="name"><h3>Название</h3></label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Введите название соревнования"
+                class="inputItem"
+              />
+            </div>
+            <div class="competitionItem">
+              <label for="description"><h3>Описание</h3></label>
+              <input
+                type="text"
+                id="description"
+                cols="30"
+                rows="10"
+                placeholder="Введите описание соревнования"
+                class="inputItem"
+              />
+            </div>
+            <div class="competitionItem">
+              <label for="time"><h3>Дата и время</h3></label>
+              <div class="timeInput">
+                <input class="inputItem time" type="date" id="time" />
+                <input class="inputItem time" type="time" id="time" />
+              </div>
+            </div>
+
+            <div class="competitionItem">
+              <label for="listPart"><h3>Список участников</h3></label>
+              <div class="competitionItemInputs">
+                <div class="competitionItemInput">
+                    <input
+                    class="inputItem last"
+                    type="text"
+                    id="list"
+                    placeholder="Имя/название"
+                  />
+                  <input
+                    type="text"
+                    id="more"
+                    placeholder="Дополнительные сведения"
+                    class="inputItem last"
+                  />
+                </div>
+                
+              </div>
+              <div class="addPartContainer">
+                <div class="addPart">Добавить</div>
+                <div class="deletePart">Сброс</div>
+              </div>
+            </div>
+            <div class="submitContainer">
+                <input class="submit" type="submit" value="Создать" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <script src="admin.js"></script>
+  </body>
+</html>

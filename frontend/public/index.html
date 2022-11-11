@@ -1,43 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Main</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    <head>
+      <nav>
+        <div class="container">
+          <div class="navInner">
+            <div class="navLogo">
+              <img src="images/Form Logo.png" alt="Лого" />
+            </div>
+            <!-- <ul>
+              <li>Главная</li>
+              <li>Соревнования</li>
+              <li>Мой профиль</li>
+            </ul> -->
+            <a class="popup-open" href="schedule.html"
+              ><div class="login">
+                <p>Войти</p>
+                <img src="images/Иконка выхода.svg" alt="Войти" /></div
+            ></a>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+            <div class="popup-fade">
+              <div class="popup">
+                <div class="login-page">
+                  <div class="form">
+                    <form class="register-form formToggle" method="post" action="/api/registration">
+                      <div class="formHead">
+                        <div class="formLogo">
+                          <img src="images/Form Logo.png" />
+                        </div>
+                        <div class="formName">Регистрация</div>
+                        <a class="popup-close" href="#">Закрыть</a>
+                      </div>
+                      <input type="text" placeholder="Фамилия" required />
+                      <input type="text" placeholder="Имя" required />
+                      <input type="text" placeholder="Email" required />
+                      <input
+                        type="password"
+                        placeholder="Придумайте пароль"
+                        required
+                      />
+                      <input
+                        type="password"
+                        placeholder="Повторите пароль"
+                        required
+                      />
+                      <button type="submit">Зарегистрироваться</button>
+                      <p class="message">
+                        Уже зарегистрировались? <a href="schedule.html">Войти</a>
+                      </p>
+                    </form>
+                    <form class="login-form formToggle" method="post" action="/api/login">
+                      <div class="formHead">
+                        <div class="formLogo">
+                          <img src="images/Form Logo.png" />
+                        </div>
+                        <a class="popup-close" href="#">Закрыть</a>
+                        <div class="formName">Авторизация</div>
+                      </div>
+                      <input type="text" placeholder="Логин" />
+                      <input type="password" placeholder="Пароль" />
+                      <button type="submit"><a href="schedule.html">Войти</a></button>
+                      <p class="message">
+                        Не зарегистрированы? <a href="#">Создать аккаунт</a>
+                      </p>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </head>
+    <main>
+      <div class="join">
+        <div class="container">
+          <div class="joinInner">
+            <h1>Платформа для проведения соревнований</h1>
+            <div class="joinText">
+              Провести соревнование с нами быстро и легко!
+            </div>
+            <div class="joinForm">
+              <form action="/api/join_to_tournament" class="formJoin" method="post">
+                <input
+                  type="text"
+                  placeholder="Введите код присоединения"
+                  class="joinFormText"
+                />
+                <button type="submit" class="joinFormBtn">
+                  Присоединиться
+                </button>
+              </form>
+              <script>
+                let result;
+                $(document).on('click', '.joinFormBtn', function(){
+                    let data = '1234';
+                    let url = '/api/login';
+                    let q = $.ajax({
+                        type: 'POST',
+                        url: url,
+                        data: {
+                            'text': data.val
+                        },
+                        dataType: 'json'
+                    });
+        
+                    q.done(function(){
+                        let result = q.responseJSON.result
+                        console.log(q.responseJSON.result)
+                    })
+                    if (result = true) {
+                        window.location.href = 'admin.html';
+                    }
+                })
+            </script>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about">
+        <div class="container">
+          <div class="aboutInner">
+            <div class="aboutItem">
+              <div class="aboutItemInner">
+                <h2>О НАШЕЙ <br />ПЛАТФОРМЕ</h2>
+                <div class="aboutText">
+                  Подойдет как для судей, так и для тренеров и участников
+                  соревнований.
+                </div>
+                <a href="#">
+                  <div class="aboutBtn">Попробовать</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="container">
+          <h2>НАЧНИТЕ СУДИТЬ СЕЙЧАС</h2>
+          <div class="stepsInner">
+            <div class="stepsItem">
+              <img src="images/step1.png" alt="Шаг 1" />
+              <div class="stepHead">Шаг 1</div>
+              <div class="stepText">Зарегистрируйтесь на платформе</div>
+            </div>
+            <div class="stepsItem">
+              <img src="images/step2.png" alt="Шаг 2" />
+              <div class="stepHead">Шаг 2</div>
+              <div class="stepText">Создайте соревнование в редакторе</div>
+            </div>
+            <div class="stepsItem">
+              <img src="images/step3.png" alt="Шаг 3" />
+              <div class="stepHead">Шаг 3</div>
+              <div class="stepText">Теперь вы можете вести соревнования!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="advantages">
+        <div class="container">
+          <div class="advantagesInner">
+            <div class="advantagesText">Преимущества</div>
+            <h2>НАС ВЫБИРАЮТ</h2>
+            <div class="advantagesItems">
+              <div class="advantagesItem">
+                <h3>1.  Преимущество</h3>
+                <p>Простая система просмотра турниров.</p>
+              </div>
+              <div class="advantagesItem">
+                <h3>2.  Преимущество</h3>
+                <p>Возможность экспорта результата соревнований в нужный формат</p>
+              </div>
+              <div class="advantagesItem">
+                <h3>3.  Преимущество</h3>
+                <p>Удобный интерфейс создания соревнования для организаторов</p>
+              </div>
+              <div class="advantagesItem">
+                <h3>4.  Преимущество</h3>
+                <p>Трансляция счета соревнования в режиме реального времени</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer></footer>
+    <script src="scripts.js"></script>
+    <script src="form.js"></script>
   </body>
 </html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Расписание соревнований</title>
+    <link rel="stylesheet" href="schedule.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <head>
+      <nav>
+        <div class="container">
+          <div class="navInner">
+            <div class="navLogo">
+              <img src="images/Form Logo.png" alt="Лого" />
+            </div>
+            <!-- <ul>
+              <li>Главная</li>
+              <li>Соревнования</li>
+              <li>Мой профиль</li>
+            </ul> -->
+            <a class="popup-open" href="schedule.html"
+              ><div class="login">
+                <p>Выйти</p>
+                <img src="images/Иконка выхода.svg" alt="Войти" /></div
+            ></a>
+          </div>
+        </div>
+      </nav>
+      <main>
+        <h1>Расписание соревнования</h1>
+        <div class="date">
+            <div class="digit">20</div>
+            <div class="time">
+                <div class="day"><span>Сегодня</span></div>
+                <div class="month">Ноября</div>
+            </div>
+        </div>
+        <table>
+            <tr><th>Время · место</th><th>Команда/участник</th><th>Счет</th></tr>
+            <tr><td>12:30 · Стол 1</td><td>Иванов — Петров</td><td>3     :     4</td></tr>
+            <tr><td>13:30 · Стол 2</td><td>Петров — Сидоров</td><td>Сейчас идет</td></tr>
+            <tr><td>14:30 · Стол 3</td><td>Сидоров —  Иванов</td><td></td></tr>
+        </table>
+      </main>
+    </head>
+    <script>
+      $.get( "/api/tournament_list", function( data ) {
+        alert( "Data Loaded: " + data );
+      });
+    </script>
+  </body>
+</html>
