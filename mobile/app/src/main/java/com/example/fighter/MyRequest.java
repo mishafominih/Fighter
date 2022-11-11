@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,11 +37,19 @@ public class MyRequest {
     }
 
     public void Call(String path, Responsble<JSONObject> resp, Failurable<IOException> fail){
-        call(path, resp, fail);
+        call(path, (res) -> resp.callback(new JSONObject(res)), fail);
     }
 
     public void Call(String path, Responsble<JSONObject> resp){
-        call(path, resp, this::baseFail);
+        call(path, (res) -> resp.callback(new JSONObject(res)), this::baseFail);
+    }
+
+    public void CallArray(String path, Responsble<JSONArray> resp, Failurable<IOException> fail){
+        call(path, (res) -> resp.callback(new JSONArray(res)), fail);
+    }
+
+    public void CallArray(String path, Responsble<JSONArray> resp){
+        call(path, (res) -> resp.callback(new JSONArray(res)), this::baseFail);
     }
 
     private void baseFail(IOException ex){
@@ -60,8 +69,8 @@ public class MyRequest {
         return formbody.build();
     }
 
-    private void call(String path, Responsble<JSONObject> resp, Failurable<IOException> fail){
-        String url = "http://10.0.2.2:5000/";
+    private void call(String path, Responsble<String> resp, Failurable<IOException> fail){
+        String url = "http://51.250.97.3/api/";
 
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request
@@ -78,13 +87,10 @@ public class MyRequest {
             @Override
             public void onResponse(@NonNull Call call, @NonNull final Response response) throws IOException {
                 try {
-                    JSONObject json = new JSONObject(response.body().string());
-                    resp.callback(json);
+                    resp.callback(response.body().string());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
             }
         });
     }

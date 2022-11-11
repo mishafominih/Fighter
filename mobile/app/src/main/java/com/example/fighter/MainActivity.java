@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -27,16 +25,19 @@ public class MainActivity extends AppCompatActivity {
             MyRequest request = new MyRequest();
             EditText edit =  (EditText) findViewById(R.id.edit_text_main_code_to_join);
             request.put("key", edit.getText().toString());
-            request.Call("tournament_list", (res) -> {
+            request.Call("join_to_tournament", (res) -> {
                 runOnUiThread(() -> {
                     try {
-                        Toast.makeText(this, res.getString("result"), Toast.LENGTH_LONG).show();
+                        if(res.getBoolean("result")){
+                            Intent intent = new Intent(this, FightList.class);
+                            startActivity(intent);
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 });
             }, (fail) ->{
-                runOnUiThread(() -> Toast.makeText(this, fail.getMessage(), Toast.LENGTH_LONG).show());
+                return;
             });
         });
     }

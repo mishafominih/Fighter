@@ -15,15 +15,21 @@
 
         <ImageView
             android:id="@+id/imageView5"
-            android:layout_width="50dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="265dp"
+            android:layout_weight="40"
             app:srcCompat="@drawable/logo" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="20"/>
 
         <Button
             android:id="@+id/button_main_login"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="35"
             android:background="#00FFFFFF"
             android:textColor="#FFA979"
             android:textStyle="bold"
@@ -76,7 +82,7 @@
                 android:textColorHint="@color/white"
                 android:textColor="@color/white"
                 android:hint="Введите код для присоединения"
-                android:textSize="18dp"/>
+                android:textSize="15dp"/>
 
             <ImageView
                 android:id="@+id/image_join_to_tournament"

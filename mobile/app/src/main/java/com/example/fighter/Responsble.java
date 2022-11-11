@@ -1,5 +1,7 @@
 package com.example.fighter;
 
+import org.json.JSONException;
+
 @FunctionalInterface
 public interface Responsble<T> {
 
@@ -9,5 +11,5 @@ public interface Responsble<T> {
      * @param t the first function argument
      * @param u the second function argument
      */
-    void callback(T responce);
+    void callback(T responce) throws JSONException;
 }
