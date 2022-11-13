@@ -20,6 +20,11 @@ public class TournametnsList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tournametns_list);
 
+        findViewById(R.id.button_add_tournament).setOnClickListener((click) -> {
+            Intent intent = new Intent(this, CreateTournament.class);
+            startActivity(intent);
+        });
+
         MyRequest request = new MyRequest();
         // Набираем данные для запроса
         request.put("key", "1234");
