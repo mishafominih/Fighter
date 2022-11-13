@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -28,7 +27,6 @@ public class Login extends AppCompatActivity {
             Intent reg = new Intent(this, Registration.class);
             startActivity(reg);
             this.finish();
-            return;
         });
 
         findViewById(R.id.button_login).setOnClickListener(view -> {
@@ -42,7 +40,11 @@ public class Login extends AppCompatActivity {
             request.Call("login", (res) -> {
                 runOnUiThread(() -> {
                     try {
-                        Toast.makeText(Login.this, res.getString("result"), Toast.LENGTH_LONG).show();
+                        if(res.getBoolean("result")) {
+                            Intent tournaments = new Intent(this, TournametnsList.class);
+                            startActivity(tournaments);
+                            this.finish();
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

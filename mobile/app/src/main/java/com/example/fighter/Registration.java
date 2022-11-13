@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -44,7 +43,11 @@ public class Registration extends AppCompatActivity {
             request.Call("registration", (res) -> {
                 runOnUiThread(() -> {
                     try {
-                        Toast.makeText(this, res.getString("result"), Toast.LENGTH_LONG).show();
+                        if(res.getBoolean("result")) {
+                            Intent tournaments = new Intent(this, TournametnsList.class);
+                            startActivity(tournaments);
+                            this.finish();
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

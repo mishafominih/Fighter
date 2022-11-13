@@ -2,7 +2,9 @@ package com.example.fighter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -11,37 +13,36 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class FightList extends AppCompatActivity {
+public class TournametnsList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fight_list);
+        setContentView(R.layout.activity_tournametns_list);
 
         MyRequest request = new MyRequest();
         // Набираем данные для запроса
         request.put("key", "1234");
-        request.CallArray("tournament_list", (res) -> {
+        // Сам запрос
+        request.CallArray("get_tournaments", (res) -> {
             runOnUiThread(() -> {
-                ArrayList<Fight> fights = new ArrayList<Fight>();
+                ArrayList<Tournament> tournaments = new ArrayList<Tournament>();
                 // fights.add(new Fight("Время/место", "Участники", "Счет"));
                 for(int i = 0; i < res.length(); i++){
                     try {
                         JSONObject json = res.getJSONObject(i);
-                        fights.add(new Fight(
-                            json.getString("time"),
-                            json.getString("place"),
-                            json.getString("fighter_one"),
-                            json.getString("fighter_two"),
-                            json.getString("score")
+                        tournaments.add(new Tournament(
+                                json.getString("name"),
+                                json.getString("description"),
+                                json.getString("status")
                         ));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
 
-                ListView fights_list = findViewById(R.id.list_view_tournament_list);
-                FightAdapter adapter = new FightAdapter(this, R.layout.fight_list_item, fights);
+                ListView fights_list = findViewById(R.id.list_view_tournaments_list);
+                TournamentAdapter adapter = new TournamentAdapter(this, R.layout.tournament_list_item, tournaments);
                 fights_list.setAdapter(adapter);
             });
         }, (fail) ->{

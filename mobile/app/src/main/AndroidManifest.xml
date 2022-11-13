@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Fighter"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".CreateTournament"
+            android:exported="false" />
+        <activity
+            android:name=".TournametnsList"
+            android:exported="false" />
+        <activity
             android:name=".FightList"
             android:exported="false" />
         <activity
