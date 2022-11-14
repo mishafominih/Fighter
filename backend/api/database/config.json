@@ -1,0 +1,8 @@
+{
+  "dbname": "fighter",
+  "password": "postgres",
+  "host": "rc1b-e1m47fv71pchwvru.mdb.yandexcloud.net",
+  "user": "yukey",
+  "port": "6432",
+  "target_session_attrs": "read-write"
+}

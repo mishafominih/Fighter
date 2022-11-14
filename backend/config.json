@@ -1,6 +1,0 @@
-{
-  "dbname": "Fighter",
-  "password": "postgres",
-  "host": "localhost",
-  "user": "postgres"
-}
