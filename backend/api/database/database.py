@@ -28,51 +28,57 @@ def connection_db(func):
 @connection_db
 def sign_in(cursor, password, login):
     tmpl = """
-        SELECT "Password" = %s
+        SELECT "_id"
         FROM "Users"
-        WHERE "Login" = %s
+        WHERE "Login" = %s and "Password" = %s
         LIMIT 1;"""
-    cursor.execute(tmpl, [password, login])
+    cursor.execute(tmpl, [login, password])
     record = cursor.fetchone()
-    if not record or False in record:
+    if not record:
         return 'Неверный логин или пароль'
-    return True is record['Password']
+    else:
+        return {'id': record['_id'], 'result': True}
 
 
 @connection_db
 def registration(cursor, password, login):
-    cursor.execute("""SELECT "Login" FROM "Users" WHERE "Login" = %s;""", [sql.Literal(login)])
+    cursor.execute("""SELECT "Login" FROM "Users" WHERE "Login" = %s;""", [login])
     result = cursor.fetchone()
     if result:
         return 'Пользователь с таким логином уже есть'
-    tmpl = """INSERT INTO public."Users" ("Login", "Password") VALUES (%s, %s);"""
-    cursor.execute(tmpl, [sql.Literal(login), sql.Literal(password)])
+    tmpl = """INSERT INTO public."Users" ("Login", "Password") VALUES (%s, %s) RETURNING "_id";"""
+    cursor.execute(tmpl, [login, password])
+    return cursor.fetchone()['_id']
 
 
 @connection_db
 def create_tournament(cursor, **params):
     event_tmpl = """
-        INSERT INTO public."Event" ("Name", "Description", "Type", "CountThread", "User") VALUES  (%s, %s, %s, %s, %s)
+        INSERT INTO public."Event" ("Name", "Description", "Type", "CountThread", "User", "Categories")
+        VALUES  (%s, %s, %s, %s, %s, %s)
         RETURNING "_id";
     """
-    cursor.execute(event_tmpl, [params.get('name'), params.get('description'),
-                                params.get('count_thread'), params.get('type'), params.get('user_id')])
-    event_id = cursor.fetchone()
+    cursor.execute(event_tmpl, [params.get('name'), params.get('description'), params.get('count_thread'),
+                                params.get('type'), params.get('user_id'), json.dumps(params.get('categories'))])
 
-    categories_tmpl = """
-        INSERT INTO public."Specifications" ("Event", "Name", "Range") VALUES (%s, %s, %s);
-    """
-    categories = params.get('categories')
-    data = []
-    for val in categories:
-        data += [event_id, val.get('name'), json.dumps(val.get('range'))]
-
-    cursor.execute(categories_tmpl * len(categories), data)
+    return cursor.fetchone()['_id']
 
 
 @connection_db
 def tournament_list(cursor, user_id):
-    tmpl = """select * from "Event" where "User" = %s"""
+    tmpl = """
+    SELECT 
+        "_id" "key",
+        "Name" "name",
+        "Description" "description",
+        "Type" "type",
+        "CountThread" "count_thread",
+        "User" "user_id",
+        "Categories" "categories",
+        "Status" "status"
+    FROM "Event"
+    WHERE "User" = %s
+    """
     cursor.execute(tmpl, [user_id])
     data = cursor.fetchall()
     return data
