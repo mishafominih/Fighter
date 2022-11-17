@@ -46,10 +46,8 @@ public class CreateTournament extends AppCompatActivity {
 
     }
 
-    public void change_distribution(int position, String name){
+    public void change_distribution(int position, Intent intent){
         last_pos = position;
-        Intent intent = new Intent(this, ChangeDistribution.class);
-        intent.putExtra("distribution_name", name);
         mStartForResult.launch(intent);
     }
 }

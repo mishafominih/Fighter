@@ -31,10 +31,17 @@ public class ChangeDistribution extends AppCompatActivity {
         TextView textView = findViewById(R.id.distribution_text_name);
         textView.append(arguments.get("distribution_name").toString());
 
-        ArrayList<Range> distributions = new ArrayList<Range>();
+        ArrayList<Range> ranges = new ArrayList<Range>();
+        ArrayList<String> min = (ArrayList<String>) arguments.get("min");
+        ArrayList<String> max = (ArrayList<String>) arguments.get("max");
+        if(min != null){
+            for(int i = 0; i < min.size(); i++){
+                ranges.add(new Range(min.get(i), max.get(i)));
+            }
+        }
 
         ListView fights_list = findViewById(R.id.list_view_range_list);
-        adapter = new RangeAdapter(this, R.layout.range_list_item, distributions);
+        adapter = new RangeAdapter(this, R.layout.range_list_item, ranges);
         fights_list.setAdapter(adapter);
 
         findViewById(R.id.add_new_range).setOnClickListener((view) -> {

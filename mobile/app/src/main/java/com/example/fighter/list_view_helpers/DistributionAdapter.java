@@ -64,7 +64,21 @@ public class DistributionAdapter extends ArrayAdapter<Distribution> {
         });
 
         viewHolder.ChangeDistribution.setOnClickListener((view) -> {
-            this.parent.change_distribution(position, viewHolder.name.getText().toString());
+            Intent intent = new Intent(parent.getContext(), ChangeDistribution.class);
+            Distribution distr = distributionsList.get(position);
+            distr.Name = viewHolder.name.getText().toString();
+            intent.putExtra("distribution_name", distr.Name);
+            if(distr.Ranges.size() > 0){
+                ArrayList<String> min = new ArrayList<>();
+                ArrayList<String> max = new ArrayList<>();
+                for(Range r : distr.Ranges){
+                    min.add(r.Min);
+                    max.add(r.Max);
+                }
+                intent.putExtra("min", min);
+                intent.putExtra("max", max);
+            }
+            this.parent.change_distribution(position, intent);
         });
 
         return convertView;
@@ -82,7 +96,11 @@ public class DistributionAdapter extends ArrayAdapter<Distribution> {
 
     public void update_item(ArrayList<String> min, ArrayList<String> max, int position){
         Distribution distribution = getItem(position);
-        distribution.Description = min.get(0);
+        ArrayList<Range> ranges = new ArrayList<>();
+        for(int i = 0; i < min.size(); i++){
+            ranges.add(new Range(min.get(i), max.get(i)));
+        }
+        distribution.UpdateRanges(ranges);
         notifyDataSetChanged();
     }
 }
