@@ -17,8 +17,8 @@
             </div>
             <ul>
               <li><a href="index.html">Главная</a></li>
-              <li><a href="listCompetition.html">Соревнования</a></li>
-              <li>Мой профиль</li>
+              <li><a href="schedule.html" class="current">Соревнования</a></li>
+              <li><a href="profile.html">Мой профиль</a></li>
             </ul>
             <a class="popup-open" href="#"
               ><div class="login">
@@ -31,7 +31,7 @@
     </head>
     <main>
       <div class="mainInner">
-        <div class="info">
+        <!-- <div class="info">
           <div class="adminItem">
             <div class="adminImage">
               <img src="./images/admin.svg" />
@@ -57,7 +57,7 @@
               <div class="infoItem">Список соревнований</div>
             </a>
           </div>
-        </div>
+        </div> -->
         <div class="createCompetition">
           <h1>Создание соревнования</h1>
           <form class="competitionForm" action="" method="post">
@@ -101,8 +101,26 @@
                   />
                   <input
                     type="text"
+                    id="weight"
+                    placeholder="Вес"
+                    class="inputItem last"
+                  />
+                  <input
+                    type="text"
+                    id="sex"
+                    placeholder="Пол"
+                    class="inputItem last"
+                  />
+                  <input
+                    type="text"
+                    id="age"
+                    placeholder="Возраст"
+                    class="inputItem last"
+                  />
+                  <input
+                    type="text"
                     id="more"
-                    placeholder="Дополнительные сведения"
+                    placeholder="Доп. сведения"
                     class="inputItem last"
                   />
                 </div>

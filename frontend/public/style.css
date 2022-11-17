@@ -472,3 +472,7 @@ font-style: normal;
   top: 10px;
   right: 10px;
 }
+
+.current{
+  color: var(--color-select);
+}
