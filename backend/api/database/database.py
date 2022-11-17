@@ -1,7 +1,7 @@
 import psycopg2
 import json
 
-from psycopg2 import sql
+from psycopg2 import sql, extras
 
 
 def connection_db(func):
@@ -14,7 +14,7 @@ def connection_db(func):
             password=postgres
             target_session_attrs=read-write
         """)
-        cursor = conn.cursor()
+        cursor = conn.cursor(cursor_factory=extras.RealDictCursor)
         result = func(cursor, **args)
 
         conn.commit()
@@ -36,7 +36,7 @@ def sign_in(cursor, password, login):
     record = cursor.fetchone()
     if not record or False in record:
         return 'Неверный логин или пароль'
-    return True in record
+    return True is record['Password']
 
 
 @connection_db
@@ -52,12 +52,11 @@ def registration(cursor, password, login):
 @connection_db
 def create_tournament(cursor, **params):
     event_tmpl = """
-        INSERT INTO public."Event" ("Name", "Description", "Type", "CountThread") VALUES  (%s, %s, %s, %s)
+        INSERT INTO public."Event" ("Name", "Description", "Type", "CountThread", "User") VALUES  (%s, %s, %s, %s, %s)
         RETURNING "_id";
     """
-    print(params)
     cursor.execute(event_tmpl, [params.get('name'), params.get('description'),
-                                params.get('count_thread'), params.get('type')])
+                                params.get('count_thread'), params.get('type'), params.get('user_id')])
     event_id = cursor.fetchone()
 
     categories_tmpl = """
@@ -70,3 +69,10 @@ def create_tournament(cursor, **params):
 
     cursor.execute(categories_tmpl * len(categories), data)
 
+
+@connection_db
+def tournament_list(cursor, user_id):
+    tmpl = """select * from "Event" where "User" = %s"""
+    cursor.execute(tmpl, [user_id])
+    data = cursor.fetchall()
+    return data

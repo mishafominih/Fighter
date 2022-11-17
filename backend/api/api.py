@@ -1,6 +1,6 @@
 from flask import Flask, request
 
-from database.database import sign_in, registration, create_tournament
+from database.database import sign_in, registration, create_tournament, tournament_list
 
 logins = {'my@my': '1234'}
 keys = ['1234']
@@ -29,12 +29,6 @@ app = Flask(__name__)
 @app.route('/api/login', methods=['GET', 'POST'])
 def check_login():
     params = request.form
-    email = params.get('login')
-    password = params.get('password')
-    if logins.get(email) == password:
-        return {'result': True}
-    else:
-        return {'result': False, 'message': 'Неверный логин или пароль'}
     result = sign_in(**params)
     if isinstance(result, str):
         return {'result': False, 'message': result}
@@ -44,13 +38,6 @@ def check_login():
 @app.route('/api/registration', methods=['GET', 'POST'])
 def reg():
     params = request.form
-    email = params.get('login')
-    password = params.get('password')
-    if not logins.get(email):
-        logins[email] = password
-        return {'result': True}
-    else:
-        return {'result': False, 'message': 'Пользователь с таким логином уже зарегистрирован'}
     result = registration(**params)
     if result:
         return {'result': False, 'message': result}
@@ -67,8 +54,8 @@ def join_to_tournament():
 @app.route('/api/tournament_list', methods=['GET', 'POST'])
 def get_tournament_list():
     params = request.form
-    key = params.get('key')
-    return tournaments
+    result = tournament_list(**{'user_id': params.get('key')})
+    return result
 
 
 @app.route('/api/create_tournament', methods=['GET', 'POST'])
