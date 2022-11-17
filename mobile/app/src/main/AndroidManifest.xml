@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Fighter"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ChangeDistribution"
+            android:exported="false" />
+        <activity
             android:name=".CreateTournament"
             android:exported="false" />
         <activity

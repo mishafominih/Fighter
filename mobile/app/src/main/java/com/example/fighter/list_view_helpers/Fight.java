@@ -1,4 +1,4 @@
-package com.example.fighter;
+package com.example.fighter.list_view_helpers;
 
 public class Fight {
     public String TimePlace;

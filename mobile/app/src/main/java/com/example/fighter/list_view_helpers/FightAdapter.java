@@ -1,12 +1,13 @@
-package com.example.fighter;
+package com.example.fighter.list_view_helpers;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.fighter.R;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ public class FightAdapter extends ArrayAdapter<Fight> {
     private int layout;
     private ArrayList<Fight> fightList;
 
-    FightAdapter(Context context, int resource, ArrayList<Fight> fights) {
+    public FightAdapter(Context context, int resource, ArrayList<Fight> fights) {
         super(context, resource, fights);
         this.fightList = fights;
         this.layout = resource;

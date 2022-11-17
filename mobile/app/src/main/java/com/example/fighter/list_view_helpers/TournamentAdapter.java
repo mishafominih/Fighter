@@ -1,14 +1,13 @@
-package com.example.fighter;
+package com.example.fighter.list_view_helpers;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.fighter.R;
 
 import java.util.ArrayList;
 
@@ -17,7 +16,7 @@ public class TournamentAdapter extends ArrayAdapter<Tournament> {
     private int layout;
     private ArrayList<Tournament> tournamentsList;
 
-    TournamentAdapter(Context context, int resource, ArrayList<Tournament> tournaments) {
+    public TournamentAdapter(Context context, int resource, ArrayList<Tournament> tournaments) {
         super(context, resource, tournaments);
         this.tournamentsList = tournaments;
         this.layout = resource;
