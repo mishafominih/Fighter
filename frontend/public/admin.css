@@ -111,7 +111,7 @@ color: #000000;
 }
 
 .createCompetition {
-  width: 80vw;
+  width: 100vw;
   height: 100%;
 }
 
@@ -171,14 +171,24 @@ color: #000000;
 h1 {
   text-align: center;
 }
-
-.competitionForm {
-  padding: 0 0 0 90px;
+.createCompetition{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .competitionItem {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+label{
+ align-self: flex-start;
+ position: relative;
+ left: 9.5%;
 }
 
 .inputItem {
@@ -196,7 +206,7 @@ h1 {
 }
 
 .last {
-  width: 45%;
+  width: 15%;
   display: flex;
   align-items: center;
 }
@@ -293,4 +303,8 @@ h1 {
 
 .deletePart:hover{
     color: var(--color-select);
+}
+
+.current{
+  color: var(--color-select);
 }

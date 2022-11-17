@@ -1,7 +1,6 @@
-from flask import Flask
-from flask import request
+from flask import Flask, request
 
-# from database import sign_in, registration
+from database.database import sign_in, registration
 
 logins = {'my@my': '1234'}
 keys = ['1234']
@@ -25,6 +24,7 @@ tournaments = [
 ]
 
 app = Flask(__name__)
+
 
 @app.route('/api/login', methods=['GET', 'POST'])
 def check_login():

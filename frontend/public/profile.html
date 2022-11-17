@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Профиль</title>
+    <link rel="stylesheet" href="profile.css" />
+  </head>
+  <body>
+    <head>
+      <nav>
+        <div class="container">
+          <div class="navInner">
+            <div class="navLogo">
+              <img src="images/Form Logo.png" alt="Лого" />
+            </div>
+            <ul>
+              <li><a href="index.html">Главная</a></li>
+              <li><a href="schedule.html">Соревнования</a></li>
+              <li><a href="profile.html" class="current">Мой профиль</a></li>
+            </ul>
+            <a class="popup-open" href="#"
+              ><div class="login">
+                <p>Выйти</p>
+                <img src="images/Иконка выхода.svg" alt="Войти" /></div
+            ></a>
+          </div>
+        </div>
+      </nav>
+    </head>
+    <main>
+      <div class="mainInner">
+        <!-- <div class="info">
+          <div class="adminItem">
+            <div class="adminImage">
+              <img src="./images/admin.svg" />
+            </div>
+            <div class="adminRef">
+              <a href="">
+                <div class="adminName">Оксимирон</div>
+                <div class="adminArrow">
+                  <img src="./images/arrow.svg" alt="admin" />
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="createCompetitionHref">
+            <a class="createItem" href="">
+              <img src="./images/add.svg" alt="add" />
+              <div class="infoItem">Создать соревнование</div>
+            </a>
+          </div>
+          <div class="listCompetition">
+            <a class="createItem" href="">
+              <img src="./images/list.svg" alt="item" />
+              <div class="infoItem">Список соревнований</div>
+            </a>
+          </div>
+        </div> -->
+        <div class="createCompetition">
+          <h1>Профиль</h1>
+          <form
+            class="competitionForm"
+            action=""
+            method="post"
+            name="profileForm"
+          >
+            <div class="competitionItem">
+              <label for="name"><h3>Имя Фамилия</h3></label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Иван Иванов"
+                class="inputItem"
+              />
+            </div>
+            <div class="competitionItem">
+              <label for="description"><h3>E-mail</h3></label>
+              <input
+                type="text"
+                id="email"
+                placeholder="ivanov@mail.ru"
+                class="inputItem"
+              />
+            </div>
+            <div class="competitionItem">
+              <label for="description"><h3>Пароль</h3></label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Пароль"
+                class="inputItem"
+              />
+            </div>
+            <div class="competitionItem">
+              <label for="description"><h3>Новый пароль</h3></label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Пароль"
+                class="inputItem"
+              />
+            </div>
+
+            <div class="competitionItem">
+                <label for="description"><h3>Подтверждение пароля</h3></label>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="Пароль"
+                  class="inputItem"
+                />
+              </div>
+            <div class="submitContainer">
+              <input class="submit" type="submit" value="Сохранить" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <script src="admin.js"></script>
+  </body>
+</html>

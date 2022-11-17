@@ -6,13 +6,16 @@ from psycopg2 import sql
 
 def connection_db(func):
     def connect(**args):
-        db_data = {}
         with open('config.json', 'r') as config:
-            db_data = json.loads(config.read())
-        conn = psycopg2.connect(dbname=db_data.get('dbname'),
-                                user=db_data.get('user'),
-                                password=db_data.get('password'),
-                                host=db_data.get('localhost'))
+            db_data = json.loads(config.read()) or {}
+        conn = psycopg2.connect(f"""
+            host={db_data.get('host')}
+            port={db_data.get('port')}
+            dbname={db_data.get('dbname')}
+            user={db_data.get('user')}
+            password={db_data.get('password')}
+            target_session_attrs=read-write
+        """)
         cursor = conn.cursor()
         result = func(cursor, **args)
         cursor.close()
@@ -44,4 +47,14 @@ def registration(cursor, password, login):
         return "Пользователь с таким логином уже есть"
     tmpl = """INSERT INTO public."Users" ("Login", "Password") VALUES (%s, %s);"""
     cursor.execute(tmpl, [sql.Literal(login), sql.Literal(password)])
+
+
+@connection_db
+def sign_i_n(cursor):
+    cursor.execute('SELECT * FROM "Users"')
+
+    print(cursor.fetchone())
+
+
+sign_i_n()
 
