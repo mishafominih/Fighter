@@ -47,7 +47,7 @@
     <script>
       $.get( "/api/tournament_list", function( data ) {
         for (i = 0; i < data.length; i++) {
-          console.log(data[0]['time']);
+          // console.log(data[0]['time']);
           $('table').append('<tr><td>'+ data[i]["time"] +' · ' + data[i]["place"] + '</td><td>' + data[i]["fighter_one"] + ' - ' + data[i]["fighter_two"]+'</td><td>'+ data[i]["score"]     +'</td></tr>')
         }
       });
