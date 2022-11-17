@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.authorization).setOnClickListener(view -> {
-            Intent login = new Intent(this, Login.class);
+            Intent login = new Intent(this, CreateTournament.class);
             startActivity(login);
         });
 

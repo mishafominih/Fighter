@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.fighter.list_view_helpers.Tournament;
+import com.example.fighter.list_view_helpers.TournamentAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;

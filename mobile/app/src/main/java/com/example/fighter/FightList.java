@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.fighter.list_view_helpers.Fight;
+import com.example.fighter.list_view_helpers.FightAdapter;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
