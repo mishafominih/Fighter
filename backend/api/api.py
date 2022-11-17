@@ -1,6 +1,6 @@
 from flask import Flask, request
 
-from database.database import sign_in, registration
+from database.database import sign_in, registration, create_tournament
 
 logins = {'my@my': '1234'}
 keys = ['1234']
@@ -28,49 +28,54 @@ app = Flask(__name__)
 
 @app.route('/api/login', methods=['GET', 'POST'])
 def check_login():
-    params = request.form.items()
-    # email = params.get('login')
-    # password = params.get('password')
-    # if logins.get(email) == password:
-    #     return {'result': True}
-    # else:
-    #     return {'result': False, 'message': 'Неверный логин или пароль'}
-    # result = sign_in(**params)
-    # if isinstance(result, str):
-    #     return {'result': False, 'message': result}
-    # return {'result': result}
-    return {'result': True}
+    params = request.form
+    email = params.get('login')
+    password = params.get('password')
+    if logins.get(email) == password:
+        return {'result': True}
+    else:
+        return {'result': False, 'message': 'Неверный логин или пароль'}
+    result = sign_in(**params)
+    if isinstance(result, str):
+        return {'result': False, 'message': result}
+    return {'result': result}
 
 
 @app.route('/api/registration', methods=['GET', 'POST'])
 def reg():
-    params = request.form.items()
-    # email = params.get('login')
-    # password = params.get('password')
-    # if not logins.get(email):
-    #     logins[email] = password
-    #     return {'result': True}
-    # else:
-    #     return {'result': False, 'message': 'Пользователь с таким логином уже зарегистрирован'}
-    # result = registration(**params)
-    # if result:
-    #     return {'result': False, 'message': result}
-    # return {'result': not result}
-    return {'result': True}
+    params = request.form
+    email = params.get('login')
+    password = params.get('password')
+    if not logins.get(email):
+        logins[email] = password
+        return {'result': True}
+    else:
+        return {'result': False, 'message': 'Пользователь с таким логином уже зарегистрирован'}
+    result = registration(**params)
+    if result:
+        return {'result': False, 'message': result}
+    return {'result': not result}
 
 
 @app.route('/api/join_to_tournament', methods=['GET', 'POST'])
 def join_to_tournament():
-    params = request.form.items()
-    # key = params.get('key')
+    params = request.form
+    key = params.get('key')
     return {'result': True}
 
 
 @app.route('/api/tournament_list', methods=['GET', 'POST'])
 def get_tournament_list():
-    params = request.form.items()
-    # key = params.get('key')
+    params = request.form
+    key = params.get('key')
     return tournaments
+
+
+@app.route('/api/create_tournament', methods=['GET', 'POST'])
+def tournament():
+    params = request.form
+    event_id = create_tournament(**params)
+    return {'result': True, 'id': event_id}
 
 
 app.run()

@@ -6,18 +6,18 @@ from psycopg2 import sql
 
 def connection_db(func):
     def connect(**args):
-        with open('config.json', 'r') as config:
-            db_data = json.loads(config.read()) or {}
         conn = psycopg2.connect(f"""
-            host={db_data.get('host')}
-            port={db_data.get('port')}
-            dbname={db_data.get('dbname')}
-            user={db_data.get('user')}
-            password={db_data.get('password')}
+            host=rc1b-e1m47fv71pchwvru.mdb.yandexcloud.net
+            port=6432
+            dbname=fighter
+            user=yukey
+            password=postgres
             target_session_attrs=read-write
         """)
         cursor = conn.cursor()
         result = func(cursor, **args)
+
+        conn.commit()
         cursor.close()
         conn.close()
         return result
@@ -31,7 +31,7 @@ def sign_in(cursor, password, login):
         SELECT "Password" = %s
         FROM "Users"
         WHERE "Login" = %s
-        LIMIT 1"""
+        LIMIT 1;"""
     cursor.execute(tmpl, [password, login])
     record = cursor.fetchone()
     if not record or False in record:
@@ -41,20 +41,32 @@ def sign_in(cursor, password, login):
 
 @connection_db
 def registration(cursor, password, login):
-    cursor.execute("""SELECT "Login" FROM "Users" WHERE "Login" = %s """, [sql.Literal(login)])
+    cursor.execute("""SELECT "Login" FROM "Users" WHERE "Login" = %s;""", [sql.Literal(login)])
     result = cursor.fetchone()
     if result:
-        return "Пользователь с таким логином уже есть"
+        return 'Пользователь с таким логином уже есть'
     tmpl = """INSERT INTO public."Users" ("Login", "Password") VALUES (%s, %s);"""
     cursor.execute(tmpl, [sql.Literal(login), sql.Literal(password)])
 
 
 @connection_db
-def sign_i_n(cursor):
-    cursor.execute('SELECT * FROM "Users"')
+def create_tournament(cursor, **params):
+    event_tmpl = """
+        INSERT INTO public."Event" ("Name", "Description", "Type", "CountThread") VALUES  (%s, %s, %s, %s)
+        RETURNING "_id";
+    """
+    print(params)
+    cursor.execute(event_tmpl, [params.get('name'), params.get('description'),
+                                params.get('count_thread'), params.get('type')])
+    event_id = cursor.fetchone()
 
-    print(cursor.fetchone())
+    categories_tmpl = """
+        INSERT INTO public."Specifications" ("Event", "Name", "Range") VALUES (%s, %s, %s);
+    """
+    categories = params.get('categories')
+    data = []
+    for val in categories:
+        data += [event_id, val.get('name'), json.dumps(val.get('range'))]
 
-
-sign_i_n()
+    cursor.execute(categories_tmpl * len(categories), data)
 
