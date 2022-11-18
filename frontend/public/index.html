@@ -31,7 +31,7 @@
               <div class="popup">
                 <div class="login-page">
                   <div class="form">
-                    <form class="register-form formToggle" method="post" action="/api/registration">
+                    <form class="register-form formToggle" id = "registration">
                       <div class="formHead">
                         <div class="formLogo">
                           <img src="images/Form Logo.png" />
@@ -39,25 +39,49 @@
                         <div class="formName">Регистрация</div>
                         <a class="popup-close" href="#">Закрыть</a>
                       </div>
-                      <input type="text" placeholder="Фамилия" required />
-                      <input type="text" placeholder="Имя" required />
-                      <input type="text" placeholder="Email" required />
+                      <!-- <input type="text" placeholder="Фамилия" required />
+                      <input type="text" placeholder="Имя" required /> -->
+                      <input type="text" placeholder="Email" name="login" required />
                       <input
                         type="password"
                         placeholder="Придумайте пароль"
+                        name="password"
                         required
                       />
-                      <input
+                      <!-- <input
                         type="password"
                         placeholder="Повторите пароль"
                         required
-                      />
+                      /> -->
                       <button type="submit">Зарегистрироваться</button>
                       <p class="message">
-                        Уже зарегистрировались? <a href="schedule.html">Войти</a>
+                        Уже зарегистрировались?
+                        <a href="schedule.html">Войти</a>
                       </p>
                     </form>
-                    <form class="login-form formToggle" method="post" action="/api/login">
+                    <!-- Запрос registration -->
+                    <script>
+                         $("#registration").on("submit", function () {
+                          let q = $.ajax({
+                            url: "/api/registration",
+                            method: "post",
+                            dataType: "html",
+                            data: $(this).serialize(),
+                            success: function (data) {
+                              let RegResult = q.responseJSON.result;
+                              console.log(RegResult);
+                              if ((RegResult = true)) {
+                                window.location.href = "/admin.html";
+                              }
+                              else{
+                                console.log("нет");
+                              }
+                            },
+                            error: console.log('не отправился я')
+                          });
+                        });
+                    </script>
+                    <form class="login-form formToggle" id ="login">
                       <div class="formHead">
                         <div class="formLogo">
                           <img src="images/Form Logo.png" />
@@ -65,13 +89,37 @@
                         <a class="popup-close" href="#">Закрыть</a>
                         <div class="formName">Авторизация</div>
                       </div>
-                      <input type="text" placeholder="Логин" />
-                      <input type="password" placeholder="Пароль" />
-                      <button type="submit"><a href="schedule.html">Войти</a></button>
+                      <input type="text" placeholder="Логин" name="login"/>
+                      <input type="password" placeholder="Пароль" name="password"/>
+                      <button type="submit">
+                        <a href="./schedule.html">Войти</a>
+                      </button>
                       <p class="message">
                         Не зарегистрированы? <a href="#">Создать аккаунт</a>
                       </p>
                     </form>
+                    <!-- Запрос login -->
+                    <script>
+                      $("#login").on("submit", function () {
+                       let q = $.ajax({
+                         url: "/api/login",
+                         method: "post",
+                         dataType: "html",
+                         data: $(this).serialize(),
+                         success: function (data) {
+                           let logResult = q.responseJSON.result;
+                           console.log(logResult);
+                           if ((logResult = true)) {
+                             window.location.href = "http://51.250.97.3/admin.html";
+                           }
+                           else{
+                             console.log("нет");
+                           }
+                         },
+                         error: console.log('не отправился я')
+                       });
+                     });
+                 </script>
                   </div>
                 </div>
               </div>
@@ -89,39 +137,38 @@
               Провести соревнование с нами быстро и легко!
             </div>
             <div class="joinForm">
-              <form action="/api/join_to_tournament" class="formJoin" method="post">
+              <form class="formJoin" id="join">
                 <input
                   type="text"
                   placeholder="Введите код"
                   class="joinFormText"
+                  name="key"
                 />
                 <button type="submit" class="joinFormBtn">
                   Присоединиться
                 </button>
               </form>
+              <!-- Запрос join_to_tournament -->
               <script>
-                let result;
-                $(document).on('click', '.joinFormBtn', function(){
-                    let data = '1234';
-                    let url = '/api/login';
-                    let q = $.ajax({
-                        type: 'POST',
-                        url: url,
-                        data: {
-                            'text': data.val
-                        },
-                        dataType: 'json'
-                    });
-        
-                    q.done(function(){
-                        let result = q.responseJSON.result
-                        console.log(q.responseJSON.result)
-                        if (result = true) {
-                            window.location.href = 'schedule.html';
-                        }
-                    })
-                })
-            </script>
+                $("#join").on("submit", function () {
+                  let q = $.ajax({
+                    url: "/api/join_to_tournament",
+                    method: "post",
+                    dataType: "html",
+                    data: $(this).serialize(),
+                    success: function (data) {
+                      let result = q.responseJSON.result;
+                      if ((result = true)) {
+                        window.location.href = "admin.html";
+                      }
+                      else{
+                          console.log("нет");
+                      }
+                    },
+                    error: console.log('не отправился я')
+                  });
+                });
+              </script>
             </div>
           </div>
         </div>
@@ -173,19 +220,21 @@
             <h2>НАС ВЫБИРАЮТ</h2>
             <div class="advantagesItems">
               <div class="advantagesItem">
-                <h3>1.  Преимущество</h3>
+                <h3>1. Преимущество</h3>
                 <p>Простая система просмотра турниров.</p>
               </div>
               <div class="advantagesItem">
-                <h3>2.  Преимущество</h3>
-                <p>Возможность экспорта результата соревнований в нужный формат</p>
+                <h3>2. Преимущество</h3>
+                <p>
+                  Возможность экспорта результата соревнований в нужный формат
+                </p>
               </div>
               <div class="advantagesItem">
-                <h3>3.  Преимущество</h3>
+                <h3>3. Преимущество</h3>
                 <p>Удобный интерфейс создания соревнования для организаторов</p>
               </div>
               <div class="advantagesItem">
-                <h3>4.  Преимущество</h3>
+                <h3>4. Преимущество</h3>
                 <p>Трансляция счета соревнования в режиме реального времени</p>
               </div>
             </div>
