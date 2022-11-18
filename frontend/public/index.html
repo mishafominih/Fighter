@@ -63,15 +63,15 @@
                     <script>
                          $("#registration").on("submit", function () {
                           let q = $.ajax({
-                            url: "/api/registration",
+                            url: "api/registration",
                             method: "post",
                             dataType: "html",
                             data: $(this).serialize(),
                             success: function (data) {
-                              let RegResult = q.responseJSON.result;
+                              let RegResult = q.responseJSON;
                               console.log(RegResult);
                               if ((RegResult = true)) {
-                                window.location.href = "/admin.html";
+                                window.location.href = "admin.html";
                               }
                               else{
                                 console.log("нет");
@@ -92,7 +92,7 @@
                       <input type="text" placeholder="Логин" name="login"/>
                       <input type="password" placeholder="Пароль" name="password"/>
                       <button type="submit">
-                        <a href="./schedule.html">Войти</a>
+                        Войти
                       </button>
                       <p class="message">
                         Не зарегистрированы? <a href="#">Создать аккаунт</a>
@@ -107,7 +107,7 @@
                          dataType: "html",
                          data: $(this).serialize(),
                          success: function (data) {
-                           let logResult = q.responseJSON.result;
+                           let logResult = q.responseJSON;
                            console.log(logResult);
                            if ((logResult = true)) {
                              window.location.href = "http://51.250.97.3/admin.html";
@@ -157,7 +157,7 @@
                     dataType: "html",
                     data: $(this).serialize(),
                     success: function (data) {
-                      let result = q.responseJSON.result;
+                      let result = q.responseJSON;
                       if ((result = true)) {
                         window.location.href = "admin.html";
                       }
