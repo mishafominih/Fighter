@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 
 import org.json.JSONException;
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.authorization).setOnClickListener(view -> {
-            Intent login = new Intent(this, CreateTournament.class);
+            Intent login = new Intent(this, Login.class);
             startActivity(login);
         });
 

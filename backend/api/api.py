@@ -80,6 +80,14 @@ def add_player():
         return {'result': False, 'message': 'Что-то пошло не так'}
 
 
+
+@app.route('/api/get_players', methods=['GET', 'POST'])
+def get_players():
+    params = request.form
+    result = get_players_for_tournament(**{'user_id': params.get('user'), 'tournament_id': params.get('tournament_id')})
+    return result
+
+
 @app.route('/api/tournament_grid', methods=['GET', 'POST'])
 def tournament_grid():
     params = request.form

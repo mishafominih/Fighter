@@ -101,6 +101,23 @@ def add_new_player(cursor, **params):
 
     return cursor.fetchone()['_id']
 
+@connection_db
+def get_players_for_tournament(cursor, user_id, tournament_id):
+    sql = """
+        SELECT 
+            "Name" as "name" 
+            , "Surname" as "surname"
+            , "Patronymic" as "patronymic"
+            , "Link" as "link"
+            , "Description" as "description"
+            , "Categories" as "categories"
+        FROM "Players"
+        WHERE "UserId" = '%s' AND "TournamentId" = '%s'
+    """
+    cursor.execute(sql, [user_id, tournament_id])
+    data = cursor.fetchall()
+    return data
+
 
 @connection_db
 def create_tournament_grid(cursor, tournament_id):
