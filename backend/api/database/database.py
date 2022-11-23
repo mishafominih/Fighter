@@ -82,3 +82,46 @@ def tournament_list(cursor, user_id):
     cursor.execute(tmpl, [user_id])
     data = cursor.fetchall()
     return data
+
+
+@connection_db
+def add_new_player(cursor, **params):
+    player_tmpl = """
+            INSERT INTO public."Players" 
+            ("Name","Surname","Patronymic","Link","Description","UserId","TournamentId","Categories")
+            VALUES  (%s, %s, %s, %s, %s, %s, %s, %s)
+            RETURNING "_id";
+        """
+
+    cursor.execute(player_tmpl, [
+        params.get('name'), params.get('surname'), params.get('patronymic'), params.get('link'),
+        params.get('description'), int(params.get('user_id')), int(params.get('tournament_id')),
+        json.dumps(params.get('categories'))
+    ])
+
+    return cursor.fetchone()['_id']
+
+
+@connection_db
+def create_tournament_grid(cursor, tournament_id):
+    places_tmpl = """
+        SELECT "Places"
+        FROM "Event"
+        WHERE "_id" = %s
+    """
+    cursor.execute(places_tmpl, [tournament_id])
+    places = cursor.fetchone()
+
+    players_tmpl = """
+        SELECT *
+        FROM "Players"
+        WHERE "TournamentId" = %s
+    """
+
+    cursor.execute(players_tmpl, [tournament_id])
+
+
+@connection_db
+def get_tournament_grid(**params):
+    pass
+

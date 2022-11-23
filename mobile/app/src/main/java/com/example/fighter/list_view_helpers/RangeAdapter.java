@@ -44,18 +44,11 @@ public class RangeAdapter extends ArrayAdapter<Range>{
         final Range range = rangeList.get(position);
 
 
-        viewHolder.min.setText(range.Min);
-        viewHolder.min.setOnFocusChangeListener((v, hasFocus) -> {
+        viewHolder.value.setText(range.Value);
+        viewHolder.value.setOnFocusChangeListener((v, hasFocus) -> {
             if(!hasFocus){
-                EditText et =(EditText)v.findViewById(R.id.min);
-                rangeList.get(position).Min = et.getText().toString().trim();
-            }
-        });
-        viewHolder.max.setText(range.Max);
-        viewHolder.max.setOnFocusChangeListener((v, hasFocus) -> {
-            if(!hasFocus){
-                EditText et =(EditText)v.findViewById(R.id.max);
-                rangeList.get(position).Max = et.getText().toString().trim();
+                EditText et =(EditText)v.findViewById(R.id.value);
+                rangeList.get(position).Value = et.getText().toString().trim();
             }
         });
 
@@ -68,11 +61,10 @@ public class RangeAdapter extends ArrayAdapter<Range>{
     }
 
     private class ViewHolder {
-        final TextView min, max;
+        final TextView value;
         final ImageView delBtn;
         ViewHolder(View view){
-            min = view.findViewById(R.id.min);
-            max = view.findViewById(R.id.max);
+            value = view.findViewById(R.id.value);
             delBtn = view.findViewById(R.id.image_del_range);
         }
     }

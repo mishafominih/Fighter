@@ -7,6 +7,16 @@ public class Tournament {
     public Tournament(String name, String description, String status){
         Name = name;
         Description = description;
-        Status = status;
+        switch (status) {
+            case "0":
+                Status = "Проведено";
+                break;
+            case "1":
+                Status = "Идет сейчас";
+                break;
+            case "2":
+                Status = "Запланировано";
+                break;
+        }
     }
 }

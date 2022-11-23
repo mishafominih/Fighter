@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fighter.list_view_helpers.Tournament;
@@ -15,21 +17,31 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class TournametnsList extends AppCompatActivity {
+public class TournamentsList extends AppCompatActivity {
 
+    protected String user_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tournametns_list);
 
+        Bundle arguments = getIntent().getExtras();
+        if(arguments != null && arguments.containsKey("user_id")){
+            user_id = arguments.get("user_id").toString();
+        }
+
         findViewById(R.id.button_add_tournament).setOnClickListener((click) -> {
             Intent intent = new Intent(this, CreateTournament.class);
+            intent.putExtra("user_id", user_id);
             startActivity(intent);
         });
 
+    }
+
+    private void update_tournaments() {
         MyRequest request = new MyRequest();
         // Набираем данные для запроса
-        request.put("key", "1234");
+        request.put("user", user_id);
         // Сам запрос
         request.CallArray("get_tournaments", (res) -> {
             runOnUiThread(() -> {
@@ -55,5 +67,11 @@ public class TournametnsList extends AppCompatActivity {
         }, (fail) ->{
             runOnUiThread(() -> Toast.makeText(this, fail.getMessage(), Toast.LENGTH_LONG).show());
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        update_tournaments();
     }
 }

@@ -6,39 +6,19 @@
     android:layout_height="wrap_content">
 
     <EditText
-        android:id="@+id/min"
-        android:layout_weight="10"
+        android:id="@+id/value"
+        android:layout_weight="2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:backgroundTint="@color/white"
-        android:textSize="20dp"
-        android:hint="min"
-        />
-
-    <TextView
-        android:layout_weight="13"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:gravity="center"
-        android:text=":"
-        android:textColor="@color/black"
-        android:textSize="25dp"
-        />
-
-    <EditText
-        android:id="@+id/max"
-        android:layout_weight="10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
         android:backgroundTint="@color/white"
         android:textSize="20dp"
-        android:hint="max"
+        android:hint="Введите значение"
         />
 
     <ImageView
-        android:layout_weight="13"
+        android:layout_weight="15"
         android:id="@+id/image_del_range"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

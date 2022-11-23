@@ -21,7 +21,7 @@ public class Login extends AppCompatActivity {
         //  Словарь для получения заполненных данных
         HashMap<String, Integer> sources = new HashMap<>();
         sources.put("login", R.id.edit_text_login_email);
-        sources.put("pass", R.id.edit_text_login_password);
+        sources.put("password", R.id.edit_text_login_password);
 
         findViewById(R.id.text_view_login_registration).setOnClickListener(view -> {
             Intent reg = new Intent(this, Registration.class);
@@ -41,7 +41,8 @@ public class Login extends AppCompatActivity {
                 runOnUiThread(() -> {
                     try {
                         if(res.getBoolean("result")) {
-                            Intent tournaments = new Intent(this, TournametnsList.class);
+                            Intent tournaments = new Intent(this, TournamentsList.class);
+                            tournaments.putExtra("user_id", res.getString("id"));
                             startActivity(tournaments);
                             this.finish();
                         }

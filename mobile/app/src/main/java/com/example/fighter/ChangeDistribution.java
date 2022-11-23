@@ -32,11 +32,10 @@ public class ChangeDistribution extends AppCompatActivity {
         textView.append(arguments.get("distribution_name").toString());
 
         ArrayList<Range> ranges = new ArrayList<Range>();
-        ArrayList<String> min = (ArrayList<String>) arguments.get("min");
-        ArrayList<String> max = (ArrayList<String>) arguments.get("max");
-        if(min != null){
-            for(int i = 0; i < min.size(); i++){
-                ranges.add(new Range(min.get(i), max.get(i)));
+        ArrayList<String> values = (ArrayList<String>) arguments.get("values");
+        if(values != null){
+            for(int i = 0; i < values.size(); i++){
+                ranges.add(new Range(values.get(i)));
             }
         }
 
@@ -45,7 +44,7 @@ public class ChangeDistribution extends AppCompatActivity {
         fights_list.setAdapter(adapter);
 
         findViewById(R.id.add_new_range).setOnClickListener((view) -> {
-            adapter.add(new Range("", ""));
+            adapter.add(new Range(""));
             adapter.notifyDataSetChanged();
         });
 
@@ -56,16 +55,13 @@ public class ChangeDistribution extends AppCompatActivity {
     }
 
     private void save_ranges() {
-        ArrayList<String> min_set = new ArrayList<>();
-        ArrayList<String> max_set = new ArrayList<>();
+        ArrayList<String> values = new ArrayList<>();
         for(int i = 0; i < adapter.getCount(); i++){
             Range range = adapter.getItem(i);
-            min_set.add(range.Min);
-            max_set.add(range.Max);
+            values.add(range.Value);
         }
         Intent data = new Intent();
-        data.putExtra("min", min_set);
-        data.putExtra("max", max_set);
+        data.putExtra("values", values);
         setResult(RESULT_OK, data);
         finish();
     }

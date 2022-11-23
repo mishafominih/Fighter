@@ -20,10 +20,10 @@ public class Registration extends AppCompatActivity {
 
         //  Словарь для получения заполненных данных
         HashMap<String, Integer> sources = new HashMap<>();
-        sources.put("surname", R.id.edit_text_registration_surname);
-        sources.put("firstname", R.id.edit_text_registration_firstname);
+//        sources.put("surname", R.id.edit_text_registration_surname);
+//        sources.put("firstname", R.id.edit_text_registration_firstname);
         sources.put("login", R.id.edit_text_registration_email);
-        sources.put("pass", R.id.edit_text_registration_password);
+        sources.put("password", R.id.edit_text_registration_password);
 
         findViewById(R.id.text_view_registration_login).setOnClickListener(view -> {
             Intent login = new Intent(this, Login.class);
@@ -44,7 +44,9 @@ public class Registration extends AppCompatActivity {
                 runOnUiThread(() -> {
                     try {
                         if(res.getBoolean("result")) {
-                            Intent tournaments = new Intent(this, TournametnsList.class);
+                            Intent tournaments = new Intent(this, TournamentsList.class);
+                            if(!res.isNull("id"))
+                                tournaments.putExtra("user_id", res.getString("id"));
                             startActivity(tournaments);
                             this.finish();
                         }

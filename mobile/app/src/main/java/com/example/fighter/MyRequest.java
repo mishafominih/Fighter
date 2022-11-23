@@ -61,7 +61,7 @@ public class MyRequest {
         for (Iterator<String> it = params.keys(); it.hasNext(); ) {
             String key = it.next();
             try {
-                formbody.add(key, (String) params.get(key));
+                formbody.add(key, params.get(key).toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }

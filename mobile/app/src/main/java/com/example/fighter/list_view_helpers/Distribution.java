@@ -21,9 +21,7 @@ public class Distribution {
     public void UpdateDescription(){
         StringBuilder res = new StringBuilder();
         for(Range r : Ranges){
-            res.append(r.Min);
-            res.append("-");
-            res.append(r.Max);
+            res.append(r.Value);
             res.append("; ");
         }
         if(res.length() > 0)

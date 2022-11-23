@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.fighter.list_view_helpers.Distribution;
 import com.example.fighter.list_view_helpers.DistributionAdapter;
@@ -24,15 +26,15 @@ import java.util.ArrayList;
 
 public class CreateTournament extends AppCompatActivity {
 
+    protected String user_id;
     DistributionAdapter adapter;
     private int last_pos;
     ActivityResultLauncher<Intent> mStartForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 Intent data = result.getData();
                 if(data != null){
-                    ArrayList<String> min = data.getStringArrayListExtra("min");
-                    ArrayList<String> max = data.getStringArrayListExtra("max");
-                    adapter.update_item(min, max, last_pos);
+                    ArrayList<String> values = data.getStringArrayListExtra("values");
+                    adapter.update_item(values, last_pos);
                 }
             });
 
@@ -41,6 +43,10 @@ public class CreateTournament extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_tournament);
 
+        Bundle arguments = getIntent().getExtras();
+        if(arguments != null && arguments.containsKey("user_id")){
+            user_id = arguments.get("user_id").toString();
+        }
 
         ArrayList<Distribution> distributions = new ArrayList<Distribution>();
 
@@ -55,14 +61,35 @@ public class CreateTournament extends AppCompatActivity {
         });
 
         findViewById(R.id.button_create_tournament).setOnClickListener((view) -> {
-            MyRequest request = new MyRequest();
-            request.put("name", findViewById(R.id.name));
-            request.put("description", findViewById(R.id.description));
-            request.put("categories", create_categories());
-//            request.Call("create_tournament", (res) -> {
-//
-//            });
+            String name = ((EditText)findViewById(R.id.name)).getText().toString();
+            String description = ((EditText)findViewById(R.id.description)).getText().toString();
+            JSONArray categories = create_categories();
+            if(check_fields(name, description, categories)){
+                MyRequest request = new MyRequest();
+                request.put("name", name);
+                request.put("user_id", user_id);
+                request.put("description", description);
+                request.put("categories", categories);
+                request.Call("create_tournament", (res) -> {
+                    finish();
+                });
+            }
         });
+    }
+
+    private boolean check_fields(String name, String description, JSONArray categories){
+        if(name.length() < 3){
+            return show_error("Слишком короткое название соревнования");
+        }
+        if(description.length() == 0){
+            return show_error("Введите описание соревнования");
+        }
+        return true;
+    }
+
+    private boolean show_error(String error) {
+        Toast.makeText(CreateTournament.this, error, Toast.LENGTH_LONG).show();
+        return false;
     }
 
     @NonNull
@@ -76,8 +103,7 @@ public class CreateTournament extends AppCompatActivity {
                 JSONArray ranges = new JSONArray();
                 for(Range r : distribution.Ranges){
                     JSONObject range = new JSONObject();
-                    range.put("start", r.Min);
-                    range.put("end", r.Max);
+                    range.put("value", r.Value);
                     ranges.put(range);
                 }
                 item.put("range", ranges);
