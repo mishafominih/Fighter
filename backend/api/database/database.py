@@ -112,7 +112,7 @@ def get_players_for_tournament(cursor, user_id, tournament_id):
             , "Description" as "description"
             , "Categories" as "categories"
         FROM "Players"
-        WHERE "UserId" = '%s' AND "TournamentId" = '%s'
+        WHERE "UserId" = %s AND "TournamentId" = %s
     """
     cursor.execute(sql, [user_id, tournament_id])
     data = cursor.fetchall()
