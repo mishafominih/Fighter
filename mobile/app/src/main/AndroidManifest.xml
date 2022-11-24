@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Fighter"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".PlayersList"
+            android:exported="false" />
+        <activity
             android:name=".AddPlayer"
             android:exported="false" />
         <activity

@@ -100,13 +100,11 @@ public class CreateTournament extends AppCompatActivity {
             JSONObject item = new JSONObject();
             try {
                 item.put("name", distribution.Name);
-                JSONArray ranges = new JSONArray();
+                ArrayList<String> values = new ArrayList<>();
                 for(Range r : distribution.Ranges){
-                    JSONObject range = new JSONObject();
-                    range.put("value", r.Value);
-                    ranges.put(range);
+                    values.add(r.Value);
                 }
-                item.put("range", ranges);
+                item.put("values", values);
                 categories.put(item);
             } catch (JSONException e) {
                 e.printStackTrace();

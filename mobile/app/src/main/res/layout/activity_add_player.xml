@@ -7,6 +7,10 @@
     android:orientation="vertical"
     tools:context=".AddPlayer">
 
+    <include
+        layout="@layout/head"
+        />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
