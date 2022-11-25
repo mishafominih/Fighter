@@ -69,3 +69,5 @@ $('.menu_small_icon').click(function () {
 
 let start = 0;
 let end = 0;
+
+

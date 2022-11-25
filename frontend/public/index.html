@@ -4,12 +4,17 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Main</title>
+    <title>Главная</title>
     <link rel="stylesheet" href="style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link type="image/x-icon" rel="shortcut icon" href="images/favicon.ico">
+    <link type="image/png" sizes="16x16" rel="icon" href="images/favicon-16x16.png">
+    <link type="image/png" sizes="32x32" rel="icon" href="images/favicon-32x32.png">
+    <link type="image/png" sizes="96x96" rel="icon" href="images/favicon-64X64.png">
+    <link type="image/png" sizes="120x120" rel="icon" href="images/favicon-120X120.png">
   </head>
   <body>
-    <head>
+    <header>
       <nav>
         <div class="container">
           <div class="navInner">
@@ -21,7 +26,7 @@
               <li>Соревнования</li>
               <li>Мой профиль</li>
             </ul> -->
-            <a class="popup-open" href="schedule.html"
+            <a class="popup-open"
               ><div class="login">
                 <p>Войти</p>
                 <img src="images/Иконка выхода.svg" alt="Войти" /></div
@@ -37,7 +42,6 @@
                           <img src="images/Form Logo.png" />
                         </div>
                         <div class="formName">Регистрация</div>
-                        <a class="popup-close" href="#">Закрыть</a>
                       </div>
                       <!-- <input type="text" placeholder="Фамилия" required />
                       <input type="text" placeholder="Имя" required /> -->
@@ -56,7 +60,7 @@
                       <button type="submit">Зарегистрироваться</button>
                       <p class="message">
                         Уже зарегистрировались?
-                        <a href="schedule.html">Войти</a>
+                        <a>Войти</a>
                       </p>
                     </form>
                     <!-- Запрос registration -->
@@ -71,7 +75,7 @@
                               let RegResult = q.responseJSON;
                               console.log(RegResult);
                               if ((RegResult = true)) {
-                                window.location.href = "admin.html";
+                                window.location.href = "grid.html";
                               }
                               else{
                                 console.log("нет");
@@ -86,7 +90,7 @@
                         <div class="formLogo">
                           <img src="images/Form Logo.png" />
                         </div>
-                        <a class="popup-close" href="#">Закрыть</a>
+                        
                         <div class="formName">Авторизация</div>
                       </div>
                       <input type="text" placeholder="Логин" name="login"/>
@@ -127,7 +131,7 @@
           </div>
         </div>
       </nav>
-    </head>
+    </header>
     <main>
       <div class="join">
         <div class="container">
