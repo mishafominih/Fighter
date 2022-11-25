@@ -21,7 +21,7 @@ public class Player {
             Lastname = data.getString("patronymic");
             Link = data.getString("link");
             Description = data.getString("description");
-            Categories = data.getJSONArray("categories");
+            Categories = new JSONArray(data.getString("categories"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

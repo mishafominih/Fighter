@@ -50,8 +50,6 @@ public class CreateTournament extends AppCompatActivity {
 
         ArrayList<Distribution> distributions = new ArrayList<Distribution>();
 
-        distributions.add(new Distribution("", ""));
-
         ListView fights_list = findViewById(R.id.list_view_distributions_list);
         adapter = new DistributionAdapter(this, R.layout.distribution_list_item, distributions, this);
         fights_list.setAdapter(adapter);
@@ -100,9 +98,9 @@ public class CreateTournament extends AppCompatActivity {
             JSONObject item = new JSONObject();
             try {
                 item.put("name", distribution.Name);
-                ArrayList<String> values = new ArrayList<>();
+                JSONArray values = new JSONArray();
                 for(Range r : distribution.Ranges){
-                    values.add(r.Value);
+                    values.put(r.Value);
                 }
                 item.put("values", values);
                 categories.put(item);

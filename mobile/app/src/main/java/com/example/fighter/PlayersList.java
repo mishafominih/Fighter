@@ -13,6 +13,7 @@ import com.example.fighter.list_view_helpers.Player;
 import com.example.fighter.list_view_helpers.PlayerAdapter;
 import com.example.fighter.list_view_helpers.Tournament;
 import com.example.fighter.list_view_helpers.TournamentAdapter;
+import com.example.fighter.list_view_helpers.TransportDataHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,16 +29,15 @@ public class PlayersList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_players_list);
 
-        Bundle arguments = getIntent().getExtras();
-        if(arguments != null && arguments.containsKey("user_id")){
-            user_id = arguments.get("user_id").toString();
-            tournament_id = arguments.get("tournament_id").toString();
-        }
+        TransportDataHelper helper = new TransportDataHelper(getIntent());
+        user_id = helper.get("user_id");
+        tournament_id = helper.get("tournament_id");
 
         findViewById(R.id.button_add_player).setOnClickListener((click) -> {
             Intent intent = new Intent(this, AddPlayer.class);
             intent.putExtra("user_id", user_id);
             intent.putExtra("tournament_id", tournament_id);
+            intent.putExtra("categories", helper.get("categories"));
             startActivity(intent);
         });
 

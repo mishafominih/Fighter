@@ -67,6 +67,7 @@ public class TournamentsList extends AppCompatActivity {
                     Intent intent = new Intent(parent.getContext(), PlayersList.class);
                     intent.putExtra("user_id", user_id);
                     intent.putExtra("tournament_id", t.Id);
+                    intent.putExtra("categories", t.Categories.toString());
                     startActivity(intent);
                 });
             });
