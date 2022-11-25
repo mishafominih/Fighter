@@ -4,53 +4,128 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Расписание соревнований</title>
+    <title>Расписание соревнования</title>
     <link rel="stylesheet" href="schedule.css" />
+    <script src="anime.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link type="image/x-icon" rel="shortcut icon" href="images/favicon.ico">
+    <link type="image/png" sizes="16x16" rel="icon" href="images/favicon-16x16.png">
+    <link type="image/png" sizes="32x32" rel="icon" href="images/favicon-32x32.png">
+    <link type="image/png" sizes="96x96" rel="icon" href="images/favicon-64X64.png">
+    <link type="image/png" sizes="120x120" rel="icon" href="images/favicon-120X120.png">
   </head>
   <body>
-    <head>
+    <header>
       <nav>
         <div class="container">
           <div class="navInner">
             <div class="navLogo">
               <img src="images/Form Logo.png" alt="Лого" />
             </div>
-            <ul>
-              <li><a href="index.html">Главная</a></li>
-              <li><a href="admin.html" class="current">Соревнования</a></li>
-              <li><a href="profile.html">Мой профиль</a></li>
-            </ul>
-            <a class="popup-open" href="schedule.html"
-              ><div class="login">
-                <p>Выйти</p>
-                <img src="images/Иконка выхода.svg" alt="Войти" /></div
+
+            <!-- админ окно -->
+            <a class="myLinkModal" href="#"
+              ><div class="adminIcon">
+                <img src="images/adminIcon.svg" alt="" /></div
             ></a>
+            <div id="myModal">
+              <div class="modalContent">
+                <div class="myCompetition">
+                  <a href="tournamentList.html">Мои соревнования</a>
+                </div>
+                <div class="myProfile">
+                  <a href="profile.html">Мой Профиль</a>
+                </div>
+                <div class="exit">
+                  <a href="index.html">
+                    <div class="exitInner">
+                      Выйти <img src="images/Иконка выхода.svg" alt="Войти" />
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div id="myOverlay"></div>
+            <!-- админ окно -->
           </div>
         </div>
       </nav>
-      <main>
-        <h1>Расписание соревнования</h1>
-        <div class="date">
-            <div class="digit">20</div>
-            <div class="time">
-                <div class="day"><span>Сегодня</span></div>
-                <div class="month">Ноября</div>
-            </div>
+    </header>
+    <main>
+      <div class="header">
+        <a href="grid.html">
+          <div class="flex">
+        <img src="images/arrowBack.svg" alt="Стрелка назад">
+        <h1>Ход соревнования</h1>
+      </div>
+        </a>
+      </div>
+      
+      
+      <div class="date">
+        <div class="digit"></div>
+        <div class="time">
+          <div class="day"><span>Сегодня</span></div>
+          <div class="month">Ноября</div>
         </div>
-        <table>
-            <tr><th>Время · место</th><th>Команда/участник</th><th>Счет</th></tr>
-        </table>
-        <a href="admin.html">Создать</a>
-      </main>
-    </head>
+      </div>
+      <table>
+        <tr>
+          <th>Время · место</th>
+          <th>Команда/участник</th>
+          <th>Счет</th>
+        </tr>
+      </table>
+    </main>
+
     <script>
-      $.get( "/api/tournament_list", function( data ) {
-        for (i = 0; i < data.length; i++) {
-          // console.log(data[0]['time']);
-          $('table').append('<tr><td>'+ data[i]["time"] +' · ' + data[i]["place"] + '</td><td>' + data[i]["fighter_one"] + ' - ' + data[i]["fighter_two"]+'</td><td>'+ data[i]["score"]     +'</td></tr>')
-        }
-      });
+       $.ajax({
+          url: '/api/get_tournaments', // Тут путь к файлу
+          type: 'POST',
+          dataType: 'json', 
+          data: {
+            'id': 0
+          },
+        })
+        .done(function(result){
+
+          if(result){
+            console.log('Ответ получен');
+            console.log(result);
+          }
+
+        })
+        // Если не смогли отправить запрос
+        .fail(function(){
+          console.log("error");
+        });
+      // $.get("/api/tournament_list", function (data) {
+      //   for (i = 0; i < data.length; i++) {
+      //     // console.log(data[0]['time']);
+      //     $("table").append(
+      //       "<tr><td>" + data[i]["time"] + " · " + data[i]["place"] + "</td><td>" + data[i]["fighter_one"] + " - " + data[i]["fighter_two"] + "</td><td>" + data[i]["score"] + "</td></tr>"
+      //     );
+      //   }
+      // });
+
+      let months = [
+        "Январь",
+        "Февраль",
+        "Март",
+        "Апрель",
+        "Май",
+        "Июнь",
+        "Июль",
+        "Август",
+        "Сентябрь",
+        "Октябрь",
+        "Ноябрь",
+        "Декабрь",
+      ];
+      let date = new Date();
+      $(".digit").html(date.getDate());
+      $(".month").html(months[date.getMonth()]);
     </script>
+    <script src="windowScript.js"></script>
   </body>
 </html>

@@ -8,14 +8,6 @@
   --color-grey: #d9d9d9;
 }
 
-.formJoin > input::-webkit-input-placeholder {
-  color: white;
-  opacity: 0.7;
-}
-.formJoin > input:-moz-placeholder {
-  color: white;
-  opacity: 0.7;
-}
 
 body {
   font-family: "Open Sans", sans-serif;
@@ -38,9 +30,9 @@ header {
 .navInner {
   display: flex;
   justify-content: space-between;
-  align-items: center; 
+  align-items: center;
   margin: auto auto;
-  height: 10vh;
+  height: 70px;
 }
 
 .navInner ul {
@@ -133,8 +125,6 @@ body {
 }
 
 .menu-small {
-  display: none;
-  height: 2em;
   position: absolute;
 }
 
@@ -161,14 +151,41 @@ body {
 .menu-small {
   display: flex;
   flex-direction: column;
-
   left: -1px;
-  height: 100vh;
+  height: 120vh;
   width: 15vw;
   padding: 0;
   background: var(--color-grey);
   transform: translateX(-100vw);
 }
+
+.menuSmallInner {
+  width: 100%;
+  height: 100%;
+  padding-top: 80px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.menuSmallInner > p {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 27px;
+}
+
+.menuSmallInnerHead {
+  margin: 40px 0 20px 0;
+  width: 80%;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 27px;
+}
+
+
 
 .menu_small_item {
   height: 2em;
@@ -194,6 +211,28 @@ body {
   flex-direction: column;
 }
 
+#gridForm{
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.submit{
+  width: 70%;
+  height: 50px;
+  background: rgba(248, 141, 64, 0.8);
+  border-radius: 5px;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 33px;
+  text-align: center;
+}
+
 .inner {
   padding-top: calc(50px + 2em);
 }
@@ -202,53 +241,52 @@ body {
   margin: 0;
 }
 
-.content{
-    width: 100%;
+.content {
+  width: 100%;
 }
-.grid{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.grid h1{
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 32px;
-    text-align: center;
-    margin: 0;
-    height: 70px;
+.grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.line{
-    height: 5px;
-    width: 320px;
-    display: flex;
-    margin: 0px;
-    background-color: var(--color--main);
+.grid h1 {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  text-align: center;
+  margin: 0;
+  height: 70px;
 }
 
-.grid p{
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 33px;
-    text-align: center;
-    color: white;
-    margin: 0;
+.line {
+  height: 5px;
+  width: 320px;
+  display: flex;
+  margin: 0px;
+  background-color: var(--color--main);
 }
 
+.grid p {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 33px;
+  text-align: center;
+  color: white;
+  margin: 0;
+}
 
+a {
+  text-decoration: none;
+  color: white;
+}
 
-
-
-
-
-
-
-
+a:hover {
+  color: var(--color--main);
+}
 
 .g_gracket {
   margin-left: 15vw;
@@ -281,15 +319,14 @@ body {
 }
 .g_team:last-child {
   background: rgba(218, 218, 218, 0.9);
-  border-radius: 4px; 
+  border-radius: 4px;
 }
 .g_round:last-child {
   margin-right: 20px;
 }
 
 .g_winner .g_team {
-  background: var(--color-extra)
-
+  background: var(--color-extra);
 }
 
 .g_current {
@@ -302,4 +339,186 @@ body {
   color: #ccc;
   text-align: center;
   font-size: 18px;
+}
+
+/* кастомные radio */
+/* для элемента input c type="radio" */
+.custom-radio {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+/* для элемента label связанного с .custom-radio */
+.custom-radio + label {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+}
+
+/* создание в label псевдоэлемента  before со следующими стилями */
+.custom-radio + label::before {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid #adb5bd;
+  border-radius: 50%;
+  margin-right: 0.5em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
+
+/* стили при наведении курсора на радио */
+.custom-radio:not(:disabled):not(:checked) + label:hover::before {
+  border-color: var(--color-select);
+}
+
+/* стили для активной радиокнопки (при нажатии на неё) */
+.custom-radio:not(:disabled):active + label::before {
+  background-color: var(--color-select);
+  border-color: var(--color-select);
+}
+
+/* стили для радиокнопки, находящейся в фокусе */
+.custom-radio:focus + label::before {
+  box-shadow: var(--color-select);
+}
+
+/* стили для радиокнопки, находящейся в фокусе и не находящейся в состоянии checked */
+.custom-radio:focus:not(:checked) + label::before {
+  border-color: var(--color-select);
+}
+
+/* стили для радиокнопки, находящейся в состоянии checked */
+.custom-radio:checked + label::before {
+  border-color: var(--color-select);
+  background-color: var(--color-select);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+}
+
+/* стили для радиокнопки, находящейся в состоянии disabled */
+.custom-radio:disabled + label::before {
+  background-color: var(--color-grey);
+}
+.radio {
+  margin-bottom: 0.4em;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25px;
+  width: 80%;
+}
+
+/* кастомные radio */
+
+/* 
+окно админа */
+
+#myModal {
+  width: 253px;
+  height: 151px;
+  padding: 18px 9px;
+  border-radius: 5px;
+  background: #d9d9d9;
+  position: absolute;
+  top: 70px;
+  left: calc(80vw - 280px);
+  margin: auto;
+  display: none;
+  opacity: 0;
+  z-index: 38;
+  color: #000000;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+}
+
+.modalContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+.modalContent a {
+  color: #000000;
+}
+
+.modalContent a:hover {
+  color: var(--color-select);
+}
+
+.modalContent div {
+  padding: 10px 0;
+}
+
+.exit {
+  display: flex;
+  align-items: center;
+}
+
+.exitInner {
+  display: flex;
+  align-items: center;
+}
+
+#myOverlay {
+  z-index: 37;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  display: none;
+}
+
+/* 
+окно админа */
+
+@media (max-width: 1280px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    max-width: 800px;
+  }
+}
+
+@media (max-width: 800px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    max-width: 480px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    max-width: 320px;
+  }
 }

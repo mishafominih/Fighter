@@ -35,7 +35,7 @@ body {
   justify-content: space-between;
   align-items: center;
   margin: auto auto;
-  height: 10vh;
+  height: 70px;
 }
 
 .navInner ul {
@@ -315,4 +315,112 @@ label {
 
 h2{
   text-align: center;
+}
+
+/* 
+окно админа */
+
+#myModal {
+  width: 253px; 
+  height: 151px;
+  padding: 18px 9px;
+  border-radius: 5px;
+  background: #D9D9D9;
+  position: absolute;
+  top: 70px;
+  left: calc(80vw - 280px);
+  margin: auto;
+  display: none;
+  opacity: 0;
+  z-index: 38;
+  color: #000000;
+  font-family: 'Open Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 27px;
+}
+
+.modalContent{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+.modalContent a{
+  color: #000000;
+}
+
+.modalContent a:hover{
+  color: var(--color-select);
+}
+
+.modalContent div{
+  padding: 10px 0;
+}
+
+.exit{
+  display: flex;
+  align-items: center;
+
+}
+
+.exitInner{
+  display: flex;
+  align-items: center;
+}
+
+#myOverlay {
+  z-index: 37;
+  position: fixed;
+  background: rgba(0,0,0,.7);
+  width: 100%; height: 100%;
+  top: 0; left: 0;
+  cursor: pointer;
+  display: none;
+}
+
+/* 
+окно админа */
+
+
+
+@media (max-width: 1280px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    max-width: 800px;
+  }
+}
+
+@media (max-width: 800px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    max-width: 480px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    max-width: 320px;
+  }
 }
