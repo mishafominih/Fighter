@@ -1,0 +1,413 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+:root {
+  --color--main: #ffa979;
+  --color-select: #f88d40;
+  --color-extra: #ffd952;
+  --color-main-pink: #ff7979;
+}
+
+.formJoin > input::-webkit-input-placeholder {
+  color: white;
+  opacity: 0.7;
+}
+.formJoin > input:-moz-placeholder {
+  color: white;
+  opacity: 0.7;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #000000;
+  background-color: #fff;
+  margin: 0;
+  height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+.navInner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto auto;
+  height: 70px;
+}
+
+.navInner ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  width: 40vw;
+  height: 5vh;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+}
+
+.login {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+  cursor: pointer;
+}
+
+.login:hover {
+  transform: scale(1.1);
+}
+
+.navInner ul li:hover {
+  color: var(--color-select);
+  cursor: pointer;
+}
+
+.navLogo img {
+  width: 61px;
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+main {
+  height: 90vh;
+}
+
+h3 {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 33px;
+  margin: 20px 0 20px 0;
+  /* identical to box height */
+
+  color: #000000;
+}
+
+.mainInner {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+.info {
+  width: 20vw;
+  min-width: 350px;
+  height: 30vh;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.createCompetition {
+  width: 100vw;
+  height: 100%;
+}
+
+.adminItem {
+  width: 100%;
+  max-height: 156px;
+  background-color: var(--color--main);
+  min-height: 150px;
+}
+
+.adminImage {
+  padding: 20px 0 0 20px;
+}
+
+.adminRef > a {
+  padding: 0 20px 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 33px;
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.adminArrow {
+  display: flex;
+  align-items: center;
+}
+
+.createItem {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 10px 0 10px 20px;
+}
+
+.createItem > img {
+  padding-right: 10px;
+  width: 41px;
+}
+
+.infoItem {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.84);
+}
+
+h1 {
+  text-align: center;
+}
+.createCompetition {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.competitionItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+label {
+  align-self: flex-start;
+  position: relative;
+  left: 9.5%;
+}
+
+.inputItem {
+  width: 80%;
+  background: rgba(237, 237, 237, 0.9);
+  border-radius: 5px;
+  height: 30px;
+  border: none;
+  padding: 10px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 33px;
+}
+
+.last {
+  width: 15%;
+  display: flex;
+  align-items: center;
+}
+
+#description {
+  height: 100px;
+}
+
+.competitionItemInputs {
+  width: calc(80% + 20px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.competitionItemInput {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.timeInput {
+  display: flex;
+  width: calc(80% + 20px);
+}
+
+.time {
+  width: 25%;
+  margin-right: 20px;
+}
+
+.addPartContainer {
+  width: calc(80% + 20px);
+}
+
+.addPart {
+  width: 100%;
+  height: 50px;
+  background: #ffd952;
+  border-radius: 5px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #000000;
+}
+
+.addPart:hover {
+  background-color: var(--color-select);
+}
+
+.submit {
+  width: 33%;
+  height: 47px;
+  background: #ffd952;
+  border-radius: 5px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  border: none;
+  cursor: pointer;
+}
+
+.submit:hover {
+  background-color: var(--color-select);
+}
+
+.submitContainer {
+  margin-top: 20px;
+  width: calc(80% + 20px);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.deletePart {
+  cursor: pointer;
+}
+
+.deletePart:hover {
+  color: var(--color-select);
+}
+
+.current {
+  color: var(--color-select);
+}
+
+/* 
+окно админа */
+
+#myModal {
+  width: 253px;
+  height: 151px;
+  padding: 18px 9px;
+  border-radius: 5px;
+  background: #d9d9d9;
+  position: absolute;
+  top: 70px;
+  left: calc(80vw - 280px);
+  margin: auto;
+  display: none;
+  opacity: 0;
+  z-index: 38;
+  color: #000000;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+}
+
+.modalContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+.modalContent a {
+  color: #000000;
+}
+
+.modalContent a:hover {
+  color: var(--color-select);
+}
+
+.modalContent div {
+  padding: 10px 0;
+}
+
+.exit {
+  display: flex;
+  align-items: center;
+}
+
+.exitInner {
+  display: flex;
+  align-items: center;
+}
+
+#myOverlay {
+  z-index: 37;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  display: none;
+}
+
+/* 
+окно админа */
+
+@media (max-width: 1280px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    max-width: 800px;
+  }
+}
+
+@media (max-width: 800px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    max-width: 480px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    max-width: 320px;
+  }
+}
