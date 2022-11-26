@@ -109,4 +109,6 @@ def start_tournament():
     pass
 
 
-app.run()
+#app.run()
+
+print(get_tournaments_for_db(10))

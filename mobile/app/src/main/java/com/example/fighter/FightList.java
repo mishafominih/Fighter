@@ -24,7 +24,7 @@ public class FightList extends AppCompatActivity {
         MyRequest request = new MyRequest();
         // Набираем данные для запроса
         request.put("user_id", "10");
-        request.put("tournament_id", "22");
+        request.put("tournament_id", "24");
         request.CallArray("tournament_list", (res) -> {
             runOnUiThread(() -> {
                 ArrayList<Fight> fights = new ArrayList<Fight>();

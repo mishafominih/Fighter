@@ -5,7 +5,7 @@ from psycopg2 import sql, extras
 
 
 def connection_db(func):
-    def connect(**args):
+    def connect(*args, **kwards):
         conn = psycopg2.connect(f"""
             host=rc1b-e1m47fv71pchwvru.mdb.yandexcloud.net
             port=6432
@@ -15,7 +15,7 @@ def connection_db(func):
             target_session_attrs=read-write
         """)
         cursor = conn.cursor(cursor_factory=extras.RealDictCursor)
-        result = func(cursor, **args)
+        result = func(cursor, *args, **kwards)
 
         conn.commit()
         cursor.close()
