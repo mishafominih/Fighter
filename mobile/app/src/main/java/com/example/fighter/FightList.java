@@ -23,7 +23,8 @@ public class FightList extends AppCompatActivity {
 
         MyRequest request = new MyRequest();
         // Набираем данные для запроса
-        request.put("key", "1234");
+        request.put("user_id", "10");
+        request.put("tournament_id", "22");
         request.CallArray("tournament_list", (res) -> {
             runOnUiThread(() -> {
                 ArrayList<Fight> fights = new ArrayList<Fight>();
@@ -31,13 +32,7 @@ public class FightList extends AppCompatActivity {
                 for(int i = 0; i < res.length(); i++){
                     try {
                         JSONObject json = res.getJSONObject(i);
-                        fights.add(new Fight(
-                            json.getString("time"),
-                            json.getString("place"),
-                            json.getString("fighter_one"),
-                            json.getString("fighter_two"),
-                            json.getString("score")
-                        ));
+                        fights.add(new Fight(json));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

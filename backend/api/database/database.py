@@ -65,7 +65,7 @@ def create_tournament(cursor, **params):
 
 
 @connection_db
-def tournament_list(cursor, user_id):
+def get_tournaments_for_db(cursor, user_id):
     tmpl = """
     SELECT 
         "_id" "key",

@@ -1,7 +1,7 @@
 from flask import Flask, request
 
 from database.database import sign_in, registration, \
-    create_tournament, tournament_list, add_new_player, \
+    create_tournament, get_tournaments_for_db, add_new_player, \
     get_tournament_list, get_players_for_tournament
 from timing.simple_timing import SimpleTiming
 
@@ -36,7 +36,7 @@ def join_to_tournament():
 @app.route('/api/get_tournaments', methods=['GET', 'POST'])
 def get_tournaments():
     params = request.form
-    result = tournament_list(**{'user_id': params.get('user')})
+    result = get_tournaments_for_db(**{'user_id': params.get('user')})
     return result
 
 
@@ -58,7 +58,6 @@ def add_player():
         return {'result': True, 'id': player_id}
     else:
         return {'result': False, 'message': 'Что-то пошло не так'}
-
 
 
 @app.route('/api/get_players', methods=['GET', 'POST'])
