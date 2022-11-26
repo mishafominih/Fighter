@@ -94,7 +94,7 @@ def tournament_list():
         rec['fighter_two'] = find(rec.get('fighter_two'))
 
     if result:
-        return result
+        return [rec for rec in result if rec.get('fighter_one') and rec.get('fighter_two')]
     else:
         return {'result': False, 'message': 'Что-то пошло не так'}
 
