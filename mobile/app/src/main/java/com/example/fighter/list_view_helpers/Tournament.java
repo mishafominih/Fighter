@@ -14,7 +14,8 @@ public class Tournament {
         Id = data.getString("key");
         Name = data.getString("name");
         Description = data.getString("description");
-        Categories = new JSONArray(data.getString("categories"));
+        if(!data.isNull("categories"))
+            Categories = new JSONArray(data.getString("categories"));
         switch (data.getString("status")) {
             case "0":
                 Status = "Проведено";

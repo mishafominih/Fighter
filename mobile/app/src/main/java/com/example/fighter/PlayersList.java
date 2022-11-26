@@ -37,7 +37,9 @@ public class PlayersList extends AppCompatActivity {
             Intent intent = new Intent(this, AddPlayer.class);
             intent.putExtra("user_id", user_id);
             intent.putExtra("tournament_id", tournament_id);
-            intent.putExtra("categories", helper.get("categories"));
+            String test = helper.get("categories");
+            if(test != null)
+                intent.putExtra("categories", test);
             startActivity(intent);
         });
 

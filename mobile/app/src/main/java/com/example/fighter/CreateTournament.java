@@ -67,7 +67,8 @@ public class CreateTournament extends AppCompatActivity {
                 request.put("name", name);
                 request.put("user_id", user_id);
                 request.put("description", description);
-                request.put("categories", categories);
+                if(categories.length() > 0)
+                    request.put("categories", categories);
                 request.Call("create_tournament", (res) -> {
                     finish();
                 });

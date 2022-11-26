@@ -21,7 +21,8 @@ public class Player {
             Lastname = data.getString("patronymic");
             Link = data.getString("link");
             Description = data.getString("description");
-            Categories = new JSONArray(data.getString("categories"));
+            if(!data.isNull("categories"))
+                Categories = new JSONArray(data.getString("categories"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -33,15 +34,16 @@ public class Player {
 
     public String GetCategoriesStr(){
         String res = "";
-        for(int i = 0; i < Categories.length(); i++){
-            JSONObject cat = null;
-            try {
-                cat = Categories.getJSONObject(i);
-                res += cat.getString("name") + ": " + cat.getString("value") + "; ";
-            } catch (JSONException e) {
-                e.printStackTrace();
+        if(Categories != null)
+            for(int i = 0; i < Categories.length(); i++){
+                JSONObject cat = null;
+                try {
+                    cat = Categories.getJSONObject(i);
+                    res += cat.getString("name") + ": " + cat.getString("value") + "; ";
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
-        }
         return res;
     }
 }

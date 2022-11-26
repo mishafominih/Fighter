@@ -69,6 +69,9 @@ public class AddPlayer extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+        else{
+            categories = new JSONArray();
+        }
 
 
         findViewById(R.id.button_add_player).setOnClickListener((view) -> {
@@ -97,7 +100,8 @@ public class AddPlayer extends AppCompatActivity {
             request.put("name", name);
             request.put("surname", surname);
             request.put("patronymic", lastname);
-            request.put("categories", categories);
+            if(categories.length() > 0)
+                request.put("categories", categories);
             request.put("link", link);
             request.put("description", "");
             request.Call("add_player", (res) -> {

@@ -105,7 +105,8 @@ def add_new_player(cursor, **params):
 def get_players_for_tournament(cursor, user_id, tournament_id):
     sql = """
         SELECT 
-            "Name" as "name" 
+            "_id" as "id"
+            , "Name" as "name" 
             , "Surname" as "surname"
             , "Patronymic" as "patronymic"
             , "Link" as "link"
@@ -139,6 +140,34 @@ def create_tournament_grid(cursor, tournament_id):
 
 
 @connection_db
-def get_tournament_grid(**params):
-    pass
+def get_tournament_list(cursor, user_id, tournament_id):
+    sql = """
+        SELECT 
+            "id" as "id"
+            , "place" as "place" 
+            , "fighterone" as "fighter_one"
+            , "fightertwo" as "fighter_two"
+            , "winner" as "winner"
+            , null as "score"
+            , "child" as "child"
+        FROM "EventTiming"
+        WHERE "userid" = %s AND "tournamentid" = %s
+    """
+    cursor.execute(sql, [user_id, tournament_id])
+    data = cursor.fetchall()
+    return data
 
+
+@connection_db
+def add_new_timing(cursor, params):
+    player_tmpl = """
+            INSERT INTO public."EventTiming" 
+            ("id", "userid","tournamentid","place","fighterone","fightertwo","winner","child")
+            VALUES  (%s, %s, %s, %s, %s, %s, %s, %s)
+            RETURNING "id";
+        """
+
+    for param in params:
+        cursor.execute(player_tmpl, param)
+
+    return cursor.fetchone()['id']
