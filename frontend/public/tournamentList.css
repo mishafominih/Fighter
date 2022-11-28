@@ -205,6 +205,16 @@ tr:nth-child(odd) {
   color: var(--color-select);
 }
 
+.bodyT:hover{
+  background: var(--color-select);
+  cursor: pointer;
+}
+
+.flex{
+  display: flex;
+  align-items: center;
+}
+
 
 
 /* 

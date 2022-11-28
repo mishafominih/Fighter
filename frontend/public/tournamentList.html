@@ -8,11 +8,31 @@
     <link rel="stylesheet" href="tournamentList.css" />
     <script src="anime.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link type="image/x-icon" rel="shortcut icon" href="images/favicon.ico">
-    <link type="image/png" sizes="16x16" rel="icon" href="images/favicon-16x16.png">
-    <link type="image/png" sizes="32x32" rel="icon" href="images/favicon-32x32.png">
-    <link type="image/png" sizes="96x96" rel="icon" href="images/favicon-64X64.png">
-    <link type="image/png" sizes="120x120" rel="icon" href="images/favicon-120X120.png">
+    <link type="image/x-icon" rel="shortcut icon" href="images/favicon.ico" />
+    <link
+      type="image/png"
+      sizes="16x16"
+      rel="icon"
+      href="images/favicon-16x16.png"
+    />
+    <link
+      type="image/png"
+      sizes="32x32"
+      rel="icon"
+      href="images/favicon-32x32.png"
+    />
+    <link
+      type="image/png"
+      sizes="96x96"
+      rel="icon"
+      href="images/favicon-64X64.png"
+    />
+    <link
+      type="image/png"
+      sizes="120x120"
+      rel="icon"
+      href="images/favicon-120X120.png"
+    />
   </head>
   <body>
     <header>
@@ -31,7 +51,7 @@
             <div id="myModal">
               <div class="modalContent">
                 <div class="myCompetition">
-                  <a href="tournamentList.html">Мои соревнования</a>
+                  <a href="grid.html">Турнирная сетка</a>
                 </div>
                 <div class="myProfile">
                   <a href="profile.html">Мой Профиль</a>
@@ -52,7 +72,7 @@
       </nav>
     </header>
     <main>
-      <h1>Мои соревнования</h1>
+      <h1>Список соревнований</h1>
       <table>
         <tr>
           <th>Соревнование</th>
@@ -61,33 +81,32 @@
           <th>Дисциплины</th>
           <th>Статус</th>
         </tr>
+        <tr class="bodyT" onclick="window.location.href='listOfParticipants.html'; return false">
+          <td>Заглушка</td>
+          <td>Заглушка</td>
+          <td>Заглушка</td>
+          <td>Заглушка</td>
+          <td>Заглушка</td>
+        </tr>
+        
+        
       </table>
       <div class="add">
-        <img src="images/plus.png">
-        <p class="addP"><a href="createCompetition.html">Создать соревнование</a></p>
+        <img src="images/plus.png" />
+        <p class="addP">
+          <a href="createCompetition.html">Создать соревнование</a>
+        </p>
       </div>
     </main>
-
+    <script src="scripts/get_tournaments.js"></script>
+    <script src="scripts/AdminScript.js"></script>
     <script>
-        // $.get("/api/tournament_list", function (data) {
-        //   for (i = 0; i < data.length; i++) {
-        //     // console.log(data[0]['time']);
-        //     $("table").append(
-        //       "<tr><td>" +
-        //         data[i]["time"] +
-        //         " · " +
-        //         data[i]["place"] +
-        //         "</td><td>" +
-        //         data[i]["fighter_one"] +
-        //         " - " +
-        //         data[i]["fighter_two"] +
-        //         "</td><td>" +
-        //         data[i]["score"] +
-        //         "</td></tr>"
-        //     );
-        //   }
-        // });
-      </script>
-      <script src="windowScript.js"></script>
+      let table = $(".bodyT");
+      for (let i = 0; i < table.length; i++) {
+        table[i].addEventListener("click", function () {
+          localStorage.setItem("tournament_id", i);
+        });
+      }
+    </script>
   </body>
 </html>

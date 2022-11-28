@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Список участников</title>
-    <link rel="stylesheet" href="schedule.css" />
+    <link rel="stylesheet" href="listOfParticipants.css" />
     <script src="anime.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
@@ -26,7 +26,7 @@
             <div id="myModal">
               <div class="modalContent">
                 <div class="myCompetition">
-                  <a href="tournamentList.html">Список участников</a>
+                  <a href="grid.html">Турнирная сетка</a>
                 </div>
                 <div class="myProfile">
                   <a href="profile.html">Мой Профиль</a>
@@ -47,7 +47,14 @@
       </nav>
     </header>
     <main>
-      <h1>Список участников</h1>
+      <div class="header">
+        <a href="tournamentList.html">
+          <div class="flex">
+        <img src="images/arrowBack.svg" alt="Стрелка назад">
+        <h1>Список участников</h1>
+      </div>
+        </a>
+      </div>
       <table>
         <tr>
           <th>ФИО участника</th>
@@ -58,35 +65,7 @@
         </tr>
       </table>
     </main>
-
-    <script>
-      $.get("/api/tournament_list", function (data) {
-        for (i = 0; i < data.length; i++) {
-          // console.log(data[0]['time']);
-          $("table").append(
-            "<tr><td>" + data[i]["time"] + " · " + data[i]["place"] + "</td><td>" + data[i]["fighter_one"] + " - " + data[i]["fighter_two"] + "</td><td>" + data[i]["score"] + "</td></tr>"
-          );
-        }
-      });
-
-      let months = [
-        "Январь",
-        "Февраль",
-        "Март",
-        "Апрель",
-        "Май",
-        "Июнь",
-        "Июль",
-        "Август",
-        "Сентябрь",
-        "Октябрь",
-        "Ноябрь",
-        "Декабрь",
-      ];
-      let date = new Date();
-      $(".digit").html(date.getDate());
-      $(".month").html(months[date.getMonth()]);
-    </script>
-    <script src="windowScript.js"></script>
+    <script src="scripts/get_players.js"></script>
+    <script src="scripts/AdminScript.js"></script>
   </body>
 </html>

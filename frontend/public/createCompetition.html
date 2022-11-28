@@ -51,7 +51,7 @@
         <div class="container">
           <div class="createCompetition">
             <h1>Создание соревнования</h1>
-            <form class="competitionForm" action="" method="post">
+            <form class="competitionForm" id="create_tournament">
               <div class="competitionItem">
                 <label for="name"><h3>Название</h3></label>
                 <input
@@ -81,41 +81,15 @@
               </div>
 
               <div class="competitionItem">
-                <label for="listPart"><h3>Настройки распределения</h3></label>
-                <div class="competitionItemInputs">
-                  <div class="competitionItemInput">
-                    <input
-                      type="text"
-                      id="weight"
-                      placeholder="Вес"
-                      class="inputItem last"
-                    />
-                    <input
-                      type="text"
-                      id="age"
-                      placeholder="Возраст"
-                      class="inputItem last"
-                    />
-                    <input
-                      type="text"
-                      id="sex"
-                      placeholder="Пол"
-                      class="inputItem last"
-                    />
-                    <input
-                      type="text"
-                      id="level"
-                      placeholder="Ранг"
-                      class="inputItem last"
-                    />
-                  </div>
-                </div>
+                <h3>Настройки распределения</h3>
               </div>
               <div class="competitionItem">
                 <div class="addPartContainer">
                   <div class="addPart">Добавьте категорию</div>
                 </div>
               </div>
+
+              
               <div class="competitionItem">
                 <div class="submitContainer">
                   <input class="submit" type="submit" value="Создать" />
@@ -126,7 +100,7 @@
         </div>
       </div>
     </main>
-    <script src="createCompetition.js"></script>
-    <script src="windowScript.js"></script>
+    <script src="scripts/create_tournament.js"></script>
+    <script src="scripts/AdminScript.js"></script>
   </body>
 </html>

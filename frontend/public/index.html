@@ -63,28 +63,6 @@
                         <a>Войти</a>
                       </p>
                     </form>
-                    <!-- Запрос registration -->
-                    <script>
-                         $("#registration").on("submit", function () {
-                          let q = $.ajax({
-                            url: "api/registration",
-                            method: "post",
-                            dataType: "html",
-                            data: $(this).serialize(),
-                            success: function (data) {
-                              let RegResult = q.responseJSON;
-                              console.log(RegResult);
-                              if ((RegResult = true)) {
-                                window.location.href = "grid.html";
-                              }
-                              else{
-                                console.log("нет");
-                              }
-                            },
-                            error: console.log('не отправился я')
-                          });
-                        });
-                    </script>
                     <form class="login-form formToggle" id ="login">
                       <div class="formHead">
                         <div class="formLogo">
@@ -102,28 +80,6 @@
                         Не зарегистрированы? <a href="#">Создать аккаунт</a>
                       </p>
                     </form>
-                    <!-- Запрос login -->
-                    <script>
-                      $("#login").on("submit", function () {
-                       let q = $.ajax({
-                         url: "/api/login",
-                         method: "post",
-                         dataType: "html",
-                         data: $(this).serialize(),
-                         success: function (data) {
-                           let logResult = q.responseJSON;
-                           console.log(logResult);
-                           if ((logResult = true)) {
-                             window.location.href = "http://51.250.97.3/admin.html";
-                           }
-                           else{
-                             console.log("нет");
-                           }
-                         },
-                         error: console.log('не отправился я')
-                       });
-                     });
-                 </script>
                   </div>
                 </div>
               </div>
@@ -152,27 +108,6 @@
                   Присоединиться
                 </button>
               </form>
-              <!-- Запрос join_to_tournament -->
-              <script>
-                $("#join").on("submit", function () {
-                  let q = $.ajax({
-                    url: "/api/join_to_tournament",
-                    method: "post",
-                    dataType: "html",
-                    data: $(this).serialize(),
-                    success: function (data) {
-                      let result = q.responseJSON;
-                      if ((result = true)) {
-                        window.location.href = "admin.html";
-                      }
-                      else{
-                          console.log("нет");
-                      }
-                    },
-                    error: console.log('не отправился я')
-                  });
-                });
-              </script>
             </div>
           </div>
         </div>
@@ -247,7 +182,10 @@
       </div>
     </main>
     <footer></footer>
-    <script src="scripts.js"></script>
-    <script src="form.js"></script>
+    <script src="scripts/indexWindow.js"></script>
+    <script src="scripts/form.js"></script>
+    <script src="scripts/registration.js"></script>
+    <script src="scripts/login.js"></script>
+    <script src="scripts/join_to_tornament.js"></script>
   </body>
 </html>

@@ -79,34 +79,21 @@
     </main>
 
     <script>
-       $.ajax({
-          url: '/api/get_tournaments', // Тут путь к файлу
-          type: 'POST',
-          dataType: 'json', 
-          data: {
-            'id': 0
-          },
-        })
-        .done(function(result){
-
-          if(result){
-            console.log('Ответ получен');
-            console.log(result);
-          }
-
-        })
-        // Если не смогли отправить запрос
-        .fail(function(){
-          console.log("error");
-        });
-      // $.get("/api/tournament_list", function (data) {
-      //   for (i = 0; i < data.length; i++) {
-      //     // console.log(data[0]['time']);
-      //     $("table").append(
-      //       "<tr><td>" + data[i]["time"] + " · " + data[i]["place"] + "</td><td>" + data[i]["fighter_one"] + " - " + data[i]["fighter_two"] + "</td><td>" + data[i]["score"] + "</td></tr>"
-      //     );
+      // $.ajax({
+      //   url: 'api/get_players',
+      //   method: 'post',
+      //   dataType: 'html',
+      //   data: {tournament_id: localStorage.getItem('tournament_id'), user: '0'},
+      //   success: function(data){
+      //     console.log(data);
+      //     console.log('Я работаю')
+      //   },
+      //   error: () =>{
+      //     console.log('не отправился я');
       //   }
+          
       // });
+  
 
       let months = [
         "Январь",
@@ -126,6 +113,6 @@
       $(".digit").html(date.getDate());
       $(".month").html(months[date.getMonth()]);
     </script>
-    <script src="windowScript.js"></script>
+    <script src="scripts/AdminScript.js"></script>
   </body>
 </html>
