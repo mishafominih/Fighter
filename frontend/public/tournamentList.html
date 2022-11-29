@@ -98,13 +98,14 @@
         </p>
       </div>
     </main>
-    <script src="scripts/get_tournaments.js"></script>
-    <script src="scripts/AdminScript.js"></script>
+    <script src="get_tournaments.js"></script>
+    <script src="AdminScript.js"></script>
     <script>
       let table = $(".bodyT");
       for (let i = 0; i < table.length; i++) {
         table[i].addEventListener("click", function () {
           localStorage.setItem("tournament_id", i);
+          console.log(localStorage.getItem("tournament_id"));
         });
       }
     </script>
