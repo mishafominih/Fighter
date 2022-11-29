@@ -57,6 +57,7 @@
                 <input
                   type="text"
                   id="name"
+                  name = "name"
                   placeholder="Введите название соревнования"
                   class="inputItem"
                 />
@@ -66,6 +67,7 @@
                 <input
                   type="text"
                   id="description"
+                  name = "description"
                   cols="30"
                   rows="10"
                   placeholder="Введите описание соревнования"
@@ -85,21 +87,51 @@
               </div>
               <div class="competitionItem">
                 <div class="addPartContainer">
+                  <input class="inputAdd" type="text">
                   <div class="addPart">Добавьте категорию</div>
                 </div>
               </div>
+            
+              <div class="competitionItem">
+                  <div class="rez">
 
-              
+                  </div>
+                  
+                </div>
+              </div>
+        
+
+            
+
               <div class="competitionItem">
                 <div class="submitContainer">
                   <input class="submit" type="submit" value="Создать" />
                 </div>
               </div>
             </form>
+            
           </div>
         </div>
       </div>
     </main>
+  <script>
+                let input = document.querySelector('.inputAdd');;
+                let addPart = $('.addPart');
+                let rez = $('.rez');
+                let categories = [];
+                $('.addPart').click(function(){
+                  console.log(input.value);
+                  $('.rez').append('<input class ="category" name=' + input.value + ' type="text" placeholder=' + input.value + '>')
+                })
+                
+                
+
+
+
+               
+                
+
+              </script>
     <script src="create_tournament.js"></script>
     <script src="AdminScript.js"></script>
   </body>

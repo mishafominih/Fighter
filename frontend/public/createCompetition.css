@@ -305,6 +305,54 @@ label {
   color: var(--color-select);
 }
 
+.addInput{
+
+  height: 30px;
+  background-color: #f88d40;
+  cursor: pointer;
+  display: flex;
+}
+
+.add{
+  width: 100px;
+  height: 30px;
+  background-color: #f88d40;
+}
+
+.rez{
+  width: 100%;
+  height: 100px;
+  background-color: pink;
+}
+
+
+.content{
+  width:230px;
+  height:200px;
+  background-color:#abc;
+  position:relative;
+}
+.flex{
+  position:absolute;
+  bottom:0px;
+  display:flex;
+  justify-content:flex-end;
+  width:100%;
+}
+.output{
+  width:100%;
+  height:90%;
+  display:flex;
+  justify-content:flex-end;
+  align-items:flex-end;
+  flex-direction: column;
+}
+.color{
+  background-color:blue;
+  border-radius:5px;
+  color:white;
+  padding:10px;
+}
 /* 
 окно админа */
 
