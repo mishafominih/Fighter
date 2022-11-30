@@ -1,15 +1,17 @@
-$("#login").on("submit", function () {
+$("#login").on("submit", function (event) {
+    event.preventDefault();
     let q = $.ajax({
-      url: "/api/login",
+      url: "http://51.250.97.3/api/login",
       method: "post",
-      dataType: "html",
+      dataType: "json",
       data: $(this).serialize(),
       success: function (data) {
         console.log(data);
         let logResult = q.responseJSON;
         console.log(logResult);
         console.log(data);
-        localStorage.setItem("id", q['id']);
+        console.log('Я работаю')
+        localStorage.setItem("user_id", q['id']);
         if ((logResult = true)) {
           window.location.href = "grid.html";
         }

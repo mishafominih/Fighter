@@ -4,7 +4,7 @@ console.log(localStorage.getItem('id'));
       $.ajax({
         url: 'api/get_tournaments',
         method: 'post',
-        dataType: 'html',
+        dataType: 'json',
         data: {user: id},
         success: function(data){
           console.log(data);

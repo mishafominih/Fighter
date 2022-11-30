@@ -1,8 +1,9 @@
-$("#registration").on("submit", function () {
+$("#registration").on("submit", function (event) {
+    event.preventDefault();
     let q = $.ajax({
-      url: "api/registration",
+      url: "http://51.250.97.3/api/registration",
       method: "post",
-      dataType: "html",
+      dataType: "json",
       data: $(this).serialize(),
       success: function (data) {
         let RegResult = q.responseJSON;

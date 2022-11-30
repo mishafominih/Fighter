@@ -1,8 +1,9 @@
-$("#create_tournament").on("submit", function () {
+$("#create_tournament").on("submit", function (event) {
+  event.preventDefault();
   let q = $.ajax({
     url: "/api/create_tournament",
     method: "post",
-    dataType: "html",
+    dataType: "json",
     data: $(this).serialize(),
     success: function (data) {
       console.log(data);

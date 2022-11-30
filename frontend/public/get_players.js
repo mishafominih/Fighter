@@ -1,7 +1,7 @@
 $.ajax({
 	url: 'api/get_players',
 	method: 'post',
-	dataType: 'html',
+	dataType: 'json',
 	data: {tournament_id: localStorage.getItem('tournament_id'), user: '0'},
 	success: function(data){
 		console.log(data);

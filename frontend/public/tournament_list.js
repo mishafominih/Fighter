@@ -1,7 +1,7 @@
 $.ajax({
   url: 'api/tournament_list',
   method: 'post',
-  dataType: 'html',
+  dataType: 'json',
   data: {key: '1234'},
   success: function(data){
     console.log(data);

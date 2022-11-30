@@ -1,7 +1,7 @@
 $.ajax({
 	url: '/api/add_player',
 	method: 'post',
-	dataType: 'html',
+	dataType: 'json',
 	data: {tournament_id: '0', user: '0', name: '0', surname: '0', patronymic: '0', categories:'0', link: '0', description: '0'},
 	success: function(data){
 		console.log(data);
