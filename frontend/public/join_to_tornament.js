@@ -1,7 +1,7 @@
 $("#join").on("submit", function (event) {
     event.preventDefault()
     let q = $.ajax({
-      url: "http://51.250.97.3/api/join_to_tournament",
+      url: "api/join_to_tournament",
       method: "post",
       dataType: "json",
       data: $(this).serialize(),
@@ -12,6 +12,9 @@ $("#join").on("submit", function (event) {
         console.log('Я работаю')
         if ((result = true)) {
           window.location.href = "grid.html";
+          console.log(data);
+          console.log(result);
+          console.log('Я работаю')
         }
         else{
             console.log("нет");

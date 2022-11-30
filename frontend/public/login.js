@@ -1,7 +1,7 @@
 $("#login").on("submit", function (event) {
     event.preventDefault();
     let q = $.ajax({
-      url: "http://51.250.97.3/api/login",
+      url: "api/login",
       method: "post",
       dataType: "json",
       data: $(this).serialize(),
