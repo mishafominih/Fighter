@@ -1,12 +1,15 @@
 $.ajax({
-  url: 'api/tournament_list',
-  method: 'post',
-  dataType: 'json',
-  data: {key: '1234'},
-  success: function(data){
+  url: "api/get_tournaments",
+  method: "post",
+  dataType: "json",
+  data: {'user' : localStorage.getItem("user_id")},
+  success: function (data) {
     console.log(data);
+   
   },
-  error: console.log('не отправился я')
+  error: function (xhr, status) {
+    console.log(xhr.status);
+  },
 });
 
 

@@ -1,23 +1,23 @@
 $("#registration").on("submit", function (event) {
     event.preventDefault();
-    let q = $.ajax({
+    $.ajax({
       url: "api/registration",
       method: "post",
       dataType: "json",
       data: $(this).serialize(),
       success: function (data) {
-        let RegResult = q.responseJSON;
-        console.log(RegResult);
-        console.log(data);
-        console.log(logResult);
-        if ((RegResult = true)) {
+        localStorage.setItem("user_id", data['id']);
+        console.log(localStorage.getItem("user_id"));
+        if ((data['result'] = true)) {
           window.location.href = "grid.html";
         }
         else{
           console.log("нет");
         }
       },
-      error: console.log('не отправился я')
+      error: function (xhr, status) {
+        console.log(xhr.status);
+      }
     });
   });
 

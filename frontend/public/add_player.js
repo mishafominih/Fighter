@@ -1,14 +1,15 @@
 $.ajax({
-	url: '/api/add_player',
-	method: 'post',
-	dataType: 'json',
-	data: {tournament_id: '0', user: '0', name: '0', surname: '0', patronymic: '0', categories:'0', link: '0', description: '0'},
-	success: function(data){
-		console.log(data);
-    console.log('Я работаю')
+	url: "http://51.250.97.3/api/add_player",
+	method: "post",
+	dataType: "json",
+	data: {'tournament_id': '39', 'user': localStorage.getItem("user_id"),'name': '0', 'surname': '0', 'patronymic': '0', 'categories':'100+', 'link': '0', 'description': '0'}, 
+	success: function (data) {
+	  console.log(data);
 	},
-  error: console.log('не отправился я')
-});
+	error: function (xhr, status) {
+	  console.log(xhr.status);
+	},
+  });
 
 
 // $("#join").on("submit", function () {

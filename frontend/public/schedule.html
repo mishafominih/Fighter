@@ -79,20 +79,19 @@
     </main>
 
     <script>
-      // $.ajax({
-      //   url: 'api/get_players',
-      //   method: 'post',
-      //   dataType: 'html',
-      //   data: {tournament_id: localStorage.getItem('tournament_id'), user: '0'},
-      //   success: function(data){
-      //     console.log(data);
-      //     console.log('Я работаю')
-      //   },
-      //   error: () =>{
-      //     console.log('не отправился я');
-      //   }
-          
-      // });
+     $.ajax({
+      url: "http://51.250.97.3/api/get_tournaments",
+      method: "post",
+      dataType: "json",
+      data: {'key' : localStorage.getItem("key")},
+      success: function (data) {
+        console.log(data);
+       
+      },
+      error: function (xhr, status) {
+        console.log(xhr.status);
+      },
+    });
   
 
       let months = [

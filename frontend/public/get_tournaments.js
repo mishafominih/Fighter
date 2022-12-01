@@ -1,14 +1,14 @@
-console.log(localStorage.getItem('id'));
-      let id = '0';
-      let key = '0';
-      $.ajax({
-        url: 'api/get_tournaments',
-        method: 'post',
-        dataType: 'json',
-        data: {user: id},
-        success: function(data){
-          console.log(data);
-        },
-        error: console.log('не отправился я')
-      });
+$.ajax({
+  url: "/api/get_tournaments",
+  method: "post",
+  dataType: "json",
+  data: {'user': localStorage.getItem("user_id")}, 
+  success: function (data) {
+    console.log(data);
+   
+  },
+  error: function (xhr, status) {
+    console.log(xhr.status);
+  },
+});
 

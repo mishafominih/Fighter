@@ -1,16 +1,18 @@
 $("#create_tournament").on("submit", function (event) {
   event.preventDefault();
-  let q = $.ajax({
-    url: "/api/create_tournament",
+  let categories = ['100кг+', '90кг+','80кг+'];
+  $.ajax({
+    url: "http://51.250.97.3/api/create_tournament",
     method: "post",
     dataType: "json",
-    data: $(this).serialize(),
+    data: {'name': 'tes5', 'description': '666', 'user_id': localStorage.getItem("user_id"), 'places': 'ууу', 'categories': '10', 'type': '2'}, 
     success: function (data) {
+      localStorage.setItem("tournament_id", data['id']);
       console.log(data);
-      let logResult = q.responseJSON;
-      console.log(logResult);
-      console.log(data);
+     
     },
-    error: console.log('не отправился я')
+    error: function (xhr, status) {
+      console.log(xhr.status);
+    },
   });
 });
