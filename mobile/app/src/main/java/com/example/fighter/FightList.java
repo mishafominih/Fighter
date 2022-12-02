@@ -15,16 +15,20 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class FightList extends AppCompatActivity {
-
+    String tournament_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fight_list);
 
+        Bundle arguments = getIntent().getExtras();
+        if(arguments != null && arguments.containsKey("tournament_id")){
+            tournament_id = arguments.get("tournament_id").toString();
+        }
+
         MyRequest request = new MyRequest();
         // Набираем данные для запроса
-        request.put("user_id", "10");
-        request.put("tournament_id", "24");
+        request.put("tournament_id", tournament_id);
         request.CallArray("tournament_list", (res) -> {
             runOnUiThread(() -> {
                 ArrayList<Fight> fights = new ArrayList<Fight>();
@@ -39,7 +43,7 @@ public class FightList extends AppCompatActivity {
                 }
 
                 ListView fights_list = findViewById(R.id.list_view_tournament_list);
-                FightAdapter adapter = new FightAdapter(this, R.layout.fight_list_item, fights);
+                FightAdapter adapter = new FightAdapter(this, R.layout.item_fight, fights);
                 fights_list.setAdapter(adapter);
             });
         }, (fail) ->{

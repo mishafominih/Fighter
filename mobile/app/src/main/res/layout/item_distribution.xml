@@ -9,7 +9,7 @@
         android:layout_height="wrap_content">
 
         <EditText xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_weight="10"
+            android:layout_weight="11"
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,11 +22,24 @@
 
         <Button
             android:id="@+id/change_distribution"
-            android:layout_weight="15"
+            android:layout_weight="13"
             android:backgroundTint="#FFD952"
             android:textColor="@color/black"
             android:textSize="10dp"
             android:text="Редактировать"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/delete_distribution"
+            android:layout_weight="15"
+            android:backgroundTint="#FF0000"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:textSize="10dp"
+            android:text="Удалить"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

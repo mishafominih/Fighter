@@ -4,11 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fighter.list_view_helpers.Tournament;
@@ -59,7 +55,7 @@ public class TournamentsList extends AppCompatActivity {
                 }
 
                 ListView fights_list = findViewById(R.id.list_view_tournaments_list);
-                TournamentAdapter adapter = new TournamentAdapter(this, R.layout.tournament_list_item, tournaments);
+                TournamentAdapter adapter = new TournamentAdapter(this, R.layout.item_tournament, tournaments);
                 fights_list.setAdapter(adapter);
                 // Обработаем нажатие на элемент
                 fights_list.setOnItemClickListener((parent, view, position, id) -> {

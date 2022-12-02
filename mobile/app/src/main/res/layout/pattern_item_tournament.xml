@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/base"
     android:orientation="horizontal"
     android:layout_width="match_parent"
+    android:background="#D9D9D9"
     android:layout_height="wrap_content">
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,7 +14,7 @@
         android:gravity="center"
         android:textColor="@color/black"
         android:minHeight="?android:attr/listPreferredItemHeight"
-        android:text="Время * место"
+        android:text="Название"
         />
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -23,7 +25,7 @@
         android:gravity="center"
         android:textColor="@color/black"
         android:minHeight="?android:attr/listPreferredItemHeight"
-        android:text="Участники"
+        android:text="Описание"
         />
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -34,6 +36,6 @@
         android:gravity="center"
         android:textColor="@color/black"
         android:minHeight="?android:attr/listPreferredItemHeight"
-        android:text="Счет"
+        android:text="Статус"
         />
 </LinearLayout>

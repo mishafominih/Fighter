@@ -1,14 +1,11 @@
 package com.example.fighter;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -51,7 +48,7 @@ public class CreateTournament extends AppCompatActivity {
         ArrayList<Distribution> distributions = new ArrayList<Distribution>();
 
         ListView fights_list = findViewById(R.id.list_view_distributions_list);
-        adapter = new DistributionAdapter(this, R.layout.distribution_list_item, distributions, this);
+        adapter = new DistributionAdapter(this, R.layout.item_distribution, distributions, this);
         fights_list.setAdapter(adapter);
 
         findViewById(R.id.add_new_distribution).setOnClickListener((view) -> {

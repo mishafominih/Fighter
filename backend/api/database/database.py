@@ -140,7 +140,7 @@ def create_tournament_grid(cursor, tournament_id):
 
 
 @connection_db
-def get_tournament_list(cursor, user_id, tournament_id):
+def get_tournament_list(cursor, tournament_id):
     sql = """
         SELECT 
             "id" as "id"
@@ -151,9 +151,9 @@ def get_tournament_list(cursor, user_id, tournament_id):
             , null as "score"
             , "child" as "child"
         FROM "EventTiming"
-        WHERE "userid" = %s AND "tournamentid" = %s
+        WHERE "tournamentid" = %s
     """
-    cursor.execute(sql, [user_id, tournament_id])
+    cursor.execute(sql, [tournament_id])
     data = cursor.fetchall()
     return data
 

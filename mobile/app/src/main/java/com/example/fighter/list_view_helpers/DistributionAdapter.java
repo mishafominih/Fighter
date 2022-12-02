@@ -78,16 +78,22 @@ public class DistributionAdapter extends ArrayAdapter<Distribution> {
             this.parent.change_distribution(position, intent);
         });
 
+        viewHolder.DeleteDistribution.setOnClickListener((view) -> {
+            distributionsList.remove(position);
+            notifyDataSetChanged();
+        });
         return convertView;
     }
     private class ViewHolder {
         final EditText name;
         final TextView desc;
         final Button ChangeDistribution;
+        final Button DeleteDistribution;
         ViewHolder(View view){
             name = view.findViewById(R.id.name);
             desc = view.findViewById(R.id.desc);
             ChangeDistribution = view.findViewById(R.id.change_distribution);
+            DeleteDistribution = view.findViewById(R.id.delete_distribution);
         }
     }
 

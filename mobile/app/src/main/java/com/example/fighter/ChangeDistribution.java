@@ -1,23 +1,16 @@
 package com.example.fighter;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.fighter.list_view_helpers.Distribution;
-import com.example.fighter.list_view_helpers.DistributionAdapter;
 import com.example.fighter.list_view_helpers.Range;
 import com.example.fighter.list_view_helpers.RangeAdapter;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class ChangeDistribution extends AppCompatActivity {
 
@@ -40,7 +33,7 @@ public class ChangeDistribution extends AppCompatActivity {
         }
 
         ListView fights_list = findViewById(R.id.list_view_range_list);
-        adapter = new RangeAdapter(this, R.layout.range_list_item, ranges);
+        adapter = new RangeAdapter(this, R.layout.item_range, ranges);
         fights_list.setAdapter(adapter);
 
         findViewById(R.id.add_new_range).setOnClickListener((view) -> {

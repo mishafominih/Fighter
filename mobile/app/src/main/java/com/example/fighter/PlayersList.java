@@ -4,16 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.fighter.list_view_helpers.Player;
 import com.example.fighter.list_view_helpers.PlayerAdapter;
-import com.example.fighter.list_view_helpers.Tournament;
-import com.example.fighter.list_view_helpers.TournamentAdapter;
-import com.example.fighter.list_view_helpers.TransportDataHelper;
+import com.example.fighter.utils.TransportDataHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,7 +61,7 @@ public class PlayersList extends AppCompatActivity {
                 }
 
                 ListView players_list = findViewById(R.id.list_view_players_list);
-                PlayerAdapter adapter = new PlayerAdapter(this, R.layout.player_list_item, players);
+                PlayerAdapter adapter = new PlayerAdapter(this, R.layout.item_player, players);
                 players_list.setAdapter(adapter);
             });
         }, (fail) ->{

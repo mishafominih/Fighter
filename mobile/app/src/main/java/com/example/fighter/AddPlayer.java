@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.fighter.list_view_helpers.TransportDataHelper;
+import com.example.fighter.utils.TransportDataHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -7,10 +7,6 @@
     android:orientation="vertical"
     tools:context=".CreateTournament">
 
-    <include
-        layout="@layout/head"
-        />
-
     <TextView
         android:id="@+id/distribution_text_name"
         android:layout_width="match_parent"

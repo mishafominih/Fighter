@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.fighter.list_view_helpers.TransportDataHelper;
-
 import org.json.JSONException;
 
 import java.util.HashMap;

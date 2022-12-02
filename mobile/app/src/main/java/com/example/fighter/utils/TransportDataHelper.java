@@ -1,4 +1,4 @@
-package com.example.fighter.list_view_helpers;
+package com.example.fighter.utils;
 
 import android.content.Intent;
 import android.os.Bundle;

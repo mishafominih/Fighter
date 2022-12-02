@@ -8,10 +8,6 @@
     tools:context=".TournamentsList"
     >
 
-    <include
-        layout="@layout/head"
-        />
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,17 +18,28 @@
         android:textColor="@color/black"
         />
 
-    <Button
-        android:id="@+id/button_add_tournament"
+    <include
+        layout="@layout/pattern_item_tournament"
+        android:layout_height="40dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Добавить"
-        android:backgroundTint="#FFD952"
-        android:textColor="@color/black"/>
+        android:layout_marginTop="10dp" />
 
     <ListView
+        android:layout_weight="2"
         android:id="@+id/list_view_tournaments_list"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:layout_weight="9"
+        android:id="@+id/button_add_tournament"
+        android:layout_marginHorizontal="10dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"/>
+        android:text="Создать соревнование"
+        android:gravity=""
+        android:textSize="16dp"
+        android:backgroundTint="#ffffff"
+        android:textColor="#F88D40"/>
+
 </LinearLayout>

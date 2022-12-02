@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.EditText;
 
 import org.json.JSONException;
@@ -17,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        findViewById(R.id.authorization).setOnClickListener(view -> {
+        findViewById(R.id.head_button).setOnClickListener(view -> {
             Intent login = new Intent(this, Login.class);
             startActivity(login);
         });
@@ -31,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         if(res.getBoolean("result")){
                             Intent intent = new Intent(this, FightList.class);
+                            intent.putExtra("tournament_id", edit.getText());
                             startActivity(intent);
                         }
                     } catch (JSONException e) {
