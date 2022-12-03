@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fighter.R;
@@ -37,16 +38,21 @@ public class PlayerAdapter extends ArrayAdapter<Player> {
 
         viewHolder.name.setText(player.GetFIO());
         viewHolder.categories.setText(player.GetCategoriesStr());
-        viewHolder.info.setText(player.Description);
+        viewHolder.delBtn.setOnClickListener((view) -> {
+            playersList.remove(position);
+            notifyDataSetChanged();
+        });
+
 
         return convertView;
     }
     private class ViewHolder {
-        final TextView name, categories, info;
+        final ImageView delBtn;
+        final TextView name, categories;
         ViewHolder(View view){
             name = view.findViewById(R.id.name);
             categories = view.findViewById(R.id.categories);
-            info = view.findViewById(R.id.info);
+            delBtn = view.findViewById(R.id.image_del_range);
         }
     }
 }

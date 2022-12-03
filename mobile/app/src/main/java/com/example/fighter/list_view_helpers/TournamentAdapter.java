@@ -39,7 +39,7 @@ public class TournamentAdapter extends ArrayAdapter<Tournament> {
 
         viewHolder.name.setText(tournament.Name);
         viewHolder.desc.setText(tournament.Description);
-        viewHolder.status.setText(tournament.Status);
+        viewHolder.status.setText(tournament.GetStringStatus());
 
         if(position % 2 == 0){
             viewHolder.base.setBackgroundColor(0xffffff);

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.fighter.list_view_helpers.ResultAdapter;
 import com.example.fighter.list_view_helpers.Tournament;
 import com.example.fighter.list_view_helpers.TournamentAdapter;
 
@@ -22,6 +23,13 @@ public class TournamentsList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tournametns_list);
+
+        findViewById(R.id.head_button).setOnClickListener(view -> {
+            Intent start = new Intent(this, MainActivity.class);
+            start.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(start);
+            this.finish();
+        });
 
         Bundle arguments = getIntent().getExtras();
         if(arguments != null && arguments.containsKey("user_id")){
@@ -60,12 +68,26 @@ public class TournamentsList extends AppCompatActivity {
                 // Обработаем нажатие на элемент
                 fights_list.setOnItemClickListener((parent, view, position, id) -> {
                     Tournament t = (Tournament) fights_list.getItemAtPosition(position);
-                    Intent intent = new Intent(parent.getContext(), PlayersList.class);
-                    intent.putExtra("user_id", user_id);
-                    intent.putExtra("tournament_id", t.Id);
-                    if(t.Categories != null)
-                        intent.putExtra("categories", t.Categories.toString());
-                    startActivity(intent);
+                    if(t.Status == 2) {  // Планируется
+                        Intent intent = new Intent(parent.getContext(), PlayersList.class);
+                        intent.putExtra("user_id", user_id);
+                        intent.putExtra("tournament_id", t.Id);
+                        if(t.Categories != null)
+                            intent.putExtra("categories", t.Categories.toString());
+                        startActivity(intent);
+                    }
+                    if(t.Status == 1) {  // Идет
+                        Intent intent = new Intent(parent.getContext(), FightList.class);
+                        intent.putExtra("user_id", user_id);
+                        intent.putExtra("tournament_id", t.Id);
+                        startActivity(intent);
+                    }
+                    if(t.Status == 0) {  // Завершено
+                        Intent intent = new Intent(parent.getContext(), ResultActivity.class);
+                        intent.putExtra("user_id", user_id);
+                        intent.putExtra("tournament_id", t.Id);
+                        startActivity(intent);
+                    }
                 });
             });
         }, (fail) ->{

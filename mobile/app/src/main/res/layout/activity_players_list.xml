@@ -7,28 +7,46 @@
     android:layout_height="match_parent"
     tools:context=".PlayersList">
 
+    <include
+        layout="@layout/pattern_head_out"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Список участников"
+        android:text="Название соревнования"
         android:gravity="center"
         android:textSize="20dp"
         android:textColor="@color/black"
         />
 
-    <Button
-        android:id="@+id/button_add_player"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Добавить"
-        android:backgroundTint="#FFD952"
-        android:textColor="@color/black"/>
+        android:layout_marginTop="20dp"
+        android:text="Участники"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        />
 
     <ListView
+        android:layout_weight="3"
         android:id="@+id/list_view_players_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_weight="11"
+        android:id="@+id/button_add_player"
+        android:layout_marginHorizontal="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Добавить участника"
+        android:gravity=""
+        android:textSize="16dp"
+        android:backgroundTint="#ffffff"
+        android:textColor="#F88D40"/>
 
 </LinearLayout>

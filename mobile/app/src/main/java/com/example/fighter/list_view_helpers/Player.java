@@ -29,7 +29,14 @@ public class Player {
     }
 
     public String GetFIO(){
-        return Name + " " + Surname.charAt(0) + "." + Lastname.charAt(0) + ".";
+        String res = "";
+        if(Name != null)
+            res += Name;
+        if(Surname != null)
+            res += " " + Surname.charAt(0) + ".";
+        if(Lastname != null)
+            res += " " + Lastname.charAt(0) + ".";
+        return res;
     }
 
     public String GetCategoriesStr(){

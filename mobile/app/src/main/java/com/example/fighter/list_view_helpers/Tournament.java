@@ -8,7 +8,7 @@ public class Tournament {
     public String Id;
     public String Name;
     public String Description;
-    public String Status;
+    public int Status;
     public JSONArray Categories;
     public Tournament(JSONObject data) throws JSONException {
         Id = data.getString("key");
@@ -16,16 +16,18 @@ public class Tournament {
         Description = data.getString("description");
         if(!data.isNull("categories"))
             Categories = new JSONArray(data.getString("categories"));
-        switch (data.getString("status")) {
-            case "0":
-                Status = "Проведено";
-                break;
-            case "1":
-                Status = "Идет сейчас";
-                break;
-            case "2":
-                Status = "Запланировано";
-                break;
+        Status = data.getInt("status");
+    }
+
+    public String GetStringStatus(){
+        switch (Status) {
+            case 0:
+                return "Проведено";
+            case 1:
+                return "Идет сейчас";
+            case 2:
+                return "Запланировано";
         }
+        return "";
     }
 }

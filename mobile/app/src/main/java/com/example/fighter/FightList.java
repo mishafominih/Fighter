@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.example.fighter.list_view_helpers.Fight;
 import com.example.fighter.list_view_helpers.FightAdapter;
+import com.example.fighter.utils.TransportDataHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,23 +17,24 @@ import java.util.ArrayList;
 
 public class FightList extends AppCompatActivity {
     String tournament_id;
+    String user_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fight_list);
 
-        Bundle arguments = getIntent().getExtras();
-        if(arguments != null && arguments.containsKey("tournament_id")){
-            tournament_id = arguments.get("tournament_id").toString();
-        }
+        TransportDataHelper helper = new TransportDataHelper(getIntent());
+        user_id = helper.get("user_id");
+        tournament_id = helper.get("tournament_id");
 
         MyRequest request = new MyRequest();
         // Набираем данные для запроса
+        if(user_id != null)
+            request.put("user_id", user_id);
         request.put("tournament_id", tournament_id);
         request.CallArray("tournament_list", (res) -> {
             runOnUiThread(() -> {
                 ArrayList<Fight> fights = new ArrayList<Fight>();
-                // fights.add(new Fight("Время/место", "Участники", "Счет"));
                 for(int i = 0; i < res.length(); i++){
                     try {
                         JSONObject json = res.getJSONObject(i);
