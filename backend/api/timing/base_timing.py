@@ -13,7 +13,7 @@ class Timing:
 
     def generate_timing(self):
         # Получим список всех участников
-        players = get_players_for_tournament(**{'user_id': self.user_id, 'tournament_id': self.tournament_id})
+        players = get_players_for_tournament(self.tournament_id)
         data = {}  # Распределение участников по категориям
         for player in players:  # Обработаем полученных участников в более удобный вид
             cat = player.get('categories')
