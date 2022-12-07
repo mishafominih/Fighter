@@ -48,8 +48,8 @@ public class FightList extends AppCompatActivity {
 
         MyRequest request = new MyRequest();
         // Набираем данные для запроса
-        if(user_id != null)
-            request.put("user_id", user_id);
+//        if(user_id != null)
+//            request.put("user_id", user_id);
         request.put("tournament_id", tournament_id);
         request.CallArray("tournament_list", (res) -> {
             runOnUiThread(() -> {

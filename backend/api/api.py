@@ -2,7 +2,7 @@ from flask import Flask, request
 
 from database.database import sign_in, registration, \
     create_tournament, get_tournaments_for_db, add_new_player, \
-    get_tournament_list, get_players_for_tournament, write_winner
+    get_tournament_list, get_players_for_tournament, write_winner, write_status
 from timing.simple_timing import SimpleTiming
 
 app = Flask(__name__)
@@ -106,6 +106,7 @@ def start_tournament():
     # Добавить проверку на уже существующее расписание
     timing = SimpleTiming(user_id, tournament_id)  # Выбираем нужную логику генерации расписания
     timing.generate_timing()  # Генерируем распределение и записываем в бд
+    write_status(1, user_id, tournament_id)
     pass
 
 

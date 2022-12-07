@@ -102,7 +102,7 @@ def add_new_player(cursor, **params):
     return cursor.fetchone()['_id']
 
 @connection_db
-def get_players_for_tournament(cursor, user_id, tournament_id):
+def get_players_for_tournament(cursor, tournament_id):
     sql = """
         SELECT 
             "_id" as "id"
@@ -113,9 +113,9 @@ def get_players_for_tournament(cursor, user_id, tournament_id):
             , "Description" as "description"
             , "Categories" as "categories"
         FROM "Players"
-        WHERE "UserId" = %s AND "TournamentId" = %s
+        WHERE "TournamentId" = %s
     """
-    cursor.execute(sql, [user_id, tournament_id])
+    cursor.execute(sql, [tournament_id])
     data = cursor.fetchall()
     return data
 
@@ -178,7 +178,6 @@ def write_winner(cursor, user_id, tournament_id, fight_id, winner_id):
     player_tmpl = """
             UPDATE public."EventTiming" 
             SET "winner" = %s
-            FROM public."EventTiming" 
             WHERE 
                 "userid" = %s
                 AND "tournamentid" = %s
@@ -186,5 +185,18 @@ def write_winner(cursor, user_id, tournament_id, fight_id, winner_id):
         """
 
     cursor.execute(player_tmpl, winner_id, user_id, tournament_id, fight_id)
+
+    return cursor.fetchone()['id']
+
+
+@connection_db
+def write_status(cursor, user_id, tournament_id, status):
+    player_tmpl = """
+            UPDATE public."Event" 
+            SET "Status" = %s
+            WHERE "userid" = %s AND "tournamentid" = %s
+        """
+
+    cursor.execute(player_tmpl, status, user_id, tournament_id)
 
     return cursor.fetchone()['id']
