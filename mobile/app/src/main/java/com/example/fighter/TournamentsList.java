@@ -47,7 +47,7 @@ public class TournamentsList extends AppCompatActivity {
     private void update_tournaments() {
         MyRequest request = new MyRequest();
         // Набираем данные для запроса
-        request.put("user", user_id);
+        request.put("user_id", user_id);
         // Сам запрос
         request.CallArray("get_tournaments", (res) -> {
             runOnUiThread(() -> {

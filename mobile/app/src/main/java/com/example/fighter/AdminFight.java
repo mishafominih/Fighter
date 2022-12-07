@@ -59,7 +59,7 @@ public class AdminFight extends AppCompatActivity {
             String fio = spinner.getSelectedItem().toString();
             if(!fio.equals("")){
                 MyRequest request = new MyRequest();
-                request.put("user", user_id);
+                request.put("user_id", user_id);
                 request.put("tournament_id", tournament_id);
                 request.put("fight_id", fight_id);
                 String winner_id;

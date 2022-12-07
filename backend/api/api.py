@@ -36,7 +36,7 @@ def join_to_tournament():
 @app.route('/api/get_tournaments', methods=['GET', 'POST'])
 def get_tournaments():
     params = request.form
-    result = get_tournaments_for_db(**{'user_id': params.get('user')})
+    result = get_tournaments_for_db(params.get('user_id'))
     return result
 
 
