@@ -38,14 +38,28 @@
         android:layout_marginTop="10dp"/>
 
     <TextView
-        android:layout_weight="11"
+        android:layout_weight="10"
         android:id="@+id/button_add_player"
         android:layout_marginHorizontal="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Добавить участника"
         android:gravity=""
+        android:layout_marginBottom="10dp"
         android:textSize="16dp"
+        android:backgroundTint="#ffffff"
+        android:textColor="#F88D40"/>
+
+    <TextView
+        android:layout_weight="10"
+        android:id="@+id/button_start_tournament"
+        android:layout_marginHorizontal="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Начать соревнование"
+        android:gravity=""
+        android:textSize="16dp"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="#ffffff"
         android:textColor="#F88D40"/>
 

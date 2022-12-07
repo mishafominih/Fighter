@@ -46,6 +46,26 @@ public class PlayersList extends AppCompatActivity {
             startActivity(intent);
         });
 
+        findViewById(R.id.button_start_tournament).setOnClickListener((click) -> {
+            MyRequest request = new MyRequest();
+            // Набираем данные для запроса
+            // request.put("user", user_id);
+            request.put("tournament_id", tournament_id);
+            // Сам запрос
+            request.Call("start_tournament", (res) -> {
+                runOnUiThread(() -> {
+                    try {
+                        if(res.getBoolean("result")) {
+                            this.finish();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }, (fail) ->{
+                runOnUiThread(() -> Toast.makeText(this, fail.getMessage(), Toast.LENGTH_LONG).show());
+            });
+        });
     }
 
     private void update_players() {

@@ -152,6 +152,7 @@ def get_tournament_list(cursor, tournament_id):
             , "child" as "child"
         FROM "EventTiming"
         WHERE "tournamentid" = %s
+        ORDER BY "id"
     """
     cursor.execute(sql, [tournament_id])
     data = cursor.fetchall()

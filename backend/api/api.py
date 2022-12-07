@@ -63,7 +63,7 @@ def add_player():
 @app.route('/api/get_players', methods=['GET', 'POST'])
 def get_players():
     params = request.form
-    result = get_players_for_tournament(**{'user_id': params.get('user'), 'tournament_id': params.get('tournament_id')})
+    result = get_players_for_tournament(**{'tournament_id': params.get('tournament_id')})
     return result
 
 
