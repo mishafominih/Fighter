@@ -80,8 +80,10 @@ def tournament_grid():
 @app.route('/api/tournament_list', methods=['GET', 'POST'])
 def tournament_list():
     params = request.form
-    result = get_tournament_list(**params)
-    players = get_players_for_tournament(**params)
+    tournament_id = params.get('tournament_id')
+    result = get_tournament_list(tournament_id)
+    print(result)
+    players = get_players_for_tournament(tournament_id)
 
     def find(id):
         for rec in players:
