@@ -193,7 +193,7 @@ def write_status(cursor, user_id, tournament_id, status):
     player_tmpl = """
             UPDATE public."Event" 
             SET "Status" = %s
-            WHERE "userid" = %s AND "tournamentid" = %s
+            WHERE "User" = %s AND "_id" = %s
         """
 
     cursor.execute(player_tmpl, [status, user_id, tournament_id])
