@@ -186,8 +186,6 @@ def write_winner(cursor, user_id, tournament_id, fight_id, winner_id):
 
     cursor.execute(player_tmpl, [winner_id, user_id, tournament_id, fight_id])
 
-    return cursor.fetchone()['id']
-
 
 @connection_db
 def write_status(cursor, user_id, tournament_id, status):
@@ -198,5 +196,3 @@ def write_status(cursor, user_id, tournament_id, status):
         """
 
     cursor.execute(player_tmpl, [status, user_id, tournament_id])
-
-    return cursor.fetchone()['id']
