@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/misha/Documents/Fighter/mobile/app/src/main/res/layout/activity_add_player.xml" value="0.21784420289855072" />
+        <entry key="..\:/Users/misha/Documents/Fighter/mobile/app/src/main/res/layout/activity_admin_fight.xml" value="0.21784420289855072" />
         <entry key="..\:/Users/misha/Documents/Fighter/mobile/app/src/main/res/layout/activity_change_distribution.xml" value="0.21784420289855072" />
         <entry key="..\:/Users/misha/Documents/Fighter/mobile/app/src/main/res/layout/activity_create_tournament.xml" value="0.21784420289855072" />
         <entry key="..\:/Users/misha/Documents/Fighter/mobile/app/src/main/res/layout/activity_fight_list.xml" value="0.21784420289855072" />
@@ -30,6 +31,7 @@
         <entry key="..\:/Users/misha/Documents/Fighter/mobile/app/src/main/res/layout/item_tournament.xml" value="0.21784420289855072" />
         <entry key="..\:/Users/misha/Documents/Fighter/mobile/app/src/main/res/layout/pattern_head_in.xml" value="0.21784420289855072" />
         <entry key="..\:/Users/misha/Documents/Fighter/mobile/app/src/main/res/layout/pattern_head_out.xml" value="0.21784420289855072" />
+        <entry key="..\:/Users/misha/Documents/Fighter/mobile/app/src/main/res/layout/pattern_item_fight.xml" value="0.21784420289855072" />
         <entry key="..\:/Users/misha/Documents/Fighter/mobile/app/src/main/res/layout/pattern_item_tournament" value="0.21784420289855072" />
         <entry key="..\:/Users/misha/Documents/Fighter/mobile/app/src/main/res/layout/pattern_item_tournament.xml" value="0.21784420289855072" />
         <entry key="..\:/Users/misha/Documents/Fighter/mobile/app/src/main/res/layout/player_list_item.xml" value="0.21784420289855072" />

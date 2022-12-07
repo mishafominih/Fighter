@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class Player {
+    public String Id;
     public String Name;
     public String Surname;
     public String Lastname;
@@ -16,6 +17,7 @@ public class Player {
 
     public Player(JSONObject data){
         try {
+            Id = data.getString("id");
             Name = data.getString("name");
             Surname = data.getString("surname");
             Lastname = data.getString("patronymic");

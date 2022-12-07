@@ -2,7 +2,7 @@ from flask import Flask, request
 
 from database.database import sign_in, registration, \
     create_tournament, get_tournaments_for_db, add_new_player, \
-    get_tournament_list, get_players_for_tournament
+    get_tournament_list, get_players_for_tournament, write_winner
 from timing.simple_timing import SimpleTiming
 
 app = Flask(__name__)
@@ -102,11 +102,22 @@ def tournament_list():
 @app.route('/api/start_tournament', methods=['GET', 'POST'])
 def start_tournament():
     params = request.form
-    user_id, tournament_id = params.get('user'), params.get('tournament_id')
+    user_id, tournament_id = params.get('user_id'), params.get('tournament_id')
     # Добавить проверку на уже существующее расписание
     timing = SimpleTiming(user_id, tournament_id)  # Выбираем нужную логику генерации расписания
     timing.generate_timing()  # Генерируем распределение и записываем в бд
     pass
+
+
+@app.route('/api/set_winner', methods=['GET', 'POST'])
+def set_winner():
+    try:
+        params = request.form
+        user_id, tournament_id = params.get('user_id'), params.get('tournament_id')
+        fight_id, winner_id = params.get('fight_id'), params.get('winner_id')
+        write_winner(user_id, tournament_id, fight_id, winner_id)
+    except Exception as e:
+        return {'result': False, 'message': str(e)}
 
 
 app.run()

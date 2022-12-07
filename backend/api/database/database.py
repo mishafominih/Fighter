@@ -171,3 +171,20 @@ def add_new_timing(cursor, params):
         cursor.execute(player_tmpl, param)
 
     return cursor.fetchone()['id']
+
+
+@connection_db
+def write_winner(cursor, user_id, tournament_id, fight_id, winner_id):
+    player_tmpl = """
+            UPDATE public."EventTiming" 
+            SET "winner" = %s
+            FROM public."EventTiming" 
+            WHERE 
+                "userid" = %s
+                AND "tournamentid" = %s
+                AND "id" = %s
+        """
+
+    cursor.execute(player_tmpl, winner_id, user_id, tournament_id, fight_id)
+
+    return cursor.fetchone()['id']

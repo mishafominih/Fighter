@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AdminFight">
+
+    <include
+        layout="@layout/pattern_head_out"/>
+
+    <include
+        layout="@layout/pattern_item_fight"/>
+
+    <LinearLayout
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Выбрать победителя"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            />
+
+        <Spinner
+            android:id="@+id/spinner_fighters"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFD952"
+        android:text="Сохранить"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="10dp"
+        />
+
+
+
+</LinearLayout>

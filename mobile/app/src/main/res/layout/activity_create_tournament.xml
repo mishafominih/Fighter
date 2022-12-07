@@ -64,6 +64,25 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Место проведения"
+            android:layout_marginTop="10dp"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:id="@+id/places"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Список мест... "
+            android:layout_marginTop="5dp"
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Категории"
             android:layout_marginTop="10dp"
             android:textSize="18dp"

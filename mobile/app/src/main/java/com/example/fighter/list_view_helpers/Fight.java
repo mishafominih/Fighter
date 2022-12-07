@@ -4,12 +4,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Fight {
-    public String TimePlace;
+    public String Id;
+    public String Place;
     public JSONObject Fighter_one;
     public JSONObject Fighter_two;
     public String Score = "";
     public Fight(JSONObject json) throws JSONException {
-        TimePlace = json.getString("place");
+        Place = json.getString("place");
+        Id = json.getString("id");
         if( !json.isNull("fighter_one"))
             Fighter_one = json.getJSONObject("fighter_one");
         if( !json.isNull("fighter_two"))
@@ -19,7 +21,7 @@ public class Fight {
     }
 
     public String GetTimePlace(){
-        return TimePlace;
+        return Place;
     }
 
     public String GetFigters(){
