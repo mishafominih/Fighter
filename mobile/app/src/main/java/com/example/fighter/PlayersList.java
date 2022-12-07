@@ -49,7 +49,7 @@ public class PlayersList extends AppCompatActivity {
         findViewById(R.id.button_start_tournament).setOnClickListener((click) -> {
             MyRequest request = new MyRequest();
             // Набираем данные для запроса
-            // request.put("user", user_id);
+            request.put("user_id", user_id);
             request.put("tournament_id", tournament_id);
             // Сам запрос
             request.Call("start_tournament", (res) -> {
@@ -71,7 +71,7 @@ public class PlayersList extends AppCompatActivity {
     private void update_players() {
         MyRequest request = new MyRequest();
         // Набираем данные для запроса
-        request.put("user", user_id);
+        // request.put("user", user_id);
         request.put("tournament_id", tournament_id);
         // Сам запрос
         request.CallArray("get_players", (res) -> {

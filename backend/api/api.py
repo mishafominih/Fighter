@@ -108,7 +108,7 @@ def start_tournament():
     # Добавить проверку на уже существующее расписание
     timing = SimpleTiming(user_id, tournament_id)  # Выбираем нужную логику генерации расписания
     timing.generate_timing()  # Генерируем распределение и записываем в бд
-    write_status(1, user_id, tournament_id)
+    write_status(user_id, tournament_id, 1)
     return {'result': True, 'message': ""}
 
 
