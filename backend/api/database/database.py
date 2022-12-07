@@ -153,7 +153,7 @@ def get_tournament_list(cursor, tournament_id):
         FROM "EventTiming"
         WHERE "tournamentid" = %s
     """
-    cursor.execute(sql, [tournament_id])
+    cursor.execute(sql, tournament_id)
     data = cursor.fetchall()
     return data
 
