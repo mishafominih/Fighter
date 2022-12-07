@@ -109,6 +109,7 @@ def start_tournament():
     timing = SimpleTiming(user_id, tournament_id)  # Выбираем нужную логику генерации расписания
     timing.generate_timing()  # Генерируем распределение и записываем в бд
     write_status(1, user_id, tournament_id)
+    return {'result': True, 'message': ""}
 
 
 @app.route('/api/set_winner', methods=['GET', 'POST'])
@@ -118,6 +119,7 @@ def set_winner():
         user_id, tournament_id = params.get('user_id'), params.get('tournament_id')
         fight_id, winner_id = params.get('fight_id'), params.get('winner_id')
         write_winner(user_id, tournament_id, fight_id, winner_id)
+        return {'result': True, 'message': ""}
     except Exception as e:
         return {'result': False, 'message': str(e)}
 
