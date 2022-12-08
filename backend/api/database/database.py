@@ -195,8 +195,12 @@ def write_player(cursor, user_id, tournament_id, fight_id, player_id):
     player_tmpl = """
             UPDATE public."EventTiming" 
             SET 
-                CASE WHEN "fighterone" = null THEN "fighterone" = %s
-                ELSE "fightertwo" = %s
+                "fightertwo" = 
+                    CASE WHEN "fightertwo" is null AND "fighterone" is not null THEN %s
+                ELSE "fightertwo" END,
+                "fighterone" = 
+                    CASE WHEN "fighterone" is null THEN %s
+                ELSE "fighterone" END
             WHERE 
                 "userid" = %s
                 AND "tournamentid" = %s

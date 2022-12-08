@@ -122,6 +122,7 @@ def set_winner():
         SimpleTiming(user_id, tournament_id).set_result(fight_id, winner_id)
         return {'result': True, 'message': ""}
     except Exception as e:
+        print(e)
         return {'result': False, 'message': str(e)}
 
 

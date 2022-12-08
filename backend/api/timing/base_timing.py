@@ -32,6 +32,7 @@ class Timing:
         rec = write_winner(self.user_id, self.tournament_id, fight_id, winner_id)
         print(rec)
         if rec.get('child'):
+            print('enter')
             write_player(self.user_id, self.tournament_id, rec.get('child'), winner_id)
 
     def change(self):
