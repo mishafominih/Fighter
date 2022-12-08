@@ -128,7 +128,7 @@ def start_tournament():
 @app.route('/api/set_winner', methods=['GET', 'POST'])
 @check_exeption
 def set_winner():
-    params = request.formq
+    params = request.form
     user_id, tournament_id = params.get('user_id'), params.get('tournament_id')
     fight_id, winner_id = params.get('fight_id'), params.get('winner_id')
     timing = get_timing(user_id, tournament_id)
