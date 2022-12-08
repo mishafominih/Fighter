@@ -35,4 +35,3 @@ class SimpleTiming(Timing):
         f = self._add_finish(sub_result[0: count // 2])
         s = self._add_finish(sub_result[count // 2: count])
         return join(f, s)
-

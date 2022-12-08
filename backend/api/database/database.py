@@ -183,9 +183,29 @@ def write_winner(cursor, user_id, tournament_id, fight_id, winner_id):
                 "userid" = %s
                 AND "tournamentid" = %s
                 AND "id" = %s
+            RETURNING *
         """
 
     cursor.execute(player_tmpl, [winner_id, user_id, tournament_id, fight_id])
+    return cursor.fetchone()
+
+
+@connection_db
+def write_player(cursor, user_id, tournament_id, fight_id, player_id):
+    player_tmpl = """
+            UPDATE public."EventTiming" 
+            SET 
+                CASE WHEN "fighterone" = null THEN "fighterone" = %s
+                ELSE "fightertwo" = %s
+            WHERE 
+                "userid" = %s
+                AND "tournamentid" = %s
+                AND "id" = %s
+            RETURNING *
+        """
+
+    cursor.execute(player_tmpl, [player_id, player_id, user_id, tournament_id, fight_id])
+    return cursor.fetchone()
 
 
 @connection_db

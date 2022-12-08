@@ -1,6 +1,6 @@
 import json
 
-from database.database import get_players_for_tournament, add_new_timing
+from database.database import get_players_for_tournament, add_new_timing, write_winner, write_player
 
 
 class Timing:
@@ -28,8 +28,11 @@ class Timing:
             self._generate_timing_for_category(players)
         self._write_to_bd()
 
-    def set_result(self):
-        pass
+    def set_result(self, fight_id, winner_id):
+        rec = write_winner(self.user_id, self.tournament_id, fight_id, winner_id)
+        print(rec)
+        if rec.get('child'):
+            write_player(self.user_id, self.tournament_id, rec.get('child'), winner_id)
 
     def change(self):
         pass
