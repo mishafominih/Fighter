@@ -14,9 +14,11 @@ public class Player {
     public JSONArray Categories;
     public String Link;
     public String Description;
+    public String Base;
 
     public Player(JSONObject data){
         try {
+            Base = data.toString();
             Id = data.getString("id");
             Name = data.getString("name");
             Surname = data.getString("surname");

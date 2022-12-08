@@ -74,8 +74,8 @@ public class FightList extends AppCompatActivity {
                         intent.putExtra("user_id", user_id);
                         intent.putExtra("tournament_id", tournament_id);
                         intent.putExtra("fight_id", f.Id);
-                        intent.putExtra("fighter_one", f.Fighter_one.toString());
-                        intent.putExtra("fighter_two", f.Fighter_two.toString());
+                        intent.putExtra("fighter_one", f.Fighter_one.Base);
+                        intent.putExtra("fighter_two", f.Fighter_two.Base);
                         intent.putExtra("place", f.Place);
                         startActivity(intent);
                     }

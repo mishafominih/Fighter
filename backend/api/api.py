@@ -82,7 +82,6 @@ def tournament_list():
     params = request.form
     tournament_id = params.get('tournament_id')
     result = get_tournament_list(tournament_id)
-    print(result)
     players = get_players_for_tournament(tournament_id)
 
     def find(id):
@@ -120,7 +119,7 @@ def set_winner():
         params = request.form
         user_id, tournament_id = params.get('user_id'), params.get('tournament_id')
         fight_id, winner_id = params.get('fight_id'), params.get('winner_id')
-        write_winner(user_id, tournament_id, fight_id, winner_id)
+        SimpleTiming(user_id, tournament_id).set_result(fight_id, winner_id)
         return {'result': True, 'message': ""}
     except Exception as e:
         return {'result': False, 'message': str(e)}
