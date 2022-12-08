@@ -46,6 +46,12 @@ public class FightList extends AppCompatActivity {
             });
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         MyRequest request = new MyRequest();
         // Набираем данные для запроса
 //        if(user_id != null)

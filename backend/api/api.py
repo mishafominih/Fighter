@@ -3,9 +3,21 @@ from flask import Flask, request
 from database.database import sign_in, registration, \
     create_tournament, get_tournaments_for_db, add_new_player, \
     get_tournament_list, get_players_for_tournament, write_winner, write_status
+from timing.bl_funcs import get_timing
 from timing.simple_timing import SimpleTiming
 
 app = Flask(__name__)
+
+
+def check_exeption(func):
+    def res(*args, **kwards):
+        try:
+            return func(*args, **kwards)
+        except Exception as e:
+            print(f'При обработке запроса произошло исключение: {str(e)}')
+            return {'result': False, 'message': str(e)}
+
+    return res
 
 
 @app.route('/api/login', methods=['GET', 'POST'])
@@ -107,23 +119,21 @@ def start_tournament():
     params = request.form
     user_id, tournament_id = params.get('user_id'), params.get('tournament_id')
     # Добавить проверку на уже существующее расписание
-    timing = SimpleTiming(user_id, tournament_id)  # Выбираем нужную логику генерации расписания
+    timing = get_timing(user_id, tournament_id)
     timing.generate_timing()  # Генерируем распределение и записываем в бд
     write_status(user_id, tournament_id, 1)
     return {'result': True, 'message': ""}
 
 
 @app.route('/api/set_winner', methods=['GET', 'POST'])
+@check_exeption
 def set_winner():
-    try:
-        params = request.form
-        user_id, tournament_id = params.get('user_id'), params.get('tournament_id')
-        fight_id, winner_id = params.get('fight_id'), params.get('winner_id')
-        SimpleTiming(user_id, tournament_id).set_result(fight_id, winner_id)
-        return {'result': True, 'message': ""}
-    except Exception as e:
-        print(e)
-        return {'result': False, 'message': str(e)}
+    params = request.formq
+    user_id, tournament_id = params.get('user_id'), params.get('tournament_id')
+    fight_id, winner_id = params.get('fight_id'), params.get('winner_id')
+    timing = get_timing(user_id, tournament_id)
+    timing.set_result(fight_id, winner_id)
+    return {'result': True, 'message': ""}
 
 
 app.run()

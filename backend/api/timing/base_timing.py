@@ -1,6 +1,6 @@
 import json
 
-from database.database import get_players_for_tournament, add_new_timing, write_winner, write_player
+from database.database import get_players_for_tournament, add_new_timing, write_winner, write_player, write_status
 
 
 class Timing:
@@ -30,10 +30,11 @@ class Timing:
 
     def set_result(self, fight_id, winner_id):
         rec = write_winner(self.user_id, self.tournament_id, fight_id, winner_id)
-        print(rec)
         if rec.get('child'):
-            print('enter')
             write_player(self.user_id, self.tournament_id, rec.get('child'), winner_id)
+        else:  # Если нет следующего - значит дошли до последнего боя.
+            write_status(self.user_id, self.tournament_id, 0)
+            pass
 
     def change(self):
         pass

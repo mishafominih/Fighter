@@ -221,3 +221,23 @@ def write_status(cursor, user_id, tournament_id, status):
         """
 
     cursor.execute(player_tmpl, [status, user_id, tournament_id])
+
+
+@connection_db
+def get_tournament(cursor, user_id, tournament_id):
+    player_tmpl = """
+            SELECT 
+                "_id" "key",
+                "Name" "name",
+                "Description" "description",
+                "Type" "type",
+                "CountThread" "count_thread",
+                "User" "user_id",
+                "Categories" "categories",
+                "Status" "status"
+            FROM public."Event"
+            WHERE "User" = %s AND "_id" = %s
+        """
+
+    cursor.execute(player_tmpl, [user_id, tournament_id])
+    return cursor.fetchone()
