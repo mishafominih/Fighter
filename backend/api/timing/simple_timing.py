@@ -10,20 +10,22 @@ class SimpleTiming(Timing):
         result = []
         count = len(players)
         size = 2
+        stage = 0
         while size < count:
             size *= 2
         for i in range(0, size // 2):
             second_i = i + size // 2
             item = self.add_timing_item(
                 players[i].get("id"),
-                players[second_i].get("id") if second_i < count else None
+                players[second_i].get("id") if second_i < count else None,
+                stage
             )
             result.append(item)
         self._add_finish(result)
 
     def _add_finish(self, sub_result):
         def join(f, s):
-            child = self.add_timing_item(f.winner, s.winner)
+            child = self.add_timing_item(f.winner, s.winner, f.stage+1)
             f.child = child
             s.child = child
             return child

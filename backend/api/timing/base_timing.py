@@ -39,8 +39,8 @@ class Timing:
     def change(self):
         pass
 
-    def add_timing_item(self, player_one, player_two):
-        item = self.TimingItem(self.id, player_one, player_two)
+    def add_timing_item(self, player_one, player_two, stage):
+        item = self.TimingItem(self.id, player_one, player_two, stage)
         self.result.append(item)
         self.id += 1
         return item
@@ -62,13 +62,14 @@ class Timing:
                 item = i
 
     class TimingItem:
-        def __init__(self, id, player_one, player_two):
+        def __init__(self, id, player_one, player_two, stage):
             self.id = id
             self.player_one = player_one
             self.player_two = player_two
             self.winner = player_one if player_one and not player_two else None
             self.child = None
             self.place = ""
+            self.stage = stage
 
         def get_data_for_db(self, user_id, tournament_id):
             return [
@@ -79,5 +80,6 @@ class Timing:
                 self.player_one,
                 self.player_two,
                 self.winner,
-                self.child.id if self.child else None
+                self.child.id if self.child else None,
+                self.stage
             ]

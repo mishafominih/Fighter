@@ -101,6 +101,7 @@ def add_new_player(cursor, **params):
 
     return cursor.fetchone()['_id']
 
+
 @connection_db
 def get_players_for_tournament(cursor, tournament_id):
     sql = """
@@ -143,28 +144,38 @@ def create_tournament_grid(cursor, tournament_id):
 def get_tournament_list(cursor, tournament_id):
     sql = """
         SELECT 
-            "id" as "id"
-            , "place" as "place" 
-            , "fighterone" as "fighter_one"
-            , "fightertwo" as "fighter_two"
-            , "winner" as "winner"
-            , null as "score"
-            , "child" as "child"
-        FROM "EventTiming"
-        WHERE "tournamentid" = %s
-        ORDER BY "id"
+            array_agg(COALESCE(rec."one",'') || ',' || COALESCE(rec."two", '')) "Array"
+        FROM
+        (
+            SELECT
+                (SELECT "Name" FROM "Players" WHERE "_id" = "fighterone" LIMIT 1) "one",
+                (SELECT "Name" FROM "Players" WHERE "_id" = "fightertwo" LIMIT 1) "two",
+                "stage"
+            FROM "EventTiming"
+            WHERE "tournamentid" = %s
+        ) AS rec
+        GROUP BY "stage"
+        ORDER BY "stage" ASC
     """
     cursor.execute(sql, [tournament_id])
     data = cursor.fetchall()
-    return data
+    result = []
+    for val in data:
+        stage = []
+        for couple in val.get('Array'):
+            fighters = couple.split(',')
+            stage.append([{'name': fighters[0]}, {'name': fighters[1]}])
+        result.append(stage)
+
+    return result
 
 
 @connection_db
 def add_new_timing(cursor, params):
     player_tmpl = """
             INSERT INTO public."EventTiming" 
-            ("id", "userid","tournamentid","place","fighterone","fightertwo","winner","child")
-            VALUES  (%s, %s, %s, %s, %s, %s, %s, %s)
+            ("id", "userid","tournamentid","place","fighterone","fightertwo","winner","child","stage")
+            VALUES  (%s, %s, %s, %s, %s, %s, %s, %s, %s)
             RETURNING "id";
         """
 
