@@ -26,7 +26,8 @@
          
             
             <!-- админ окно -->
-            <!-- <a class="myLinkModal" href="#"><div class="adminIcon">
+            <div class="admin">
+              <a class="myLinkModal" href="#"><div class="adminIcon">
               <img src="images/adminIcon.svg" alt="">
             </div></a>
             <div id="myModal">
@@ -40,10 +41,12 @@
                     </a>
                   
                 </div>
-              </div> -->
+              </div>
                 
             </div>
             <div id="myOverlay"></div>
+            </div>
+           
             <!-- админ окно -->
 
           </div>
@@ -108,11 +111,21 @@
             <div class="grid">
               <h1>ТУРНИРНАЯ СЕТКА</h1>
               <div class="line"></div>
-              <p><a href="index.html">На главную</a></p>
+              <!-- <p><a href="schedule.html">Следить за всеми категориями</a></p> -->
               <div class="my_gracket"></div>
     </main>
     <script src="leftMenuScript.js"></script>
     <script src="tournament_list.js"></script>
     <script src="AdminScript.js"></script>
+    <script>
+      $('.exitInner').click(function(){
+        localStorage.setItem("user_id", '');
+        localStorage.setItem("tournament_id", '');
+      })
+      console.log(localStorage.getItem("user_id"))
+      if(!localStorage.getItem("user_id")){
+        $('.admin').css('display', 'none');
+      }
+    </script>
   </body>
 </html>

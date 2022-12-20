@@ -76,17 +76,9 @@
       <table>
         <tr>
           <th>Соревнование</th>
-          <th>Участники</th>
-          <th>Даты</th>
-          <th>Дисциплины</th>
+          <th>Описание</th>
           <th>Статус</th>
-        </tr>
-        <tr class="bodyT" onclick="window.location.href='listOfParticipants.html'; return false">
-          <td>Заглушка</td>
-          <td>Заглушка</td>
-          <td>Заглушка</td>
-          <td>Заглушка</td>
-          <td>Заглушка</td>
+          <th>Код</th>
         </tr>
         
         
@@ -101,13 +93,43 @@
     <script src="get_tournaments.js"></script>
     <script src="AdminScript.js"></script>
     <script>
-      let table = $(".bodyT");
-      for (let i = 0; i < table.length; i++) {
-        table[i].addEventListener("click", function () {
-          localStorage.setItem("tournament_id", i);
-          console.log(localStorage.getItem("tournament_id"));
-        });
-      }
+      $.ajax({
+        url: "http://51.250.97.3/api/get_tournaments",
+        method: "post",
+        dataType: "json",
+        data: {'user_id': localStorage.getItem("user_id")}, 
+        success: function (data) {
+          console.log(data);
+
+          for(let i = 0; i < data.length; i++){
+            let status;
+            if (data[i]['status'] == 0){
+              status = 'Пройдено';
+            }
+            else if (data[i]['status'] == 1){
+              status = 'Идёт сейчас';
+            }
+            else{
+              status = 'Планируется';
+            }
+            $('table').append(`<tr class="bodyT" onclick="window.location.href='listOfParticipants.html'; return false"><td>` + data[i]['categories'] + `</td><td>` + data[i]['description'] + `</td><td>` + status + `<td>` + data[i]['key'] + `</td></tr>`)
+            let table = $(".bodyT");
+                  for (let i = 0; i < table.length; i++) {
+                    table[i].addEventListener("click", function () {
+                      
+                      localStorage.setItem("tournament_id", data[i]['key']);
+                      console.log(localStorage.getItem("tournament_id"));
+                    });
+                  }
+          }
+        },
+        error: function (xhr, status) {
+          console.log(xhr.status);
+        },
+      });
+
+
+      
     </script>
   </body>
 </html>

@@ -1,8 +1,8 @@
 $.ajax({
-  url: "/api/get_tournaments",
+  url: "http://51.250.97.3/api/get_tournaments",
   method: "post",
   dataType: "json",
-  data: {'user': localStorage.getItem("user_id")}, 
+  data: {'user_id': localStorage.getItem("user_id")}, 
   success: function (data) {
     console.log(data);
    

@@ -1,11 +1,11 @@
 console.log(localStorage.getItem('tournament_id'));
 let arr;
 $.ajax({
-  url: "/api/tournament_grid",
+  url: "http://51.250.97.3/api/tournament_grid",
   method: "post",
   dataType: "json",
-  // data: {tournament_id : localStorage.getItem('tournament_id')},
   data: {tournament_id : localStorage.getItem('tournament_id')},
+  // data: {tournament_id : 64},
   success: function (data) {
   (function (win, doc, $) {
     win.TestData = data

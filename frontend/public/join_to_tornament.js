@@ -1,7 +1,7 @@
 $("#join").on("submit", function (event) {
     event.preventDefault()
     let q = $.ajax({
-      url: "api/join_to_tournament",
+      url: "http://51.250.97.3/api/join_to_tournament",
       method: "post",
       dataType: "json",
       data: $(this).serialize(),
