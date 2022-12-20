@@ -1,4 +1,4 @@
-$.get( "/api/tournament_list", function( data ) {
+$.get( "api/tournament_list", function( data ) {
     (function (win, doc, $) {
     win.TestData = [
         

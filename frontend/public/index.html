@@ -26,11 +26,11 @@
               <li>Соревнования</li>
               <li>Мой профиль</li>
             </ul> -->
-            <a class="popup-open"
+            <!-- <a class="popup-open"
               ><div class="login">
                 <p>Войти</p>
                 <img src="images/Иконка выхода.svg" alt="Войти" /></div
-            ></a>
+            ></a> -->
 
             <div class="popup-fade">
               <div class="popup">
@@ -102,13 +102,24 @@
                   type="text"
                   placeholder="Введите код"
                   class="joinFormText"
-                  name="key"
+                  name="tournament_id"
+                  id="tournament_id"
                   required
                 />
                 <button type="submit" class="joinFormBtn">
                   Присоединиться
                 </button>
               </form>
+              
+              <script>
+                localStorage.setItem("tournament_id", '')
+                let value = document.querySelector('#tournament_id');
+                value.addEventListener('input',()=>{
+                  localStorage.setItem("tournament_id", value.value);
+                  console.log(localStorage.getItem("tournament_id"));
+                })
+                
+              </script>
             </div>
           </div>
         </div>

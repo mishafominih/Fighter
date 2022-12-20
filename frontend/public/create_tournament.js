@@ -2,7 +2,7 @@ $("#create_tournament").on("submit", function (event) {
   event.preventDefault();
   let categories = ['100кг+', '90кг+','80кг+'];
   $.ajax({
-    url: "http://51.250.97.3/api/create_tournament",
+    url: "/api/create_tournament",
     method: "post",
     dataType: "json",
     data: {'name': 'tes5', 'description': '666', 'user_id': localStorage.getItem("user_id"), 'places': 'ууу', 'categories': '10', 'type': '2'}, 

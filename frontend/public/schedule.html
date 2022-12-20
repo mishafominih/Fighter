@@ -83,7 +83,7 @@
       url: "http://51.250.97.3/api/get_tournaments",
       method: "post",
       dataType: "json",
-      data: {'key' : localStorage.getItem("key")},
+      data: {'tournament_id' : localStorage.getItem("tournament_id")},
       success: function (data) {
         console.log(data);
        
