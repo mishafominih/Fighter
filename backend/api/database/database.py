@@ -144,6 +144,26 @@ def create_tournament_grid(cursor, tournament_id):
 def get_tournament_list(cursor, tournament_id):
     sql = """
         SELECT 
+            "id" as "id"
+            , "place" as "place" 
+            , "fighterone" as "fighter_one"
+            , "fightertwo" as "fighter_two"
+            , "winner" as "winner"
+            , null as "score"
+            , "child" as "child"
+        FROM "EventTiming"
+        WHERE "tournamentid" = %s
+        ORDER BY "id"
+    """
+    cursor.execute(sql, [tournament_id])
+    data = cursor.fetchall()
+    return data
+
+
+@connection_db
+def get_tournament_grid(cursor, tournament_id):
+    sql = """
+        SELECT 
             array_agg(COALESCE(rec."one",'') || ',' || COALESCE(rec."two", '')) "Array"
         FROM
         (
@@ -252,3 +272,70 @@ def get_tournament(cursor, user_id, tournament_id):
 
     cursor.execute(player_tmpl, [user_id, tournament_id])
     return cursor.fetchone()
+params = [
+    {
+        'name': 'Юрий',
+        'surname': 'Иванов',
+        'patronymic': 'Алексеевич',
+        'link': '8(163)873-97-10',
+        'description': ''
+    },
+    {
+        'name': 'Дмитрий',
+        'surname': 'Черкасов',
+        'patronymic': 'Анатольевич',
+        'link': '8(40)615-87-22',
+        'description': ''
+    },
+    {
+        'name': 'Василий',
+        'surname': 'Луканин',
+        'patronymic': 'Алексеевич',
+        'link': '8(5069)250-32-35',
+        'description': ''
+    },
+    {
+        'name': 'Александр',
+        'surname': 'Лебедев',
+        'patronymic': 'Андреевич',
+        'link': '8(08)890-04-07',
+        'description': ''
+    },
+    {
+        'name': 'Михаил',
+        'surname': 'Голубкин',
+        'patronymic': 'Ильич',
+        'link': '8(22)943-79-44',
+        'description': ''
+    },
+    {
+        'name': 'Илья',
+        'surname': 'Паликов',
+        'patronymic': 'Васильевич',
+        'link': '8(8649)635-83-38',
+        'description': ''
+    },
+    {
+        'name': 'Андрей',
+        'surname': 'Жданов',
+        'patronymic': 'Юрьевич',
+        'link': '8(39)800-92-20',
+        'description': ''
+    },
+    {
+        'name': 'Алексей',
+        'surname': 'Иванов',
+        'patronymic': 'Андреевич',
+        'link': '8(73)774-66-00',
+        'description': ''
+    }
+]
+
+# user_id = 16
+# tournament_id = 70
+# for val in params:
+#     val['user_id'] = user_id
+#     val['tournament_id'] = tournament_id
+#     add_new_player(**val)
+#
+# print(get_tournament_list(70))

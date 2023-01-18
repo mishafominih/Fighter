@@ -2,7 +2,8 @@ from flask import Flask, request
 
 from database.database import sign_in, registration, \
     create_tournament, get_tournaments_for_db, add_new_player, \
-    get_tournament_list, get_players_for_tournament, write_winner, write_status
+    get_tournament_list, get_players_for_tournament, write_winner, \
+    write_status, get_tournament_grid
 from timing.bl_funcs import get_timing
 from timing.simple_timing import SimpleTiming
 
@@ -82,7 +83,7 @@ def get_players():
 @app.route('/api/tournament_grid', methods=['GET', 'POST'])
 def tournament_grid():
     params = request.form
-    result = get_tournament_list(**params)
+    result = get_tournament_grid(**params)
     if result:
         return result
     else:
