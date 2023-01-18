@@ -272,3 +272,45 @@ def get_tournament(cursor, user_id, tournament_id):
 
     cursor.execute(player_tmpl, [user_id, tournament_id])
     return cursor.fetchone()
+
+
+@connection_db
+def get_tournament_result(cursor, user_id, tournament_id):
+    winners_tmpl = f"""
+        WITH RECURSIVE winners as (
+            SELECT 
+                "winner",
+                "fighterone" "one",
+                "fightertwo" "two",
+                "child",
+                "id"
+            FROM "EventTiming"
+            WHERE "userid" = {user_id} AND "tournamentid" = {tournament_id} AND "child" IS NULL
+            
+            UNION ALL
+            
+            SELECT
+                 event."winner",
+                 event."fighterone" "one",
+                 event."fightertwo" "two",
+                 event."child",
+                 event."id"
+            FROM "EventTiming" event
+            JOIN winners ON winners."id" =  event."child" AND event."userid" = {user_id} AND event."tournamentid" = {tournament_id} and winners."winner" != event."winner"
+        )
+        SELECT *
+        FROM "Players"
+        WHERE "_id" = ANY((SELECT "winner" FROM winners))
+    """.format(user_id=user_id, tournament_id=tournament_id)
+
+    categories = """
+        SELECT "Categories" "Data"
+        FROM "Event"
+        WHERE "User" = %s AND "_id" = %s
+    """
+    cursor.execute(winners_tmpl)
+    winners = cursor.fetchall()
+    cursor.execute(categories, [user_id, tournament_id])
+    category = cursor.fetchone()
+    return dict(data=winners, category=category.get('Data'))
+
