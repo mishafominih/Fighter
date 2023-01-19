@@ -296,7 +296,10 @@ def get_tournament_result(cursor, user_id, tournament_id):
                  event."child",
                  event."id"
             FROM "EventTiming" event
-            JOIN winners ON winners."id" =  event."child" AND event."userid" = {user_id} AND event."tournamentid" = {tournament_id} and winners."winner" != event."winner"
+            JOIN winners ON winners."id" =  event."child" 
+                AND event."userid" = {user_id} 
+                AND event."tournamentid" = {tournament_id} 
+                AND winners."winner" != event."winner"
         )
         SELECT *
         FROM "Players"
@@ -312,5 +315,5 @@ def get_tournament_result(cursor, user_id, tournament_id):
     winners = cursor.fetchall()
     cursor.execute(categories, [user_id, tournament_id])
     category = cursor.fetchone()
-    return dict(data=winners, category=category.get('Data'))
+    return [dict(data=winners, category=category.get('Data'))]
 
