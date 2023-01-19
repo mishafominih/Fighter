@@ -186,6 +186,20 @@ def get_tournament_grid(cursor, tournament_id):
             fighters = couple.split(',')
             stage.append([{'name': fighters[0]}, {'name': fighters[1]}])
         result.append(stage)
+    winner = """
+        SELECT 
+            "Name" "name"
+        FROM "EventTiming" event
+        JOIN "Players" players ON players."_id" = event."winner"
+        WHERE "child" IS NULL AND "TournamentId" = %s
+        LIMIT 1
+    """
+
+    cursor.execute(winner, [tournament_id])
+    data = cursor.fetchone()
+    if not data:
+        data = {'name': ''}
+    result.append([[data]])
 
     return result
 
