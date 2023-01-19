@@ -137,7 +137,7 @@ def set_winner():
     return {'result': True, 'message': ""}
 
 
-@app.route('/api/get_result', methods=['GET', 'Post'])
+@app.route('/api/get_result', methods=['GET', 'POST'])
 def tournament_result():
     params = request.form
     user_id, tournament_id = params.get('user_id'), params.get('tournament_id')

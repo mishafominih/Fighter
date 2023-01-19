@@ -186,6 +186,20 @@ def get_tournament_grid(cursor, tournament_id):
             fighters = couple.split(',')
             stage.append([{'name': fighters[0]}, {'name': fighters[1]}])
         result.append(stage)
+    winner = """
+        SELECT 
+            "Name" "name"
+        FROM "EventTiming" event
+        JOIN "Players" players ON players."_id" = event."winner"
+        WHERE "child" IS NULL AND "TournamentId" = %s
+        LIMIT 1
+    """
+
+    cursor.execute(winner, [tournament_id])
+    data = cursor.fetchone()
+    if not data:
+        data = {'name': ''}
+    result.append([[data]])
 
     return result
 
@@ -296,9 +310,18 @@ def get_tournament_result(cursor, user_id, tournament_id):
                  event."child",
                  event."id"
             FROM "EventTiming" event
-            JOIN winners ON winners."id" =  event."child" AND event."userid" = {user_id} AND event."tournamentid" = {tournament_id} and winners."winner" != event."winner"
+            JOIN winners ON winners."id" =  event."child" 
+                AND event."userid" = {user_id} 
+                AND event."tournamentid" = {tournament_id} 
+                AND winners."winner" != event."winner"
         )
-        SELECT *
+        SELECT 
+            "_id" "id",
+            "Name" "name",
+            "Surname" "surname",
+            "Patronymic" "patronymic",
+            "Description" "description",
+            "Link" "link"
         FROM "Players"
         WHERE "_id" = ANY((SELECT "winner" FROM winners))
     """.format(user_id=user_id, tournament_id=tournament_id)
@@ -312,5 +335,5 @@ def get_tournament_result(cursor, user_id, tournament_id):
     winners = cursor.fetchall()
     cursor.execute(categories, [user_id, tournament_id])
     category = cursor.fetchone()
-    return dict(data=winners, category=category.get('Data'))
+    return [dict(data=winners, category=category.get('Data'))]
 
