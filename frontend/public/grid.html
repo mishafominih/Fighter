@@ -107,7 +107,7 @@
                 else{
                   status = 'Планируется';
                 }
-                $('.menuSmallInner').append(`<tr class="bodyT" onclick="window.location.href='grid.html'; return false"><td>` + data[i]['description'] + `</tr>`)
+                $('.menuSmallInner').append(`<tr class="bodyT" onclick="window.location.href='grid.html'; return false"><td>` + data[i]['name'] + `</tr>`)
                 let table = $(".bodyT");
                       for (let i = 0; i < table.length; i++) {
                         table[i].addEventListener("click", function () {

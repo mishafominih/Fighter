@@ -6,8 +6,9 @@ $.ajax({
   data: {'tournament_id': localStorage.getItem('tournament_id'), 'user': 16}, 
   success: function (data) {
     console.log(data);
+    let d = '';
     for(let i = 0; i < data.length; i++){
-      $('table').append(`<tr><td>` + data[i]['name'] + `</td><td>` + data[i]['surname'] + `</td><td>` + data[i]['patronymic'] + `<td>` + data[i]['categories'] + `</td><td>` + data[i]['description'] + `</td></tr>`)
+      $('table').append(`<tr><td>` + data[i]['name'] + `</td><td>` + data[i]['surname'] + `</td><td>` + data[i]['patronymic'] + `<td>` + d + `</td><td>` + data[i]['description'] + `</td></tr>`)
       let table = $(".bodyT");
             for (let i = 0; i < table.length; i++) {
               table[i].addEventListener("click", function () {

@@ -8,7 +8,7 @@ $.ajax({
   // data: {tournament_id : 64},
   success: function (data) {
   (function (win, doc, $) {
-    // win.TestData = data.push([[{name : 'Oxxxymiron'}]]);
+    // win.TestData = data.push([[{name : 'misha'}]]);
     win.TestData
     console.log(data)
     // initializer

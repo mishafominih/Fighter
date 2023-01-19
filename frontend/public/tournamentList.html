@@ -97,6 +97,7 @@
 
           for(let i = 0; i < data.length; i++){
             let status;
+            let tournament = '';
             if (data[i]['status'] == 0){
               status = 'Пройдено';
             }
@@ -106,7 +107,8 @@
             else{
               status = 'Планируется';
             }
-            $('table').append(`<tr class="bodyT" onclick="window.location.href='listOfParticipants.html'; return false"><td>` + data[i]['categories'] + `</td><td>` + data[i]['description'] + `</td><td>` + status + `<td>` + data[i]['key'] + `</td></tr>`)
+
+            $('table').append(`<tr class="bodyT" onclick="window.location.href='listOfParticipants.html'; return false"><td>` + tournament + `</td><td>` + data[i]['description'] + `</td><td>` + status + `<td>` + data[i]['key'] + `</td></tr>`)
             let table = $(".bodyT");
                   for (let i = 0; i < table.length; i++) {
                     table[i].addEventListener("click", function () {
