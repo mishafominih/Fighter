@@ -8,10 +8,11 @@ $.ajax({
   // data: {tournament_id : 64},
   success: function (data) {
   (function (win, doc, $) {
-    win.TestData = data
+    // win.TestData = data.push([[{name : 'Oxxxymiron'}]]);
+    win.TestData
     console.log(data)
     // initializer
-    $(".my_gracket").gracket({ src: win.TestData });
+    $(".my_gracket").gracket({ src: data });
   })(window, document, jQuery);
     arr =data;
   },

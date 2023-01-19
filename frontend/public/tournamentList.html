@@ -83,12 +83,6 @@
         
         
       </table>
-      <div class="add">
-        <img src="images/plus.png" />
-        <p class="addP">
-          <a href="createCompetition.html">Создать соревнование</a>
-        </p>
-      </div>
     </main>
     <script src="get_tournaments.js"></script>
     <script src="AdminScript.js"></script>
@@ -116,7 +110,6 @@
             let table = $(".bodyT");
                   for (let i = 0; i < table.length; i++) {
                     table[i].addEventListener("click", function () {
-                      
                       localStorage.setItem("tournament_id", data[i]['key']);
                       console.log(localStorage.getItem("tournament_id"));
                     });
