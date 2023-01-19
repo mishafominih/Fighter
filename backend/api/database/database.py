@@ -301,7 +301,13 @@ def get_tournament_result(cursor, user_id, tournament_id):
                 AND event."tournamentid" = {tournament_id} 
                 AND winners."winner" != event."winner"
         )
-        SELECT *
+        SELECT 
+            "_id" "id",
+            "Name" "name",
+            "Surname" "surname",
+            "Patronymic" "patronymic",
+            "Description" "description",
+            "Link" "link"
         FROM "Players"
         WHERE "_id" = ANY((SELECT "winner" FROM winners))
     """.format(user_id=user_id, tournament_id=tournament_id)
