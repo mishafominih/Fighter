@@ -162,10 +162,27 @@ body {
 .menuSmallInner {
   width: 100%;
   height: 100%;
-  padding-top: 80px;
+  padding-top: 100px;
   padding-left: 40px;
   padding-right: 40px;
 }
+
+tr{
+  font-size: 18px;
+  margin-top: 40px;
+  height: 50px;
+}
+
+tr:hover{
+  color: var(--color-select);
+  cursor: pointer;
+}
+
+tr:active{
+  color: var(--color--main);
+  cursor: pointer;
+}
+
 
 .menuSmallInner > p {
   font-family: "Open Sans";

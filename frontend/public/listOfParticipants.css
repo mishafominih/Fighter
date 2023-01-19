@@ -293,6 +293,21 @@ line-height: 27px;
   align-items: center;
 }
 
+.gridA{
+  margin: 20px;
+}
+
+
+.gridA a{
+  color: var(--color--main);
+}
+
+.gridA a:hover{
+  color: var(--color-select);
+  font-size: 18px;
+}
+
+
 #myOverlay {
   z-index: 37;
   position: fixed;

@@ -55,58 +55,18 @@
     </header>
     <main>
       <div class="container">
-        <!-- <div class="mainInner">
+        <div class="mainInner">
           <div class="containerB">
             <div class="menu_small_icon">
               <img src="images/Кнопка возврата в главное меню.svg" />
             </div>
             <div class="menu-small">
               <div class="menuSmallInner">
-                <form id="gridForm">
-                  <div>
-                     <div  class="menuSmallInnerHead">Статус в турнире</div>
-                  <div class="radio">
-                    <input class="custom-radio" type="radio" id="color-1" name="color" value="indigo">
-                    <label for="color-1">Следующие по очереди</label>
-                  </div>
-                
-                  <div class="radio">
-                    <input class="custom-radio" type="radio" id="color-2" name="color" value="red">
-                    <label for="color-2">Проходят сейчас</label>
-                  </div>
-                  <div class="menuSmallInnerHead">Пол</div> 
-                
-                  <div class="radio">
-                    <input class="custom-radio" type="radio" id="color-3" name="color" value="brown">
-                    <label for="color-3">Мужской</label>
-                  </div>
-                
-                  <div class="radio">
-                    <input class="custom-radio" type="radio" id="color-4" name="color" value="yellow">
-                    <label for="color-4">Женский</label>
-                  </div>
-                  
-                  <div class="menuSmallInnerHead">Возраст</div>
-                  <div class="radio">
-                    <input class="custom-radio" type="radio" id="color-5" name="color" value="green">
-                    <label for="color-5">5 -10 лет</label>
-                  </div>
-                  <div class="radio">
-                    <input class="custom-radio" type="radio" id="color-5" name="color" value="green">
-                    <label for="color-5">11-15 лет</label>
-                  </div>
-                  <div class="radio">
-                    <input class="custom-radio" type="radio" id="color-5" name="color" value="green">
-                    <label for="color-5">15 -17 лет</label>
-                  </div>
-                  </div>
-                 
-                  <input type="submit" value="Применить" class="submit">
-                </form>
+              
               </div>
                 
             </div>
-          </div> -->
+          </div>
           <div class="content">
             <div class="grid">
               <h1>ТУРНИРНАЯ СЕТКА</h1>
@@ -127,5 +87,46 @@
         $('.admin').css('display', 'none');
       }
     </script>
+        <script>
+          $.ajax({
+            url: "http://51.250.97.3/api/get_tournaments",
+            method: "post",
+            dataType: "json",
+            data: {'user_id': localStorage.getItem("user_id")}, 
+            success: function (data) {
+              console.log(data);
+    
+              for(let i = 0; i < data.length; i++){
+                let status;
+                if (data[i]['status'] == 0){
+                  status = 'Пройдено';
+                }
+                else if (data[i]['status'] == 1){
+                  status = 'Идёт сейчас';
+                }
+                else{
+                  status = 'Планируется';
+                }
+                $('.menuSmallInner').append(`<tr class="bodyT" onclick="window.location.href='grid.html'; return false"><td>` + data[i]['description'] + `</tr>`)
+                let table = $(".bodyT");
+                      for (let i = 0; i < table.length; i++) {
+                        table[i].addEventListener("click", function () {
+                          localStorage.setItem("tournament_id", data[i]['key']);
+                          console.log(localStorage.getItem("tournament_id"));
+                        });
+                      }
+              }
+            },
+            error: function (xhr, status) {
+              console.log(xhr.status);
+            },
+          });
+
+        </script>
+        <script>
+          if(!localStorage.getItem("user_id")){
+            $('.menu_small_icon').css('display', 'none');
+          }
+        </script>
   </body>
 </html>

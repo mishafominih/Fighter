@@ -11,7 +11,6 @@ $.ajax({
       let table = $(".bodyT");
             for (let i = 0; i < table.length; i++) {
               table[i].addEventListener("click", function () {
-                
                 localStorage.setItem("tournament_id", data[i]['key']);
                 console.log(localStorage.getItem("tournament_id"));
               });
