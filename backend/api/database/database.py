@@ -145,12 +145,12 @@ def get_tournament_list(cursor, tournament_id):
     sql = """
         SELECT 
             "id" as "id"
-            , "place" as "place" 
             , "fighterone" as "fighter_one"
             , "fightertwo" as "fighter_two"
             , "winner" as "winner"
             , null as "score"
             , "child" as "child"
+            , "stage" as "stage"
         FROM "EventTiming"
         WHERE "tournamentid" = %s
         ORDER BY "id"
