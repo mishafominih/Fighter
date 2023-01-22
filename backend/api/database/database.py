@@ -180,7 +180,7 @@ def get_tournament_grid(cursor, tournament_id):
                 (SELECT "Name" FROM "Players" WHERE "_id" = "fightertwo" LIMIT 1) "two",
                 "stage"
             FROM "EventTiming"
-            WHERE "tournamentid" = %s
+            WHERE "tournamentid" = %s AND "third" IS FALSE
         ) AS rec
         GROUP BY "stage"
         ORDER BY "stage" ASC
@@ -196,19 +196,18 @@ def get_tournament_grid(cursor, tournament_id):
         result.append(stage)
     winner = """
         SELECT 
-            players."Name"
+            "Name" "name"
         FROM "EventTiming" event
-        LEFT JOIN "Players" players ON players."_id" = event."winner"
-        WHERE event."child" IS NULL AND event."tournamentid" = %s
-        ORDER BY event."third" 
-        LIMIT 2
+        JOIN "Players" players ON players."_id" = event."winner"
+        WHERE "child" IS NULL AND "TournamentId" = %s AND "third" IS FALSE
+        LIMIT 1
     """
 
     cursor.execute(winner, [tournament_id])
-    data = cursor.fetchall()
+    data = cursor.fetchone()
     if not data:
-        data = [{'name': ''}, {'name': ''}]
-    result.append([data])
+        data = {'name': ''}
+    result.append([[data]])
 
     return result
 
@@ -346,3 +345,24 @@ def get_tournament_result(cursor, user_id, tournament_id):
     cursor.execute(categories, [user_id, tournament_id])
     category = cursor.fetchone()
     return [dict(data=winners, category=category.get('Data'))]
+
+
+@connection_db
+def get_third_timing(cursor, user_id, tournament_id):
+    third_tmpl = """
+        SELECT
+            *
+        FROM "EventTiming"
+        WHERE 
+            "third" IS TRUE
+            AND "tournamentid" = %s
+            AND "userid" = %s
+        LIMIT 1
+    """
+
+    cursor.execute(third_tmpl, [user_id, tournament_id])
+    third = cursor.fetchone()
+
+    return [[{'name': third.get('fighterone')},
+             {'name': third.get('fightertwo')}],
+            [{'name': third.get('winner')}]]

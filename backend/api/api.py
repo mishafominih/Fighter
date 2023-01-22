@@ -3,7 +3,7 @@ from flask import Flask, request
 from database.database import sign_in, registration, \
     create_tournament, get_tournaments_for_db, add_new_player, \
     get_tournament_list, get_players_for_tournament, get_tournament_result, \
-    write_status, get_tournament_grid
+    write_status, get_tournament_grid, get_third_timing
 from timing.bl_funcs import get_timing
 from timing.simple_timing import SimpleTiming
 
@@ -143,6 +143,13 @@ def tournament_result():
     params = request.form
     user_id, tournament_id = params.get('user_id'), params.get('tournament_id')
     return get_tournament_result(user_id, tournament_id)
+
+
+@app.route('/api/get_third', methods=['GET', 'POST'])
+def get_third():
+    params = request.form
+    user_id, tournament_id = params.get('user_id'), params.get('tournament_id')
+    get_third_timing(user_id, tournament_id)
 
 
 app.run()
