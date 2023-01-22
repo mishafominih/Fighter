@@ -172,29 +172,35 @@ def get_tournament_list(cursor, tournament_id):
 def get_tournament_grid(cursor, tournament_id):
     sql = """
         SELECT 
-            array_agg(COALESCE(rec."one",'') || ',' || COALESCE(rec."two", '')) "Array"
+            COALESCE(rec."one",'') "one",
+            COALESCE(rec."two", '') "two",
+            "stage"
         FROM
         (
             SELECT
                 (SELECT "Name" FROM "Players" WHERE "_id" = "fighterone" LIMIT 1) "one",
                 (SELECT "Name" FROM "Players" WHERE "_id" = "fightertwo" LIMIT 1) "two",
-                "stage"
+                "stage",
+                "id"
             FROM "EventTiming"
             WHERE "tournamentid" = %s AND "third" IS FALSE
-            ORDER BY "id"
         ) AS rec
-        GROUP BY "stage"
-        ORDER BY "stage" ASC
+        ORDER BY "stage" asc, "id"
     """
     cursor.execute(sql, [tournament_id])
     data = cursor.fetchall()
+    stage = 0
     result = []
+    stages = []
     for val in data:
-        stage = []
-        for couple in val.get('Array'):
-            fighters = couple.split(',')
-            stage.append([{'name': fighters[0]}, {'name': fighters[1]}])
-        result.append(stage)
+        if stage != val.get('stage'):
+            result.append(stages)
+            stage = val.get('stage')
+            stages = []
+        stages.append([{'name': val.get('one')}, {'name': val.get('two')}])
+    else:
+        result.append(stages)
+
     winner = """
         SELECT 
             "Name" "name"
@@ -365,12 +371,14 @@ def get_tournament_result(cursor, user_id, tournament_id):
     players = []
     for val in result:
         if cat != val.get('category'):
-            res_winners.append({'data': players, 'category': json.loads(cat)})
+            category = json.loads(cat) if cat else None
+            res_winners.append({'data': players, 'category': category})
             cat = val.get('category')
             players = []
         players.append(val)
     else:
-        res_winners.append({'data': players, 'category': json.loads(cat)})
+        category = json.loads(cat) if cat else None
+        res_winners.append({'data': players, 'category': category})
 
     return res_winners
 
@@ -379,20 +387,20 @@ def get_tournament_result(cursor, user_id, tournament_id):
 def get_third_timing(cursor, user_id, tournament_id):
     third_tmpl = """
         SELECT
-            *
+            (SELECT "Name" FROM "Players" WHERE "_id" = "fighterone" LIMIT 1) "one",
+            (SELECT "Name" FROM "Players" WHERE "_id" = "fightertwo" LIMIT 1) "two",
+            (SELECT "Name" FROM "Players" WHERE "_id" = "winner" LIMIT 1) "win"
         FROM "EventTiming"
         WHERE 
             "third" IS TRUE
             AND "tournamentid" = %s
-            AND "userid" = %s
         LIMIT 1
     """
 
-    cursor.execute(third_tmpl, [user_id, tournament_id])
-    third = cursor.fetchone()
+    cursor.execute(third_tmpl, [tournament_id])
+    third = cursor.fetchone() or {}
 
-    return [[{'name': third.get('fighterone')},
-             {'name': third.get('fightertwo')}],
-            [{'name': third.get('winner')}]]
-
+    return [[[{'name': third.get('one')},
+             {'name': third.get('two')}]],
+            [[{'name': third.get('win')}]]]
 

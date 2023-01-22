@@ -149,7 +149,7 @@ def tournament_result():
 def get_third():
     params = request.form
     user_id, tournament_id = params.get('user_id'), params.get('tournament_id')
-    get_third_timing(user_id, tournament_id)
+    return get_third_timing(user_id, tournament_id)
 
 
 app.run()
