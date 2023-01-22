@@ -20,7 +20,9 @@ class Timing:
             cat = player.get('categories')
             if cat:
                 j = json.loads(cat)
-                cat = (j.get('name'), j.get('value'))
+                cat = ""
+                for val in j:
+                    cat += f"{val.get('name')}{val.get('value')}"
             if cat in data.keys():
                 data[cat].append(player)
             else:
@@ -34,19 +36,19 @@ class Timing:
                            fight_id, winner_id,
                            one_score, two_score)
         if rec.get('child'):
-            winner = write_player(self.user_id, self.tournament_id, rec.get('child'), winner_id)
-            if not winner.get('child'):
-                loser = rec.get('fighterone') if winner_id == rec.get('fightertwo') else rec.get('fightertwo')
-                write_player(self.user_id, self.tournament_id, None, loser)
-        else:  # Если нет следующего - значит дошли до последнего боя.
+            write_player(self.user_id, self.tournament_id, rec.get('child'), winner_id)
+            if rec.get('secondchild'):
+                loser = rec.get('fighterone') if int(winner_id) == int(rec.get('fightertwo')) else rec.get('fightertwo')
+                write_player(self.user_id, self.tournament_id, rec.get('secondchild'), loser)
+        elif rec.get('stage') != -1:  # Если нет следующего - значит дошли до последнего боя.
             write_status(self.user_id, self.tournament_id, 0)
             pass
 
     def change(self):
         pass
 
-    def add_timing_item(self, player_one, player_two, stage, third=False):
-        item = self.TimingItem(self.id, player_one, player_two, stage, third)
+    def add_timing_item(self, player_one, player_two, stage, add_third=False):
+        item = self.TimingItem(self.id, player_one, player_two, stage, add_third)
         self.result.append(item)
         self.id += 1
         return item
@@ -68,7 +70,7 @@ class Timing:
                 item = i
 
     class TimingItem:
-        def __init__(self, id, player_one, player_two, stage, third=False):
+        def __init__(self, id, player_one, player_two, stage, add_third):
             self.id = id
             self.player_one = player_one
             self.player_two = player_two
@@ -76,7 +78,8 @@ class Timing:
             self.child = None
             self.place = ""
             self.stage = stage
-            self.third = third
+            self.secondchild = None
+            self.third = add_third
 
         def get_data_for_db(self, user_id, tournament_id):
             return [
@@ -89,5 +92,10 @@ class Timing:
                 self.winner,
                 self.child.id if self.child else None,
                 self.stage,
+                self.secondchild.id if self.secondchild else None,
                 self.third
             ]
+
+
+
+print(1 == '24')

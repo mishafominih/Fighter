@@ -216,8 +216,8 @@ def get_tournament_grid(cursor, tournament_id):
 def add_new_timing(cursor, params):
     player_tmpl = """
             INSERT INTO public."EventTiming" 
-            ("id", "userid","tournamentid","place","fighterone","fightertwo","winner","child","stage","third")
-            VALUES  (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            ("id", "userid","tournamentid","place","fighterone","fightertwo","winner","child","stage","secondchild","third")
+            VALUES  (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             RETURNING "id";
         """
 
