@@ -132,8 +132,9 @@ def set_winner():
     params = request.form
     user_id, tournament_id = params.get('user_id'), params.get('tournament_id')
     fight_id, winner_id = params.get('fight_id'), params.get('winner_id')
+    one_score, two_score = params.get('one_score'), params.get('two_score')
     timing = get_timing(user_id, tournament_id)
-    timing.set_result(fight_id, winner_id)
+    timing.set_result(fight_id, winner_id, one_score, two_score)
     return {'result': True, 'message': ""}
 
 

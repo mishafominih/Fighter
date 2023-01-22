@@ -28,8 +28,10 @@ class Timing:
             self._generate_timing_for_category(players)
         self._write_to_bd()
 
-    def set_result(self, fight_id, winner_id):
-        rec = write_winner(self.user_id, self.tournament_id, fight_id, winner_id)
+    def set_result(self, fight_id, winner_id, one_score, two_score):
+        rec = write_winner(self.user_id, self.tournament_id,
+                           fight_id, winner_id,
+                           one_score, two_score)
         if rec.get('child'):
             write_player(self.user_id, self.tournament_id, rec.get('child'), winner_id)
         else:  # Если нет следующего - значит дошли до последнего боя.

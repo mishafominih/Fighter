@@ -151,6 +151,8 @@ def get_tournament_list(cursor, tournament_id):
             , null as "score"
             , "child" as "child"
             , "stage" as "stage"
+            , "onescore" as "one_score"
+            , "twoscore" as "two_score"
         FROM "EventTiming"
         WHERE "tournamentid" = %s
         ORDER BY "id"
@@ -220,10 +222,10 @@ def add_new_timing(cursor, params):
 
 
 @connection_db
-def write_winner(cursor, user_id, tournament_id, fight_id, winner_id):
+def write_winner(cursor, user_id, tournament_id, fight_id, winner_id, one_score, two_score):
     player_tmpl = """
             UPDATE public."EventTiming" 
-            SET "winner" = %s
+            SET "winner" = %s, "onescore" = %s, "twoscore" = %s 
             WHERE 
                 "userid" = %s
                 AND "tournamentid" = %s
@@ -231,7 +233,7 @@ def write_winner(cursor, user_id, tournament_id, fight_id, winner_id):
             RETURNING *
         """
 
-    cursor.execute(player_tmpl, [winner_id, user_id, tournament_id, fight_id])
+    cursor.execute(player_tmpl, [winner_id, one_score, two_score, user_id, tournament_id, fight_id])
     return cursor.fetchone()
 
 
