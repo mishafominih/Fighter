@@ -181,6 +181,7 @@ def get_tournament_grid(cursor, tournament_id):
                 "stage"
             FROM "EventTiming"
             WHERE "tournamentid" = %s AND "third" IS FALSE
+            ORDER BY "id"
         ) AS rec
         GROUP BY "stage"
         ORDER BY "stage" ASC
@@ -330,13 +331,13 @@ def get_tournament_result(cursor, user_id, tournament_id):
 
     cursor.execute(third_place_tmpl, [tournament_id])
     third_place = cursor.fetchall()
-    category = []
     winners = []
     places = []
-    for sec, th in zip(seconds_place, third_place):
-        winners += [sec.get('first'), sec.get('first'), th.get('third')]
-        places += range(0, 2)
-        category += json.loads(sec.get('Categories'))
+    for i in range(0, len(seconds_place)):
+        sec = seconds_place[i]
+        th = third_place[i] if i < len(third_place) else {}
+        winners += [sec.get('first'), sec.get('second'), th.get('third')]
+        places += range(0, 3)
 
     result_tmpl = """
         with winners as (
@@ -344,16 +345,34 @@ def get_tournament_result(cursor, user_id, tournament_id):
             unnest(%s) player, 
             unnest(%s) place
         )
-        select * 
+        select 
+            p."_id" "id",
+            p."Name" "name",
+            p."Surname" "surname",
+            p."Patronymic" "patronymic",
+            p."Description" "description",
+            p."Link" "link",
+            p."Categories" "category"
         from winners
         join "Players" p on p."_id" = "player"
         order by p."Categories", "place"
     """
 
     cursor.execute(result_tmpl, [winners, places])
-    res_winners = cursor.fetchall()
+    result = cursor.fetchall()
+    res_winners = []
+    cat = result[0].get('category')
+    players = []
+    for val in result:
+        if cat != val.get('category'):
+            res_winners.append({'data': players, 'category': json.loads(cat)})
+            cat = val.get('category')
+            players = []
+        players.append(val)
+    else:
+        res_winners.append({'data': players, 'category': json.loads(cat)})
 
-    return [dict(data=res_winners, category=category)]
+    return res_winners
 
 
 @connection_db
@@ -375,4 +394,5 @@ def get_third_timing(cursor, user_id, tournament_id):
     return [[{'name': third.get('fighterone')},
              {'name': third.get('fightertwo')}],
             [{'name': third.get('winner')}]]
+
 
