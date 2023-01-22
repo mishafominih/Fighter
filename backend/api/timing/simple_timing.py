@@ -21,11 +21,11 @@ class SimpleTiming(Timing):
                 stage
             )
             result.append(item)
-        self._add_finish(result)
+        self._add_finish(result, True)
 
-    def _add_finish(self, sub_result):
-        def join(f, s):
-            child = self.add_timing_item(f.winner, s.winner, f.stage+1)
+    def _add_finish(self, sub_result, add_third=False):
+        def join(f, s, third=False):
+            child = self.add_timing_item(f.winner, s.winner, f.stage+1, third)
             f.child = child
             s.child = child
             return child
@@ -36,4 +36,6 @@ class SimpleTiming(Timing):
 
         f = self._add_finish(sub_result[0: count // 2])
         s = self._add_finish(sub_result[count // 2: count])
+        if add_third:
+            join(f, s, add_third)
         return join(f, s)

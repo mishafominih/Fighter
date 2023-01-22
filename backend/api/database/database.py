@@ -150,14 +150,20 @@ def get_tournament_list(cursor, tournament_id):
             , "winner" as "winner"
             , null as "score"
             , "child" as "child"
-            , "stage" as "stage"
+            , CASE
+                WHEN "third" is true THEN 1
+                WHEN "child" is null and "third" is false then 0
+              ELSE (SELECT max("stage") + 1
+                    FROM "EventTiming"
+                    WHERE "tournamentid" = %s) - 
+              "stage" END as "stage"
             , "onescore" as "one_score"
             , "twoscore" as "two_score"
         FROM "EventTiming"
         WHERE "tournamentid" = %s
-        ORDER BY "id"
+        ORDER BY "stage" desc, "id"
     """
-    cursor.execute(sql, [tournament_id])
+    cursor.execute(sql, [tournament_id] * 2)
     data = cursor.fetchall()
     return data
 
@@ -190,18 +196,19 @@ def get_tournament_grid(cursor, tournament_id):
         result.append(stage)
     winner = """
         SELECT 
-            "Name" "name"
+            players."Name"
         FROM "EventTiming" event
-        JOIN "Players" players ON players."_id" = event."winner"
-        WHERE "child" IS NULL AND "TournamentId" = %s
-        LIMIT 1
+        LEFT JOIN "Players" players ON players."_id" = event."winner"
+        WHERE event."child" IS NULL AND event."tournamentid" = %s
+        ORDER BY event."third" 
+        LIMIT 2
     """
 
     cursor.execute(winner, [tournament_id])
-    data = cursor.fetchone()
+    data = cursor.fetchall()
     if not data:
-        data = {'name': ''}
-    result.append([[data]])
+        data = [{'name': ''}, {'name': ''}]
+    result.append([data])
 
     return result
 
@@ -210,8 +217,8 @@ def get_tournament_grid(cursor, tournament_id):
 def add_new_timing(cursor, params):
     player_tmpl = """
             INSERT INTO public."EventTiming" 
-            ("id", "userid","tournamentid","place","fighterone","fightertwo","winner","child","stage")
-            VALUES  (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+            ("id", "userid","tournamentid","place","fighterone","fightertwo","winner","child","stage","third")
+            VALUES  (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             RETURNING "id";
         """
 
@@ -239,23 +246,24 @@ def write_winner(cursor, user_id, tournament_id, fight_id, winner_id, one_score,
 
 @connection_db
 def write_player(cursor, user_id, tournament_id, fight_id, player_id):
-    player_tmpl = """
-            UPDATE public."EventTiming" 
-            SET 
-                "fightertwo" = 
-                    CASE WHEN "fightertwo" is null AND "fighterone" is not null THEN %s
-                ELSE "fightertwo" END,
-                "fighterone" = 
-                    CASE WHEN "fighterone" is null THEN %s
-                ELSE "fighterone" END
-            WHERE 
-                "userid" = %s
-                AND "tournamentid" = %s
-                AND "id" = %s
-            RETURNING *
-        """
+    fight_filter = '"third" IS TRUE' if not fight_id else f'"id" = {fight_id}'
+    player_tmpl = f"""
+                UPDATE public."EventTiming" 
+                SET 
+                    "fightertwo" = 
+                        CASE WHEN "fightertwo" is null AND "fighterone" is not null THEN %s
+                    ELSE "fightertwo" END,
+                    "fighterone" = 
+                        CASE WHEN "fighterone" is null THEN %s
+                    ELSE "fighterone" END
+                WHERE 
+                    "userid" = %s
+                    AND "tournamentid" = %s
+                    AND {fight_filter}
+                RETURNING *
+            """.format(fight_filter=fight_filter)
 
-    cursor.execute(player_tmpl, [player_id, player_id, user_id, tournament_id, fight_id])
+    cursor.execute(player_tmpl, [player_id, player_id, user_id, tournament_id])
     return cursor.fetchone()
 
 
@@ -338,4 +346,3 @@ def get_tournament_result(cursor, user_id, tournament_id):
     cursor.execute(categories, [user_id, tournament_id])
     category = cursor.fetchone()
     return [dict(data=winners, category=category.get('Data'))]
-

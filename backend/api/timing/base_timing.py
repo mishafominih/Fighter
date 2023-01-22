@@ -1,6 +1,7 @@
 import json
 
-from database.database import get_players_for_tournament, add_new_timing, write_winner, write_player, write_status
+from database.database import get_players_for_tournament, add_new_timing,\
+    write_winner, write_player, write_status
 
 
 class Timing:
@@ -33,7 +34,10 @@ class Timing:
                            fight_id, winner_id,
                            one_score, two_score)
         if rec.get('child'):
-            write_player(self.user_id, self.tournament_id, rec.get('child'), winner_id)
+            winner = write_player(self.user_id, self.tournament_id, rec.get('child'), winner_id)
+            if not winner.get('child'):
+                loser = rec.get('fighterone') if winner_id == rec.get('fightertwo') else rec.get('fightertwo')
+                write_player(self.user_id, self.tournament_id, None, loser)
         else:  # Если нет следующего - значит дошли до последнего боя.
             write_status(self.user_id, self.tournament_id, 0)
             pass
@@ -41,8 +45,8 @@ class Timing:
     def change(self):
         pass
 
-    def add_timing_item(self, player_one, player_two, stage):
-        item = self.TimingItem(self.id, player_one, player_two, stage)
+    def add_timing_item(self, player_one, player_two, stage, third=False):
+        item = self.TimingItem(self.id, player_one, player_two, stage, third)
         self.result.append(item)
         self.id += 1
         return item
@@ -64,7 +68,7 @@ class Timing:
                 item = i
 
     class TimingItem:
-        def __init__(self, id, player_one, player_two, stage):
+        def __init__(self, id, player_one, player_two, stage, third=False):
             self.id = id
             self.player_one = player_one
             self.player_two = player_two
@@ -72,6 +76,7 @@ class Timing:
             self.child = None
             self.place = ""
             self.stage = stage
+            self.third = third
 
         def get_data_for_db(self, user_id, tournament_id):
             return [
@@ -83,5 +88,6 @@ class Timing:
                 self.player_two,
                 self.winner,
                 self.child.id if self.child else None,
-                self.stage
+                self.stage,
+                self.third
             ]
