@@ -299,52 +299,61 @@ def get_tournament(cursor, user_id, tournament_id):
 
 @connection_db
 def get_tournament_result(cursor, user_id, tournament_id):
-    winners_tmpl = f"""
-        WITH RECURSIVE winners as (
-            SELECT 
-                "winner",
-                "fighterone" "one",
-                "fightertwo" "two",
-                "child",
-                "id"
-            FROM "EventTiming"
-            WHERE "userid" = {user_id} AND "tournamentid" = {tournament_id} AND "child" IS NULL
-            
-            UNION ALL
-            
-            SELECT
-                 event."winner",
-                 event."fighterone" "one",
-                 event."fightertwo" "two",
-                 event."child",
-                 event."id"
-            FROM "EventTiming" event
-            JOIN winners ON winners."id" =  event."child" 
-                AND event."userid" = {user_id} 
-                AND event."tournamentid" = {tournament_id} 
-                AND winners."winner" != event."winner"
-        )
+    seconds_place_tmpl = """
         SELECT 
-            "_id" "id",
-            "Name" "name",
-            "Surname" "surname",
-            "Patronymic" "patronymic",
-            "Description" "description",
-            "Link" "link"
-        FROM "Players"
-        WHERE "_id" = ANY((SELECT "winner" FROM winners))
-    """.format(user_id=user_id, tournament_id=tournament_id)
-
-    categories = """
-        SELECT "Categories" "Data"
-        FROM "Event"
-        WHERE "User" = %s AND "_id" = %s
+            ev."winner" "first",
+            CASE 
+                WHEN ev."fighterone" = "winner" THEN ev."fightertwo"
+                ELSE ev."fighterone"
+            END "second",
+            p."Categories"
+        FROM "EventTiming" ev
+        JOIN "Players" p ON p."_id" = ev."winner"
+        WHERE ev."child" IS NULL AND ev."third" IS FALSE
+            AND ev."tournamentid" = %s
+        ORDER BY "Categories"
     """
-    cursor.execute(winners_tmpl)
-    winners = cursor.fetchall()
-    cursor.execute(categories, [user_id, tournament_id])
-    category = cursor.fetchone()
-    return [dict(data=winners, category=category.get('Data'))]
+
+    third_place_tmpl = """
+        SELECT
+            ev."winner" "third",
+            p."Categories"
+        FROM "EventTiming" ev
+        JOIN "Players" p ON p."_id" = ev."winner"
+        WHERE ev."child" IS NULL AND ev."third" IS TRUE
+            AND ev."tournamentid" = %s
+        ORDER BY "Categories"
+    """
+
+    cursor.execute(seconds_place_tmpl, [tournament_id])
+    seconds_place = cursor.fetchall()
+
+    cursor.execute(third_place_tmpl, [tournament_id])
+    third_place = cursor.fetchall()
+    category = []
+    winners = []
+    places = []
+    for sec, th in zip(seconds_place, third_place):
+        winners += [sec.get('first'), sec.get('first'), th.get('third')]
+        places += range(0, 2)
+        category += json.loads(sec.get('Categories'))
+
+    result_tmpl = """
+        with winners as (
+            select 
+            unnest(%s) player, 
+            unnest(%s) place
+        )
+        select * 
+        from winners
+        join "Players" p on p."_id" = "player"
+        order by p."Categories", "place"
+    """
+
+    cursor.execute(result_tmpl, [winners, places])
+    res_winners = cursor.fetchall()
+
+    return [dict(data=res_winners, category=category)]
 
 
 @connection_db
@@ -366,3 +375,4 @@ def get_third_timing(cursor, user_id, tournament_id):
     return [[{'name': third.get('fighterone')},
              {'name': third.get('fightertwo')}],
             [{'name': third.get('winner')}]]
+
