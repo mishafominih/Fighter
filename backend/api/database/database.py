@@ -174,14 +174,18 @@ def get_tournament_grid(cursor, tournament_id):
         SELECT 
             COALESCE(rec."one",'') "one",
             COALESCE(rec."two", '') "two",
-            "stage"
+            "stage",
+            "onescore",
+            "twoscore"
         FROM
         (
             SELECT
                 (SELECT "Name" FROM "Players" WHERE "_id" = "fighterone" LIMIT 1) "one",
                 (SELECT "Name" FROM "Players" WHERE "_id" = "fightertwo" LIMIT 1) "two",
                 "stage",
-                "id"
+                "id",
+                "onescore",
+                "twoscore"
             FROM "EventTiming"
             WHERE "tournamentid" = %s AND "third" IS FALSE
         ) AS rec
@@ -197,7 +201,13 @@ def get_tournament_grid(cursor, tournament_id):
             result.append(stages)
             stage = val.get('stage')
             stages = []
-        stages.append([{'name': val.get('one')}, {'name': val.get('two')}])
+        one_score = int(val.get('onescore')) if val.get('onescore') else None
+        two_score = int(val.get('twoscore')) if val.get('twoscore') else None
+        stages.append([
+            {'name': val.get('one'),
+             'score': one_score},
+            {'name': val.get('two'),
+             'score': two_score}])
     else:
         result.append(stages)
 
@@ -215,7 +225,8 @@ def get_tournament_grid(cursor, tournament_id):
     if not data:
         data = {'name': ''}
     result.append([[data]])
-
+    if not result:
+        return []
     return result
 
 
@@ -389,7 +400,9 @@ def get_third_timing(cursor, user_id, tournament_id):
         SELECT
             (SELECT "Name" FROM "Players" WHERE "_id" = "fighterone" LIMIT 1) "one",
             (SELECT "Name" FROM "Players" WHERE "_id" = "fightertwo" LIMIT 1) "two",
-            (SELECT "Name" FROM "Players" WHERE "_id" = "winner" LIMIT 1) "win"
+            (SELECT "Name" FROM "Players" WHERE "_id" = "winner" LIMIT 1) "win",
+            "twoscore",
+            "onescore"
         FROM "EventTiming"
         WHERE 
             "third" IS TRUE
@@ -399,8 +412,11 @@ def get_third_timing(cursor, user_id, tournament_id):
 
     cursor.execute(third_tmpl, [tournament_id])
     third = cursor.fetchone() or {}
+    if not third:
+        return []
 
-    return [[[{'name': third.get('one')},
-             {'name': third.get('two')}]],
+    return [[[{'name': third.get('one'),
+               'score': int(third.get('onescore'))},
+              {'name': third.get('two'),
+               'score': int(third.get('twoscore'))}]],
             [[{'name': third.get('win')}]]]
-
