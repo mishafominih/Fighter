@@ -85,6 +85,15 @@ h1 {
   display: flex;
 }
 
+.third_text{
+  position: absolute;
+  left: 420px;
+  width: 150px;
+  bottom: 150px;
+  color: white;
+  font-weight: bold;
+}
+
 /* шаблон */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&amp;amp;amp;display=swap");
 

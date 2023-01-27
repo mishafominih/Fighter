@@ -21,7 +21,26 @@ $.ajax({
   },
 });
 
-
+$.ajax({
+  url: "http://51.250.97.3/api/get_third",
+  method: "post",
+  dataType: "json",
+  data: {tournament_id : localStorage.getItem('tournament_id')},
+  // data: {tournament_id : 64},
+  success: function (data) {
+  (function (win, doc, $) {
+    // win.TestData = data.push([[{name : 'misha'}]]);
+    win.TestData
+    console.log(data)
+    // initializer
+    $(".my_gracket_third").gracket({ src: data });
+  })(window, document, jQuery);
+    arr =data;
+  },
+  error: function (xhr, status) {
+    console.log(xhr.status);
+  },
+});
 
 
 
