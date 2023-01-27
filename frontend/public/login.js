@@ -10,7 +10,7 @@ $("#login").on("submit", function (event) {
         localStorage.setItem("user_id", data['id']);
         console.log(localStorage.getItem("user_id"));
         if ((data['result'] = true)) {
-          window.location.href = "grid.html";
+          window.location.href = "tournamentList.html";
         }
         else{
           console.log("нет");
